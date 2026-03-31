@@ -793,20 +793,6 @@
       </div>
     </div>
 
-    <!-- HOSMONY level indicator — compact -->
-    <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center;">
-      <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--primary-bg);border:1px solid var(--primary);border-radius:var(--radius);flex:1;">
-        <div style="width:32px;height:32px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;">2</div>
-        <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Niveau 2 &mdash; Dynamique</div><div style="font-size:11px;color:var(--text-secondary);">7/9 etapes &bull; Score 47/100 &bull; <a href="#" onclick="event.preventDefault();document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=hosmony]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-hosmony').classList.add('active');" style="color:var(--primary);text-decoration:none;font-weight:600;">Voir le parcours &rarr;</a></div></div>
-        <div style="display:flex;gap:3px;">
-          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.4;">1</div>
-          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;">2</div>
-          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-3);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.15;">3</div>
-          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.15;">4</div>
-          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.15;">5</div>
-        </div>
-      </div>
-    </div>
     <div class="grid-4">
       <div class="kpi-card slide-up" style="border-top-color:var(--accent);"><div class="kpi-badge up">+12%</div><div class="kpi-label">CA du jour</div><div class="kpi-value">2 340 &euro;</div><div class="kpi-detail">+12% vs hier</div><div class="kpi-sparkline" id="sp1"></div></div>
       <div class="kpi-card slide-up" style="border-top-color:var(--green);animation-delay:0.05s;"><div class="kpi-badge neutral">=</div><div class="kpi-label">Tresorerie</div><div class="kpi-value">34.2 K&euro;</div><div class="kpi-detail">Solde ce matin</div><div class="kpi-sparkline" id="sp2"></div></div>
@@ -814,36 +800,64 @@
       <div class="kpi-card slide-up" style="border-top-color:var(--purple);animation-delay:0.15s;"><div class="kpi-badge up">+3</div><div class="kpi-label">Commandes</div><div class="kpi-value">42</div><div class="kpi-detail">dont 8 reservations</div><div class="kpi-sparkline" id="sp4"></div></div>
     </div>
 
-    <!-- MINI WIDGETS COCKPIT -->
-    <div class="grid-4" style="margin-bottom:16px;">
-      <div class="mini-widget slide-up" style="border-left:3px solid var(--primary);" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=hosmony]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-hosmony').classList.add('active');">
-        <div class="mini-widget-title">Parcours HOSMONY</div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:28px;height:28px;border-radius:6px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;">2</div>
-          <div><div class="mini-widget-value" style="font-size:14px;">7/9 etapes</div></div>
+    <!-- TREND CHART + ALERTS -->
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div class="card" style="padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;">Evolution CA 7 derniers jours</div>
+          <button class="btn sm ghost">Voir tout</button>
         </div>
-        <div class="progress-track" style="margin-top:6px;"><div class="progress-fill" style="width:78%;background:var(--primary);"></div></div>
-        <span class="mini-widget-link">Voir &rarr;</span>
+        <div style="display:flex;align-items:flex-end;gap:6px;height:90px;padding:0 4px;">
+          <div style="flex:1;text-align:center;">
+            <div style="background:var(--accent);opacity:.4;border-radius:3px 3px 0 0;height:55%;margin:0 auto;"></div>
+            <div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Lun</div>
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="background:var(--accent);opacity:.4;border-radius:3px 3px 0 0;height:68%;margin:0 auto;"></div>
+            <div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Mar</div>
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="background:var(--accent);opacity:.4;border-radius:3px 3px 0 0;height:60%;margin:0 auto;"></div>
+            <div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Mer</div>
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="background:var(--accent);opacity:.4;border-radius:3px 3px 0 0;height:75%;margin:0 auto;"></div>
+            <div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Jeu</div>
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="background:var(--accent);opacity:.5;border-radius:3px 3px 0 0;height:82%;margin:0 auto;"></div>
+            <div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Ven</div>
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="background:var(--accent);opacity:.5;border-radius:3px 3px 0 0;height:70%;margin:0 auto;"></div>
+            <div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Sam</div>
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="background:var(--navy);border-radius:3px 3px 0 0;height:90%;margin:0 auto;"></div>
+            <div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Dim</div>
+          </div>
+        </div>
       </div>
-      <div class="mini-widget slide-up" style="border-left:3px solid var(--green);animation-delay:0.05s;" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=crm]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-crm').classList.add('active');">
-        <div class="mini-widget-title">CRM</div>
-        <div class="mini-widget-value" style="font-size:14px;">8 deals</div>
-        <div class="mini-widget-detail">47.5K&euro; pipeline</div>
-        <div class="mini-widget-detail">3 relances aujourd'hui</div>
-        <span class="mini-widget-link">Voir &rarr;</span>
-      </div>
-      <div class="mini-widget slide-up" style="border-left:3px solid var(--purple);animation-delay:0.1s;" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=ai-studio]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-ai-studio').classList.add('active');">
-        <div class="mini-widget-title">Studio IA</div>
-        <div class="mini-widget-value" style="font-size:14px;">6 agents</div>
-        <div class="mini-widget-detail">3 automatisations</div>
-        <div class="mini-widget-detail">Dernier run : 2h</div>
-        <span class="mini-widget-link">Voir &rarr;</span>
-      </div>
-      <div class="mini-widget slide-up" style="border-left:3px solid var(--amber);animation-delay:0.15s;" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=indicateurs]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-indicateurs').classList.add('active');">
-        <div class="mini-widget-title">Indicateurs</div>
-        <div class="mini-widget-value" style="font-size:14px;">32 indicateurs</div>
-        <div class="mini-widget-detail">22 conformes &bull; 3 alertes</div>
-        <span class="mini-widget-link">Voir &rarr;</span>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Alertes & Activite</div><div class="card-badge">4 items</div></div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+            <span class="pill red" style="flex-shrink:0;">Urgent</span>
+            <span style="flex:1;">Echeance bilan carbone dans 15 jours</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+            <span class="pill green" style="flex-shrink:0;">Opportunite</span>
+            <span style="flex:1;">Aide regionale 12 000&euro; acceptee</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+            <span class="pill blue" style="flex-shrink:0;">Rappel</span>
+            <span style="flex:1;">Formation eco-circulaire demain 14h</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+            <span class="pill amber" style="flex-shrink:0;">Attention</span>
+            <span style="flex:1;">KPI satisfaction equipe sous seuil</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1049,7 +1063,12 @@
     <div class="page-header"><div><div class="page-title">Documents & Audit</div><div class="page-subtitle">Centre documentaire et suivi audit</div></div>
     <div style="display:flex;gap:6px;"><button class="btn primary">Generer rapport durabilite</button><button class="btn">+ Importer document</button></div></div>
     <div class="grid-4">
-      <div class="stat-card"><div class="stat-val" style="color:var(--green);">67%</div><div class="stat-label">Readiness Audit</div></div>
+      <div class="stat-card" style="position:relative;">
+        <div style="width:60px;height:60px;border-radius:50%;background:conic-gradient(var(--green) 0% 67%, var(--border-light) 67% 100%);margin:0 auto 6px;position:relative;">
+          <div style="position:absolute;inset:10px;background:var(--surface);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--green);">67%</div>
+        </div>
+        <div class="stat-label">Readiness Audit</div>
+      </div>
       <div class="stat-card"><div class="stat-val">12</div><div class="stat-label">Documents (8 valides)</div></div>
       <div class="stat-card"><div class="stat-val">15 mai</div><div class="stat-label">Prochain pre-audit</div></div>
       <div class="stat-card"><div class="stat-val">1</div><div class="stat-label">Rapport genere</div></div>
@@ -1137,6 +1156,13 @@
         </select>
       </div>
       <div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Actualiser la veille</button></div>
+    </div>
+
+    <div class="grid-4" style="margin-bottom:14px;">
+      <div class="stat-card"><div class="stat-val">19</div><div class="stat-label">Reglementations suivies</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">0</div><div class="stat-label">Alertes</div></div>
+      <div class="stat-card"><div class="stat-val">3</div><div class="stat-label">Echeances 30j</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">23 400 &euro;</div><div class="stat-label">Valeur obtenue</div></div>
     </div>
 
     <!-- AGENT REGLEMENTAIRE — Detail -->
@@ -1457,11 +1483,29 @@
   <div class="content page" id="page-formations">
     <div class="page-header"><div><div class="page-title">Formations</div><div class="page-subtitle">Competences durabilite</div></div><div style="display:flex;gap:6px;"><button class="btn">Catalogue complet</button><button class="btn primary">+ S'inscrire</button></div></div>
     <div class="tabs"><div class="tab active">Dashboard</div><div class="tab">Catalogue</div><div class="tab">Mes Formations</div><div class="tab">Atlas RSE</div><div class="tab">Competences</div></div>
-    <div class="grid-4">
-      <div class="stat-card"><div class="stat-val">1</div><div class="stat-label">En cours</div></div>
-      <div class="stat-card"><div class="stat-val" style="color:var(--green);">3</div><div class="stat-label">Terminees</div></div>
-      <div class="stat-card"><div class="stat-val">14h</div><div class="stat-label">Heures</div></div>
-      <div class="stat-card"><div class="stat-val">1</div><div class="stat-label">Certificat</div></div>
+    <div class="card" style="padding:16px;margin-bottom:14px;border-left:4px solid var(--accent);">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--navy) 0% 70%, var(--border-light) 70% 100%);position:relative;flex-shrink:0;">
+          <div style="position:absolute;inset:10px;background:var(--surface);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;">70%</div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;">Progression globale</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">14h completees sur 20h requises (Niveau 2)</div>
+          <div class="progress-track" style="margin-top:6px;"><div class="progress-fill" style="width:70%;background:var(--navy);"></div></div>
+        </div>
+        <div style="text-align:center;padding:0 16px;border-left:1px solid var(--border);">
+          <div style="font-size:20px;font-weight:800;">1</div>
+          <div style="font-size:10px;color:var(--text-muted);">Certificat</div>
+        </div>
+        <div style="text-align:center;padding:0 16px;border-left:1px solid var(--border);">
+          <div style="font-size:20px;font-weight:800;">3</div>
+          <div style="font-size:10px;color:var(--text-muted);">Terminees</div>
+        </div>
+        <div style="text-align:center;padding:0 16px;border-left:1px solid var(--border);">
+          <div style="font-size:20px;font-weight:800;">1</div>
+          <div style="font-size:10px;color:var(--text-muted);">En cours</div>
+        </div>
+      </div>
     </div>
     <div class="grid-2">
       <div class="card"><div class="card-header"><div class="card-title">MyDAD Learning</div><button class="btn sm">Voir tout</button></div><div class="card-body">
@@ -1495,6 +1539,7 @@
     </div>
 
     <!-- Engagement -->
+    <div id="org-engagement">
     <div style="margin-bottom:20px;">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Engagement</h3>
       <div class="grid-3">
@@ -1503,8 +1548,10 @@
         <div class="card"><div class="card-header"><div class="card-title">Comite RSE</div><span class="pill amber">A venir</span></div><div class="card-body"><p style="font-size:11px;color:var(--text-secondary);margin-bottom:6px;">Reunion trimestrielle de pilotage.</p><div style="font-size:11px;"><strong>15 avril 2026</strong> &bull; 4 membres</div><div style="margin-top:8px;display:flex;gap:4px;"><button class="btn sm primary">Planifier la reunion</button><button class="btn sm">Voir les PV</button><button class="btn sm">Inviter</button></div></div></div>
       </div>
     </div>
+    </div>
 
     <!-- Sondages -->
+    <div id="org-sondages" style="display:none;">
     <div style="margin-bottom:20px;">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Sondages</h3>
       <div class="grid-2">
@@ -1513,8 +1560,10 @@
       </div>
       <div style="margin-top:10px;"><button class="btn primary">+ Creer un sondage</button></div>
     </div>
+    </div>
 
     <!-- Boite a idees -->
+    <div id="org-idees" style="display:none;">
     <div style="margin-bottom:20px;">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Boite a idees</h3>
       <div class="grid-3">
@@ -1537,8 +1586,10 @@
       <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;font-style:italic;">Les idees elues montent automatiquement dans le Plan d'Actions</div>
       <div style="display:flex;gap:6px;"><button class="btn primary">+ Proposer une idee</button><button class="btn">Voter</button></div>
     </div>
+    </div>
 
     <!-- Partenaires -->
+    <div id="org-partenaires" style="display:none;">
     <div style="margin-bottom:20px;">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Partenaires</h3>
       <div class="grid-4">
@@ -1568,8 +1619,10 @@
         </div></div>
       </div>
     </div>
+    </div>
 
     <!-- Evenements -->
+    <div id="org-evenements" style="display:none;">
     <div style="margin-bottom:20px;">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Evenements</h3>
       <div class="card" style="margin-bottom:10px;">
@@ -1593,6 +1646,7 @@
       </div>
       <button class="btn primary">+ Creer un evenement</button>
     </div>
+    </div>
   </div>
 
   <!-- COMPETENCES -->
@@ -1604,37 +1658,79 @@
       <div class="stat-card"><div class="stat-val">7.2/10</div><div class="stat-label">Score moyen</div></div>
       <div class="stat-card"><div class="stat-val">3</div><div class="stat-label">Plans de developpement</div></div>
     </div>
+    <div class="grid-2" style="margin-bottom:16px;">
+      <!-- Radar chart approximation using CSS -->
+      <div class="card" style="padding:16px;text-align:center;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:12px;text-align:left;">Profil de competences</div>
+        <div style="position:relative;width:200px;height:200px;margin:0 auto;">
+          <!-- Background hexagon shape -->
+          <svg viewBox="0 0 200 200" style="width:200px;height:200px;">
+            <!-- Grid lines -->
+            <polygon points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="var(--border-light)" stroke-width="1"/>
+            <polygon points="100,35 160,67 160,133 100,165 40,133 40,67" fill="none" stroke="var(--border-light)" stroke-width="1"/>
+            <polygon points="100,60 140,80 140,120 100,140 60,120 60,80" fill="none" stroke="var(--border-light)" stroke-width="1"/>
+            <!-- Data polygon: Hard 75%, Soft 70%, HOSMONY 60%, IA 40% mapped to 6 axes -->
+            <polygon points="100,30 165,62 162,130 100,162 45,125 42,62" fill="rgba(49,82,153,0.15)" stroke="var(--navy)" stroke-width="2"/>
+            <!-- Dots -->
+            <circle cx="100" cy="30" r="4" fill="var(--navy)"/>
+            <circle cx="165" cy="62" r="4" fill="var(--navy)"/>
+            <circle cx="162" cy="130" r="4" fill="var(--navy)"/>
+            <circle cx="100" cy="162" r="4" fill="var(--navy)"/>
+            <circle cx="45" cy="125" r="4" fill="var(--navy)"/>
+            <circle cx="42" cy="62" r="4" fill="var(--navy)"/>
+          </svg>
+          <!-- Labels around the chart -->
+          <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;">Hard Skills</div>
+          <div style="position:absolute;top:25%;right:0;font-size:10px;font-weight:600;">Soft Skills</div>
+          <div style="position:absolute;bottom:25%;right:0;font-size:10px;font-weight:600;">HOSMONY</div>
+          <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;">IA Skills</div>
+          <div style="position:absolute;bottom:25%;left:0;font-size:10px;font-weight:600;">Leadership</div>
+          <div style="position:absolute;top:25%;left:0;font-size:10px;font-weight:600;">Technique</div>
+        </div>
+      </div>
+      <!-- Score summary card -->
+      <div class="card" style="padding:16px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:12px;">Scores par categorie</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="font-weight:600;">Hard Skills</span><span style="font-weight:700;">7.0/10</span></div><div class="progress-track"><div class="progress-fill" style="width:70%;background:var(--navy);"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="font-weight:600;">Soft Skills</span><span style="font-weight:700;">7.0/10</span></div><div class="progress-track"><div class="progress-fill" style="width:70%;background:var(--green);"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="font-weight:600;">HOSMONY Skills</span><span style="font-weight:700;">6.0/10</span></div><div class="progress-track"><div class="progress-fill" style="width:60%;background:var(--amber);"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="font-weight:600;">IA Skills</span><span style="font-weight:700;">4.0/10</span></div><div class="progress-track"><div class="progress-fill" style="width:40%;background:var(--red);"></div></div></div>
+          <div style="margin-top:6px;padding:10px;background:var(--red-bg);border-radius:var(--radius-sm);border-left:3px solid var(--red);font-size:11px;"><strong>Axe prioritaire :</strong> IA Skills — ecart de 3 points vs objectif moyen</div>
+        </div>
+      </div>
+    </div>
     <div class="grid-2">
       <div class="card">
         <div class="card-header"><div class="card-title">Hard Skills</div><div class="card-badge">Competences techniques</div></div>
         <table class="data-table"><thead><tr><th>Competence</th><th>Auto-eval.</th><th>Objectif</th><th>Ecart</th></tr></thead><tbody>
-          <tr><td><strong>Comptabilite</strong></td><td>8/10</td><td>9</td><td style="color:var(--green);">+1</td></tr>
-          <tr><td><strong>Analyse financiere</strong></td><td>7/10</td><td>8</td><td style="color:var(--green);">+1</td></tr>
-          <tr><td><strong>Droit fiscal</strong></td><td>6/10</td><td>7</td><td style="color:var(--green);">+1</td></tr>
+          <tr><td><strong>Comptabilite</strong></td><td>8/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:80%;background:var(--navy);"></div></div></td><td>9</td><td style="color:var(--green);">+1</td></tr>
+          <tr><td><strong>Analyse financiere</strong></td><td>7/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:70%;background:var(--navy);"></div></div></td><td>8</td><td style="color:var(--green);">+1</td></tr>
+          <tr><td><strong>Droit fiscal</strong></td><td>6/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:60%;background:var(--navy);"></div></div></td><td>7</td><td style="color:var(--green);">+1</td></tr>
         </tbody></table>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">Soft Skills</div><div class="card-badge">Competences humaines</div></div>
         <table class="data-table"><thead><tr><th>Competence</th><th>Auto-eval.</th><th>Objectif</th><th>Ecart</th></tr></thead><tbody>
-          <tr><td><strong>Communication</strong></td><td>7/10</td><td>8</td><td style="color:var(--green);">+1</td></tr>
-          <tr><td><strong>Leadership</strong></td><td>6/10</td><td>7</td><td style="color:var(--green);">+1</td></tr>
-          <tr><td><strong>Gestion du stress</strong></td><td>8/10</td><td>8</td><td style="color:var(--text-muted);">0</td></tr>
+          <tr><td><strong>Communication</strong></td><td>7/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:70%;background:var(--green);"></div></div></td><td>8</td><td style="color:var(--green);">+1</td></tr>
+          <tr><td><strong>Leadership</strong></td><td>6/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:60%;background:var(--green);"></div></div></td><td>7</td><td style="color:var(--green);">+1</td></tr>
+          <tr><td><strong>Gestion du stress</strong></td><td>8/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:80%;background:var(--green);"></div></div></td><td>8</td><td style="color:var(--text-muted);">0</td></tr>
         </tbody></table>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">HOSMONY Skills</div><div class="card-badge">Durabilite & RSE</div></div>
         <table class="data-table"><thead><tr><th>Competence</th><th>Auto-eval.</th><th>Objectif</th><th>Ecart</th></tr></thead><tbody>
-          <tr><td><strong>RSE & developpement durable</strong></td><td>7/10</td><td>9</td><td style="color:var(--amber);">+2</td></tr>
-          <tr><td><strong>Strategie ESG</strong></td><td>5/10</td><td>7</td><td style="color:var(--amber);">+2</td></tr>
-          <tr><td><strong>Reporting extra-financier</strong></td><td>6/10</td><td>8</td><td style="color:var(--amber);">+2</td></tr>
+          <tr><td><strong>RSE & developpement durable</strong></td><td>7/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:70%;background:var(--amber);"></div></div></td><td>9</td><td style="color:var(--amber);">+2</td></tr>
+          <tr><td><strong>Strategie ESG</strong></td><td>5/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:50%;background:var(--amber);"></div></div></td><td>7</td><td style="color:var(--amber);">+2</td></tr>
+          <tr><td><strong>Reporting extra-financier</strong></td><td>6/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:60%;background:var(--amber);"></div></div></td><td>8</td><td style="color:var(--amber);">+2</td></tr>
         </tbody></table>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">IA Skills</div><div class="card-badge">Intelligence artificielle</div></div>
         <table class="data-table"><thead><tr><th>Competence</th><th>Auto-eval.</th><th>Objectif</th><th>Ecart</th></tr></thead><tbody>
-          <tr><td><strong>Prompt engineering</strong></td><td>4/10</td><td>7</td><td style="color:var(--red);">+3</td></tr>
-          <tr><td><strong>Utilisation agents IA</strong></td><td>5/10</td><td>8</td><td style="color:var(--red);">+3</td></tr>
-          <tr><td><strong>Analyse donnees IA</strong></td><td>3/10</td><td>6</td><td style="color:var(--red);">+3</td></tr>
+          <tr><td><strong>Prompt engineering</strong></td><td>4/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:40%;background:var(--red);"></div></div></td><td>7</td><td style="color:var(--red);">+3</td></tr>
+          <tr><td><strong>Utilisation agents IA</strong></td><td>5/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:50%;background:var(--amber);"></div></div></td><td>8</td><td style="color:var(--red);">+3</td></tr>
+          <tr><td><strong>Analyse donnees IA</strong></td><td>3/10 <div class="progress-track" style="width:60px;height:3px;display:inline-block;vertical-align:middle;margin-left:6px;"><div class="progress-fill" style="width:30%;background:var(--red);"></div></div></td><td>6</td><td style="color:var(--red);">+3</td></tr>
         </tbody></table>
       </div>
     </div>
@@ -1779,11 +1875,17 @@
         <div class="k-card"><div class="k-card-title">Hotel Bellevue</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">35 000 &euro;</span></div><div class="k-card-details"><div>Presentation 10 avr.</div></div></div>
       </div></div>
       <div class="kanban-col"><div class="kanban-head">Gagne <span class="kanban-count">4</span></div><div class="kanban-body">
-        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Boulangerie Martin</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">9 500 &euro;</span></div><div class="k-card-details"><div>Signe 15 fev.</div></div></div>
-        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Vignobles Beaumont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">28 000 &euro;</span></div><div class="k-card-details"><div>Signe 1 mars</div></div></div>
-        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Garage Thibault</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">15 000 &euro;</span></div><div class="k-card-details"><div>Signe 12 mars</div></div></div>
-        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Cabinet Dupont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">22 000 &euro;</span></div><div class="k-card-details"><div>Signe 25 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Boulangerie Martin</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">9 500 &euro;</span></div><div class="k-card-details"><div>Signe 15 fev.</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Vignobles Beaumont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">28 000 &euro;</span></div><div class="k-card-details"><div>Signe 1 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Garage Thibault</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">15 000 &euro;</span></div><div class="k-card-details"><div>Signe 12 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Cabinet Dupont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">22 000 &euro;</span></div><div class="k-card-details"><div>Signe 25 mars</div></div></div>
       </div></div>
+    </div>
+    <!-- Pipeline total banner -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:var(--radius);padding:12px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);font-size:13px;font-weight:600;">
+      <span>Total pipeline : <strong style="color:var(--primary);">47 500 &euro;</strong></span>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Total gagne : <strong style="color:var(--green);">74 500 &euro;</strong></span>
     </div>
     <div class="card">
       <div class="card-header"><div class="card-title">Activites recentes</div></div>
@@ -1972,6 +2074,20 @@
     document.getElementById('agent-reglem').style.display = id === 'reglem' ? 'block' : 'none';
     document.getElementById('agent-finance').style.display = id === 'finance' ? 'block' : 'none';
   }
+
+  // Organisation tabs
+  document.querySelectorAll('#page-dynamics .tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#page-dynamics .tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const sections = ['org-engagement','org-sondages','org-idees','org-partenaires','org-evenements'];
+      sections.forEach(s => { const el = document.getElementById(s); if(el) el.style.display = 'none'; });
+      const idx = Array.from(tab.parentElement.children).indexOf(tab);
+      const target = sections[idx];
+      const el = document.getElementById(target);
+      if(el) el.style.display = 'block';
+    });
+  });
 </script>
 </body>
 </html>
