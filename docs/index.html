@@ -58,8 +58,7 @@
 
   /* ═══ SIDEBAR ═══ */
   .sidebar { width: 240px; background: #FFFFFF;
-    
-    -webkit-
+
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
@@ -96,7 +95,7 @@
   .nav-item:hover { background: #F5F5F5; color: var(--text); }
   .nav-item.active { background: var(--navy); color: #fff; font-weight: 600; border-radius: 10px; }
   /* Nav groups */
-  .nav-group { margin-bottom: 2px; }
+  .nav-group { margin-bottom: 6px; }
   .nav-group-header {
     display: flex; align-items: center; gap: 8px;
     padding: 6px 10px; border-radius: var(--radius-sm);
@@ -142,7 +141,7 @@
   .main { margin-left: 240px; flex: 1; min-height: 100vh; }
 
   .topbar { height: 52px; background: #FFFFFF; border-bottom: 1px solid #EBEBEB; box-sizing: border-box;
-    display: flex;
+    display: flex; /* same bg as sidebar */
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
@@ -193,8 +192,7 @@
     position: absolute; top: 40px; right: 0;
     width: 320px;
     background: #FFFFFF;
-    
-    -webkit-
+
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: 0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.5);
@@ -739,7 +737,7 @@
       <div class="nav-group-items">
         <div class="nav-item sub" data-page="strategy">Strategie</div>
         <div class="nav-item sub" data-page="indicateurs">Indicateurs</div>
-        <div class="nav-item sub" data-page="opportunities">Opportunites <span style="margin-left:auto;font-size:10px;font-weight:600;color:var(--text-muted);background:var(--bg);padding:1px 5px;border-radius:3px;">3</span></div>
+        <div class="nav-item sub" data-page="opportunities">Opportunites <span style="margin-left:auto;font-size:10px;font-weight:600;color:var(--text-muted);background:var(--bg);padding:1px 5px;border-radius:3px;">2</span></div>
       </div>
     </div>
 
@@ -799,10 +797,10 @@
         <button class="notif-btn" onclick="document.querySelector('.notif-dropdown').classList.toggle('open')">&#128276;<div class="notif-badge">4</div></button>
         <div class="notif-dropdown">
           <div class="notif-header"><span>Notifications</span><span style="color:var(--primary);cursor:pointer;font-weight:500;font-size:10px;">Tout marquer lu</span></div>
-          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--red);"></span>Echeance bilan carbone dans 15 jours</div><div class="n-time">Il y a 2h &bull; Action requise</div></div>
-          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--amber);"></span>Indicateur formation : 14h/20h</div><div class="n-time">Il y a 5h &bull; Indicateurs</div></div>
-          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--green);"></span>Aide numerisation TPE : 5 400&euro; obtenue</div><div class="n-time">Hier &bull; Opportunites</div></div>
-          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--primary);"></span>Etape 6 &laquo;Valeurs et raison d'etre&raquo; : rappel</div><div class="n-time">28 mars &bull; Parcours</div></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--red);"></span>Bilan annuel Boulangerie Martin a finaliser</div><div class="n-time">Il y a 2h &bull; Action requise</div></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--amber);"></span>3 declarations fiscales avant le 15 avril</div><div class="n-time">Il y a 5h &bull; Echeances</div></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--green);"></span>Garage Thibault passe Niveau 2 HOSMONY</div><div class="n-time">Hier &bull; Parcours</div></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--primary);"></span>Nouveau prospect : Restaurant Le Lys</div><div class="n-time">28 mars &bull; CRM</div></div>
         </div>
       </div>
       <button class="btn">Exporter</button>
@@ -816,9 +814,9 @@
 
     <!-- ONBOARDING BANNER -->
     <div id="onboarding-card" style="display:flex;align-items:center;gap:12px;padding:10px 16px;background: #F8F9FB; border: 1px solid #EBEBEB;border-radius:var(--radius);margin-bottom:16px;">
-      <div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">3</div>
-      <div style="flex:1;font-size:12px;"><strong>Configuration en cours</strong> — 3/8 etapes completees</div>
-      <div class="progress-track" style="width:120px;"><div class="progress-fill" style="width:37.5%;background:var(--navy);"></div></div>
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">5</div>
+      <div style="flex:1;font-size:12px;"><strong>Configuration en cours</strong> — 5/8 etapes completees</div>
+      <div class="progress-track" style="width:120px;"><div class="progress-fill" style="width:62.5%;background:var(--navy);"></div></div>
       <button class="btn sm primary">Continuer</button>
       <button class="btn sm ghost" onclick="document.getElementById('onboarding-card').style.display='none';" style="font-size:10px;">&#10005;</button>
     </div>
@@ -839,31 +837,31 @@
         </div>
         <div style="display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 4px;">
           <div style="flex:1;text-align:center;">
-            <div style="background:#F97066;border-radius:6px 6px 0 0;height:55%;margin:0 auto;"></div>
+            <div style="background:#F97066;border-radius:6px 6px 0 0;height:85%;width:80%;margin:0 auto;margin:0 auto;"></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Martin</div>
           </div>
           <div style="flex:1;text-align:center;">
-            <div style="background:#F97066;border-radius:6px 6px 0 0;height:68%;margin:0 auto;"></div>
+            <div style="background:#F97066;opacity:0.8;border-radius:6px 6px 0 0;height:70%;width:80%;margin:0 auto;margin:0 auto;"></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Thibault</div>
           </div>
           <div style="flex:1;text-align:center;">
-            <div style="background:#F97066;opacity:0.7;border-radius:6px 6px 0 0;height:60%;margin:0 auto;"></div>
+            <div style="background:#F97066;opacity:0.6;border-radius:6px 6px 0 0;height:45%;width:80%;margin:0 auto;margin:0 auto;"></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Rousseau</div>
           </div>
           <div style="flex:1;text-align:center;">
-            <div style="background:#F97066;opacity:0.7;border-radius:6px 6px 0 0;height:75%;margin:0 auto;"></div>
+            <div style="background:#F97066;opacity:0.7;border-radius:6px 6px 0 0;height:60%;width:80%;margin:0 auto;margin:0 auto;"></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Dupont</div>
           </div>
           <div style="flex:1;text-align:center;">
-            <div style="background:#F97066;border-radius:6px 6px 0 0;height:82%;margin:0 auto;"></div>
+            <div style="background:var(--navy);border-radius:6px 6px 0 0;height:92%;width:80%;margin:0 auto;margin:0 auto;"></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Beaumont</div>
           </div>
           <div style="flex:1;text-align:center;">
-            <div style="background:#F97066;opacity:0.6;border-radius:6px 6px 0 0;height:70%;margin:0 auto;"></div>
+            <div style="background:#F97066;opacity:0.5;border-radius:6px 6px 0 0;height:30%;width:80%;margin:0 auto;margin:0 auto;"></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Lys</div>
           </div>
           <div style="flex:1;text-align:center;">
-            <div style="background:var(--navy);border-radius:6px 6px 0 0;height:90%;margin:0 auto;"></div>
+            <div style="background:#F97066;opacity:0.6;border-radius:6px 6px 0 0;height:50%;width:80%;margin:0 auto;margin:0 auto;"></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Autres</div>
           </div>
         </div>
@@ -916,14 +914,14 @@
 
   <!-- PARCOURS HOSMONY -->
   <div class="content page" id="page-hosmony">
-    <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">12 clients accompagnes &bull; 4 niveaux actifs</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
+    <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">Mon parcours cabinet &bull; Suivi clients</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
 
-    <div class="context-hint">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <span><strong>Astuce :</strong> Completez les etapes dans l'ordre pour debloquer le niveau suivant et acceder a de nouveaux outils.</span>
-      <span class="dismiss" onclick="this.parentElement.style.display='none'">&#10005;</span>
+    <div class="tabs" style="margin-bottom:14px;">
+      <div class="tab active" onclick="document.getElementById('parcours-mon').style.display='block';document.getElementById('parcours-clients').style.display='none';this.classList.add('active');this.nextElementSibling.classList.remove('active');">Mon Parcours</div>
+      <div class="tab" onclick="document.getElementById('parcours-clients').style.display='block';document.getElementById('parcours-mon').style.display='none';this.classList.add('active');this.previousElementSibling.classList.remove('active');">Suivi Clients <strong>12</strong></div>
     </div>
 
+    <div id="parcours-mon">
     <div class="journey">
       <div class="j-level"><div class="j-circle done" style="background:var(--hosmony-1);">1</div><div class="j-name">Essentiel</div><div class="j-desc">6/6 &bull; Valide</div><div class="j-connector done"></div></div>
       <div class="j-level"><div class="j-circle current" style="background:var(--hosmony-2);color:var(--hosmony-2);">2</div><div class="j-name">Dynamique</div><div class="j-desc">7/9 &bull; En cours</div><div class="j-connector active"></div></div>
@@ -931,31 +929,28 @@
       <div class="j-level"><div class="j-circle future" style="background:var(--hosmony-4);">4</div><div class="j-name">Excellence</div><div class="j-desc">Innovation</div><div class="j-connector"></div></div>
       <div class="j-level"><div class="j-circle future" style="background:var(--hosmony-5);">5</div><div class="j-name">Etoile</div><div class="j-desc">Modele</div></div>
     </div>
+    </div><!-- end parcours-mon -->
+
+    <div id="parcours-clients" style="display:none;">
     <div class="card" style="margin-bottom:14px;">
-      <div class="card-header"><div class="card-title">Etapes &mdash; Niveau 2 : Dynamique</div><div class="card-badge">7/9</div></div>
+      <div class="card-header"><div class="card-title">Clients Niveau 2 &mdash; Dynamique</div><div class="card-badge">5 clients</div></div>
       <div class="card-body">
-        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Formation HOSMONY Niveau 2</div><div class="step-desc">Je construis ma strategie &mdash; 2 jours</div></div><div class="step-status"><span class="badge-achievement celebrate">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne : Gouvernance</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning niveau 2</div><div class="step-desc">Approfondissement et mise a jour reglementaire</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Diagnostic progression durabilite accompagne</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite niveau 2</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item"><div class="step-num current">6</div><div style="flex:1"><div class="step-title">Definition des valeurs et raison d'etre</div><div class="step-desc">Definir les valeurs fondamentales de l'entreprise</div></div><div class="step-status"><button class="btn sm primary">Continuer</button></div></div>
-        <div class="step-item"><div class="step-num locked">7</div><div style="flex:1"><div class="step-title">Ambitions DURABILITE (carte mentale)</div><div class="step-desc">Formaliser les ambitions via carte mentale</div></div><div class="step-status"><button class="btn sm" disabled>Verrouille</button></div></div>
-        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning complementaire</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Bilan niveau 2</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">BM</div><div style="flex:1"><div class="step-title">Boulangerie Martin</div><div class="step-desc">7/9 etapes &bull; Score 72%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:78%;"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">GT</div><div style="flex:1"><div class="step-title">Garage Thibault</div><div class="step-desc">6/9 etapes &bull; Score 65%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:67%;"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">FR</div><div style="flex:1"><div class="step-title">Fleuriste Rosalie</div><div class="step-desc">4/9 etapes &bull; Score 48%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:44%;background:var(--amber);"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">RL</div><div style="flex:1"><div class="step-title">Restaurant Le Lys</div><div class="step-desc">3/9 etapes &bull; Score 35%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:33%;background:var(--amber);"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">HB</div><div style="flex:1"><div class="step-title">Hotel Bellevue</div><div class="step-desc">5/9 etapes &bull; Score 55%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:55%;"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-header"><div class="card-title">Etapes &mdash; Niveau 1 : Essentiel</div><div style="display:flex;align-items:center;gap:8px;"><span class="pill green">6/6 &#10003;</span><button class="btn sm ghost">Voir le rapport</button></div></div>
+      <div class="card-header"><div class="card-title">Clients Niveau 1 &mdash; Essentiel</div><div style="display:flex;align-items:center;gap:8px;"><span class="pill green">3 clients &#10003;</span></div></div>
       <div class="card-body">
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Sensibilisation HOSMONY</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning initial durabilite</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Autodiagnostic progression durabilite</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Rapport de progression niveau 1</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">PR</div><div style="flex:1"><div class="step-title">Pharmacie Rousseau</div><div class="step-desc">6/6 etapes &bull; Pret pour Niveau 2</div></div><div><button class="btn sm primary">Superviser</button></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">VB</div><div style="flex:1"><div class="step-title">Vignobles Beaumont</div><div class="step-desc">6/6 etapes &bull; Niveau 2 en attente</div></div><div><button class="btn sm">Voir</button></div></div>
+        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">CD</div><div style="flex:1"><div class="step-title">Cabinet Dupont</div><div class="step-desc">6/6 etapes &bull; Termine</div></div><div><button class="btn sm">Voir</button></div></div>
       </div>
     </div>
+    </div><!-- end parcours-clients -->
   </div>
 
   <!-- INDICATEURS -->
@@ -965,7 +960,7 @@
 
     <!-- Tabs: types d'indicateurs -->
     <div class="tabs" style="margin-bottom:14px;">
-      <div class="tab active">Tous <strong>32</strong></div>
+      <div class="tab active">Tous <strong>24</strong></div>
       <div class="tab">Financier <strong>8</strong></div>
       <div class="tab">RSE <strong>12</strong></div>
       <div class="tab">Commercial <strong>6</strong></div>
@@ -1029,7 +1024,7 @@
     </div>
     <div class="grid-4">
       <div class="stat-card"><div class="stat-val">32</div><div class="stat-label">Indicateurs suivis</div></div>
-      <div class="stat-card"><div class="stat-val" style="color:var(--green);">22</div><div class="stat-label">Conformes</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">18</div><div class="stat-label">Conformes</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--amber);">7</div><div class="stat-label">En progres</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--red);">3</div><div class="stat-label">Non conformes</div></div>
     </div>
@@ -1073,12 +1068,7 @@
     <div class="page-header"><div><div class="page-title">Plan d'Actions</div><div class="page-subtitle">12 actions &bull; 5 completees &bull; 4 en cours &bull; 3 a faire</div></div>
     <div style="display:flex;gap:6px;"><button class="btn ai-powered" onclick="document.getElementById('aiSug').classList.toggle('visible')">Suggestions IA <span class="ai-badge">IA</span></button><button class="btn">Filtrer</button><button class="btn primary">+ Nouvelle action</button></div></div>
 
-    <div class="context-hint">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <span><strong>Astuce :</strong> Glissez les cartes entre colonnes pour suivre l'avancement. Les idees elues dans Organisation arrivent ici automatiquement.</span>
-      <span class="dismiss" onclick="this.parentElement.style.display='none'">&#10005;</span>
-    </div>
-
+    
     <div class="kanban">
       <div class="kanban-col"><div class="kanban-head">A faire <span class="kanban-count">3</span></div><div class="kanban-body">
         <div class="k-card"><div class="k-card-title">Plan formation 20h/an</div><div class="k-card-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">Moy.</span><span style="font-size:11px;color:var(--text-muted);">30 juin</span><div class="k-avatar" style="background:var(--amber);">AM</div></div><div class="k-card-details"><div>Indicateur : <strong>14h/20h</strong></div><div>Mesure : <strong>PayFit</strong></div><div>Budget : <strong>3 200&euro;</strong></div><div>Resp. : <strong>A. Morel</strong></div></div></div>
@@ -1147,7 +1137,7 @@
 
   <!-- STRATEGIE -->
   <div class="content page" id="page-strategy">
-    <div class="page-header"><div><div class="page-title">Strategie</div><div class="page-subtitle">Vision, mission, piliers et execution</div></div>
+    <div class="page-header"><div><div class="page-title">Strat&eacute;gie</div><div class="page-subtitle">Vision, mission, piliers et execution</div></div>
     <div style="display:flex;gap:6px;"><button class="btn ai-powered" onclick="document.getElementById('stratAI').classList.toggle('visible')">Revue IA</button><button class="btn primary">Modifier la strategie</button></div></div>
     <div class="vision-box">
       <div class="vision-label">Vision 2028</div>
@@ -1186,7 +1176,7 @@
 
     <div class="page-header">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="page-title">Opportunites</div>
+        <div class="page-title">Opportunit&eacute;s</div>
         <select onchange="showAgent(this.value)" style="padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:inherit;font-weight:600;color:var(--text);background:var(--surface);cursor:pointer;">
           <option value="reglem">Agent Reglementaire</option>
           <option value="finance">Agent Financement</option>
@@ -1352,12 +1342,7 @@
   <div class="content page" id="page-ai-studio">
     <div class="page-header"><div><div class="page-title">Studio IA</div><div class="page-subtitle">Creez des agents et automatisations sur mesure</div></div><div style="display:flex;gap:6px;"><button class="btn primary">+ Creer un agent</button><button class="btn primary" style="background:var(--accent);border-color:var(--accent);color:var(--navy);">+ Automatisation</button></div></div>
 
-    <div class="context-hint">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <span><strong>Astuce :</strong> Creez des agents specialises pour automatiser vos taches. Commencez par un template ou partez de zero.</span>
-      <span class="dismiss" onclick="this.parentElement.style.display='none'">&#10005;</span>
-    </div>
-
+    
     <!-- Tabs -->
     <div class="tabs" style="margin-bottom:18px;">
       <div class="tab active">Mes Agents <strong>6</strong></div>
@@ -1374,10 +1359,10 @@
           <div style="width:36px;height:36px;border-radius:10px;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
           </div>
-          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Commercial</div><div style="font-size:12px;color:var(--text-muted);">Portefeuille, scoring, recommandations</div></div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Comptable</div><div style="font-size:12px;color:var(--text-muted);">Analyse financiere, bilans, declarations</div></div>
           <span class="pill green">Actif</span>
         </div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Analyse votre portefeuille clients, identifie les opportunites de croissance et genere des recommandations.</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Analyse les donnees comptables de vos clients, genere des bilans et prepare les declarations fiscales.</div>
         <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
           <span>47 executions</span><span>&bull;</span><span>Derniere : il y a 2h</span>
         </div>
@@ -1393,10 +1378,10 @@
           <div style="width:36px;height:36px;border-radius:10px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
           </div>
-          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Comptable</div><div style="font-size:12px;color:var(--text-muted);">Analyse financiere, ecritures</div></div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Fiscal</div><div style="font-size:12px;color:var(--text-muted);">Declarations TVA, IS, liasses fiscales</div></div>
           <span class="pill green">Actif</span>
         </div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Analyse vos donnees comptables, detecte les anomalies et propose des optimisations fiscales.</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Prepare les declarations TVA, IS, genere les liasses fiscales et optimise la fiscalite de vos clients.</div>
         <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
           <span>23 executions</span><span>&bull;</span><span>Derniere : hier</span>
         </div>
@@ -1411,10 +1396,10 @@
           <div style="width:36px;height:36px;border-radius:10px;background:var(--purple-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
           </div>
-          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Marketing</div><div style="font-size:12px;color:var(--text-muted);">Strategie, contenu, positionnement</div></div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Audit RSE</div><div style="font-size:12px;color:var(--text-muted);">Analyse conformite, rapport RSE clients</div></div>
           <span class="pill green">Actif</span>
         </div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Genere du contenu, analyse votre positionnement et propose des strategies marketing adaptees.</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Analyse la conformite RSE de vos clients, genere des rapports et identifie les axes d'amelioration.</div>
         <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
           <span>15 executions</span><span>&bull;</span><span>Derniere : 27 mars</span>
         </div>
@@ -1429,10 +1414,10 @@
           <div style="width:36px;height:36px;border-radius:10px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">SEO</div><div style="font-size:12px;color:var(--text-muted);">Referencement, audit web</div></div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Veille Reglementaire</div><div style="font-size:12px;color:var(--text-muted);">Scan legal, alertes conformite</div></div>
           <span class="pill green">Actif</span>
         </div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Audite votre site, analyse les mots-cles et genere des recommandations SEO.</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Scanne les evolutions legales et reglementaires, genere des alertes de conformite pour vos clients.</div>
         <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
           <span>8 executions</span><span>&bull;</span><span>Derniere : 25 mars</span>
         </div>
@@ -1447,12 +1432,12 @@
           <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
-          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">RH</div><div style="font-size:12px;color:var(--text-muted);">Recrutement, droit social</div></div>
-          <span class="pill amber">Brouillon</span>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Conseil Client</div><div style="font-size:12px;color:var(--text-muted);">Recommandations strategiques, scoring</div></div>
+          <span class="pill green">Actif</span>
         </div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Aide au recrutement, analyse des CV, veille droit social et obligations employeur.</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Genere des recommandations strategiques personnalisees et evalue le scoring de vos clients.</div>
         <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
-          <span>0 executions</span><span>&bull;</span><span>Cree le 20 mars</span>
+          <span>12 executions</span><span>&bull;</span><span>Cree le 20 mars</span>
         </div>
         <div style="display:flex;gap:5px;">
           <button class="btn sm">Finaliser</button>
@@ -1500,36 +1485,36 @@
       <div class="agent-pill-card selected">
         <div class="agent-pill-icon" style="background:var(--navy);">C</div>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Commercial <span class="agent-pill-status"></span></div>
-          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Portefeuille et scoring</div>
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Comptable <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Bilans et declarations</div>
         </div>
       </div>
       <div class="agent-pill-card">
         <div class="agent-pill-icon" style="background:var(--green);">C</div>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Comptable <span class="agent-pill-status"></span></div>
-          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Analyse financiere</div>
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Fiscal <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">TVA, IS, liasses</div>
         </div>
       </div>
       <div class="agent-pill-card">
         <div class="agent-pill-icon" style="background:var(--purple);">M</div>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Marketing <span class="agent-pill-status"></span></div>
-          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Strategie et contenu</div>
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Audit RSE <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Conformite RSE clients</div>
         </div>
       </div>
       <div class="agent-pill-card">
         <div class="agent-pill-icon" style="background:var(--amber);">S</div>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">SEO <span class="agent-pill-status"></span></div>
-          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Referencement et audit</div>
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Veille Regl. <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Scan legal, alertes</div>
         </div>
       </div>
       <div class="agent-pill-card">
         <div class="agent-pill-icon" style="background:var(--text-secondary);">R</div>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">RH <span class="agent-pill-status" style="background:var(--amber);"></span></div>
-          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Recrutement, droit social</div>
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Conseil Client <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Recommandations, scoring</div>
         </div>
       </div>
     </div>
@@ -1563,7 +1548,7 @@
       <div class="chat-area">
         <div class="chat-head" style="display:flex;align-items:center;gap:8px;">
           <div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;">C</div>
-          <div>Agent Commercial</div>
+          <div>Agent Comptable</div>
           <span class="pill green" style="margin-left:auto;font-size:11px;">En ligne</span>
         </div>
         <div class="chat-context">
@@ -1676,7 +1661,7 @@
 
   <!-- ORGANISATION -->
   <div class="content page" id="page-dynamics">
-    <div class="page-header"><div><div class="page-title">Organisation</div><div class="page-subtitle">Bien-etre, sondages, idees, partenaires et evenements</div></div><button class="btn primary">+ Nouvelle initiative</button></div>
+    <div class="page-header"><div><div class="page-title">Organisation</div><div class="page-subtitle">Equipe cabinet, bien-etre, partenaires et evenements</div></div><button class="btn primary">+ Nouvelle initiative</button></div>
 
     <!-- Indice de bien-être hero -->
     <div class="card" style="padding:16px;margin-bottom:14px;border-left:4px solid var(--green);">
@@ -1686,7 +1671,7 @@
         </div>
         <div style="flex:1;">
           <div style="font-size:15px;font-weight:700;">Indice de Bien-etre au Travail</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px;">Moyenne equipe &bull; Derniere enquete : 15 mars 2026 &bull; 7/8 repondants</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px;">Moyenne equipe &bull; Derniere enquete : 15 mars 2026 &bull; 4/4 repondants</div>
           <div style="display:flex;gap:16px;margin-top:8px;">
             <div style="font-size:11px;"><span style="color:var(--green);font-weight:700;">&#9650; +0.4</span> vs trimestre precedent</div>
             <div style="font-size:11px;"><span style="font-weight:600;">Ambiance :</span> 8.2/10</div>
@@ -1702,7 +1687,7 @@
     <div class="grid-4">
       <div class="stat-card"><div class="stat-val" style="color:var(--green);">7.6/10</div><div class="stat-label">Bien-etre</div></div>
       <div class="stat-card"><div class="stat-val">2</div><div class="stat-label">Sondages actifs</div></div>
-      <div class="stat-card"><div class="stat-val">6/8</div><div class="stat-label">Collaborateurs</div></div>
+      <div class="stat-card"><div class="stat-val">4/4</div><div class="stat-label">Collaborateurs</div></div>
       <div class="stat-card"><div class="stat-val">12</div><div class="stat-label">Idees soumises</div></div>
     </div>
     <div class="tabs">
@@ -1719,7 +1704,7 @@
     <div style="margin-bottom:20px;">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Sondages</h3>
       <div class="grid-2">
-        <div class="card"><div class="card-header"><div class="card-title">Satisfaction collaborateurs Q1 2026</div><span class="pill amber">En cours</span></div><div class="card-body"><div style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;"><strong>6/8</strong> reponses</div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Date limite : 15 avril</div><button class="btn sm primary">Repondre</button></div></div>
+        <div class="card"><div class="card-header"><div class="card-title">Satisfaction collaborateurs Q1 2026</div><span class="pill amber">En cours</span></div><div class="card-body"><div style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;"><strong>4/4</strong> reponses</div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Date limite : 15 avril</div><button class="btn sm primary">Repondre</button></div></div>
         <div class="card"><div class="card-header"><div class="card-title">Priorites RSE 2026</div><span class="pill green">Termine</span></div><div class="card-body"><div style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;"><strong>8/8</strong> reponses</div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Termine</div><button class="btn sm">Resultats</button></div></div>
       </div>
       <div style="margin-top:10px;"><button class="btn primary">+ Creer un sondage</button></div>
@@ -1815,9 +1800,9 @@
 
   <!-- COMPETENCES -->
   <div class="content page" id="page-competences">
-    <div class="page-header"><div><div class="page-title">Competences</div><div class="page-subtitle">Auto-evaluation et cartographie des competences</div></div></div>
+    <div class="page-header"><div><div class="page-title">Comp&eacute;tences</div><div class="page-subtitle">Auto-evaluation et cartographie des competences</div></div></div>
     <div class="grid-4">
-      <div class="stat-card"><div class="stat-val">8</div><div class="stat-label">Collaborateurs</div></div>
+      <div class="stat-card"><div class="stat-val">4</div><div class="stat-label">Collaborateurs</div></div>
       <div class="stat-card"><div class="stat-val">32</div><div class="stat-label">Competences evaluees</div></div>
       <div class="stat-card"><div class="stat-val">7.2/10</div><div class="stat-label">Score moyen</div></div>
       <div class="stat-card"><div class="stat-val">3</div><div class="stat-label">Plans de developpement</div></div>
@@ -1938,7 +1923,7 @@
               <div class="avatar" style="background:var(--primary);">SL</div>
               <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Sophie Laurent</div><div style="font-size:12px;color:var(--text-muted);">Il y a 2h</div></div>
             </div>
-            <p style="font-size:12px;line-height:1.6;margin-bottom:8px;">Bonne nouvelle ! L'aide regionale transition ecologique a ete acceptee : 12 000 &euro; &#127881;</p>
+            <p style="font-size:12px;line-height:1.6;margin-bottom:8px;">Le Cabinet Laurent &amp; Associes est fier d'accompagner 3 nouveaux clients ce trimestre dans le parcours HOSMONY.</p>
             <div style="display:flex;gap:12px;font-size:12px;color:var(--text-secondary);">
               <span style="cursor:pointer;">&#10084; 4 likes</span>
               <span style="cursor:pointer;">&#128172; 2 commentaires</span>
@@ -1953,7 +1938,7 @@
               <div class="avatar" style="background:var(--green);">MM</div>
               <div style="flex:1;"><div style="font-size:12px;font-weight:600;">M. Martin</div><div style="font-size:12px;color:var(--text-muted);">Hier</div></div>
             </div>
-            <p style="font-size:12px;line-height:1.6;margin-bottom:8px;">Le bilan carbone Scope 1+2 est en cours de finalisation. Objectif : &minus;20% d'ici fin 2026.</p>
+            <p style="font-size:12px;line-height:1.6;margin-bottom:8px;">Le bilan Q1 est en cours de consolidation pour les 12 clients du portefeuille.</p>
             <div style="display:flex;gap:12px;font-size:12px;color:var(--text-secondary);">
               <span style="cursor:pointer;">&#10084; 2 likes</span>
               <span style="cursor:pointer;">&#128172; 1 commentaire</span>
@@ -1968,7 +1953,7 @@
               <div class="avatar" style="background:var(--amber);">AM</div>
               <div style="flex:1;"><div style="font-size:12px;font-weight:600;">A. Morel</div><div style="font-size:12px;color:var(--text-muted);">28 mars</div></div>
             </div>
-            <p style="font-size:12px;line-height:1.6;margin-bottom:8px;">Rappel : formation economie circulaire demain a 14h. Lien visio dans l'email.</p>
+            <p style="font-size:12px;line-height:1.6;margin-bottom:8px;">Formation IA comptable terminee — les agents sont configures pour le cabinet.</p>
             <div style="display:flex;gap:12px;font-size:12px;color:var(--text-secondary);">
               <span style="cursor:pointer;">&#10084; 3 likes</span>
             </div>
@@ -2017,11 +2002,11 @@
 
   <!-- CRM -->
   <div class="content page" id="page-crm">
-    <div class="page-header"><div><div class="page-title">CRM</div><div class="page-subtitle">Gestion de la relation client</div></div><div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">+ Nouveau contact</button></div></div>
+    <div class="page-header"><div><div class="page-title">CRM</div><div class="page-subtitle">Prospection et acquisition de nouveaux clients</div></div><div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">+ Nouveau contact</button></div></div>
     <div class="grid-4">
       <div class="stat-card"><div class="stat-val">24</div><div class="stat-label">Contacts</div></div>
       <div class="stat-card"><div class="stat-val">8</div><div class="stat-label">Deals en cours</div></div>
-      <div class="stat-card"><div class="stat-val" style="color:var(--green);">47 500 &euro;</div><div class="stat-label">Pipeline</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">115 000 &euro;</div><div class="stat-label">Pipeline</div></div>
       <div class="stat-card"><div class="stat-val">32%</div><div class="stat-label">Taux de conversion</div></div>
     </div>
     <div class="kanban">
@@ -2047,7 +2032,7 @@
     </div>
     <!-- Pipeline total banner -->
     <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:var(--radius);padding:12px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);font-size:13px;font-weight:600;">
-      <span>Total pipeline : <strong style="color:var(--primary);">47 500 &euro;</strong></span>
+      <span>Total pipeline : <strong style="color:var(--primary);">115 000 &euro;</strong></span>
       <span style="color:var(--text-muted);">|</span>
       <span>Total gagne : <strong style="color:var(--green);">74 500 &euro;</strong></span>
     </div>
@@ -2073,7 +2058,7 @@
 
   <!-- PARAMETRES -->
   <div class="content page" id="page-settings">
-    <div class="page-header"><div><div class="page-title">Parametres</div><div class="page-subtitle">Configuration de votre espace MyDAD</div></div></div>
+    <div class="page-header"><div><div class="page-title">Param&egrave;tres</div><div class="page-subtitle">Configuration de votre espace MyDAD</div></div></div>
     <div class="tabs">
       <div class="tab active">General</div>
       <div class="tab">Membres & Acces</div>
@@ -2089,10 +2074,10 @@
         <div class="card-body">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
             <div>
-              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Nom entreprise</div><div style="font-size:13px;font-weight:600;">Boulangerie Martin</div></div>
-              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Secteur</div><div style="font-size:13px;font-weight:500;">Artisanat alimentaire</div></div>
-              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">SIRET</div><div style="font-size:13px;font-weight:500;">123 456 789 00012</div></div>
-              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Adresse</div><div style="font-size:13px;font-weight:500;">12 rue du Pain, 75011 Paris</div></div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Nom entreprise</div><div style="font-size:13px;font-weight:600;">Cabinet Laurent &amp; Associes</div></div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Secteur</div><div style="font-size:13px;font-weight:500;">Expertise comptable</div></div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">SIRET</div><div style="font-size:13px;font-weight:500;">987 654 321 00045</div></div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Adresse</div><div style="font-size:13px;font-weight:500;">45 avenue de la Republique, 75011 Paris</div></div>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
               <div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Logo</div>
