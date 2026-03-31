@@ -1059,9 +1059,10 @@ a { text-decoration: none; color: inherit; }
   <div class="flex items-center gap-8 mb-20">
     <select class="select-styled">
       <option>Tous les agents</option>
-      <option>Agent Fiscal</option>
-      <option>Agent Veille Reglementaire</option>
-      <option>Agent Audit RSE</option>
+      <option>Agent Reglementaire (Niv.1)</option>
+      <option>Agent Financement (Niv.2)</option>
+      <option>Agent Business (Niv.3)</option>
+      <option>Agent Image de marque (Niv.4)</option>
     </select>
   </div>
 
@@ -1503,14 +1504,14 @@ a { text-decoration: none; color: inherit; }
     <div class="card">
       <div class="card-title">Membres de l'equipe</div>
       <table class="data-table">
-        <thead><tr><th>Nom</th><th>Role</th><th>Email</th><th>Statut</th></tr></thead>
+        <thead><tr><th>Nom</th><th>Role</th><th>Email</th><th>Modules autorises</th><th>Statut</th></tr></thead>
         <tbody>
-          <tr><td class="fw-600">Sophie Laurent</td><td>Expert-Comptable, Dirigeante</td><td>sophie@laurent-associes.fr</td><td><span class="pill pill-green">Actif</span></td></tr>
-          <tr><td class="fw-600">Marc Dubois</td><td>Collaborateur comptable</td><td>marc@laurent-associes.fr</td><td><span class="pill pill-green">Actif</span></td></tr>
-          <tr><td class="fw-600">Julie Robert</td><td>Collaboratrice audit</td><td>julie@laurent-associes.fr</td><td><span class="pill pill-green">Actif</span></td></tr>
-          <tr><td class="fw-600">Thomas Mercier</td><td>Collaborateur junior</td><td>thomas@laurent-associes.fr</td><td><span class="pill pill-green">Actif</span></td></tr>
-          <tr><td class="fw-600">Emma Blanc</td><td>Assistante administrative</td><td>emma@laurent-associes.fr</td><td><span class="pill pill-green">Actif</span></td></tr>
-          <tr><td class="fw-600">Lucas Martin</td><td>Stagiaire</td><td>lucas@laurent-associes.fr</td><td><span class="pill pill-amber">Stage</span></td></tr>
+          <tr><td class="fw-600">Sophie Laurent</td><td>Expert-Comptable, Dirigeante</td><td>sophie@laurent-associes.fr</td><td>Tous les modules</td><td><span class="pill pill-green">Actif</span></td></tr>
+          <tr><td class="fw-600">Marc Dubois</td><td>Collaborateur comptable</td><td>marc@laurent-associes.fr</td><td>Indicateurs, Actions, CRM</td><td><span class="pill pill-green">Actif</span></td></tr>
+          <tr><td class="fw-600">Julie Robert</td><td>Collaboratrice audit</td><td>julie@laurent-associes.fr</td><td>Indicateurs, Actions, Documents</td><td><span class="pill pill-green">Actif</span></td></tr>
+          <tr><td class="fw-600">Thomas Mercier</td><td>Collaborateur junior</td><td>thomas@laurent-associes.fr</td><td>Actions, Documents</td><td><span class="pill pill-green">Actif</span></td></tr>
+          <tr><td class="fw-600">Emma Blanc</td><td>Assistante administrative</td><td>emma@laurent-associes.fr</td><td>Documents</td><td><span class="pill pill-green">Actif</span></td></tr>
+          <tr><td class="fw-600">Lucas Martin</td><td>Stagiaire</td><td>lucas@laurent-associes.fr</td><td>Lecture seule</td><td><span class="pill pill-amber">Stage</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1549,6 +1550,44 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 
+
+<!-- ==================== PAGE: FIL D'ACTUALITE ==================== -->
+<section class="page" id="page-chatbot">
+  <div class="page-title">Fil d'Actualite</div>
+  <div class="page-subtitle">Echanges et actualites du cabinet</div>
+  <div style="display:grid;grid-template-columns:200px 1fr;gap:16px;">
+    <div class="card" style="align-self:start;">
+      <div style="padding:12px;border-bottom:1px solid var(--border);font-weight:600;font-size:13px;">Groupes</div>
+      <div style="padding:8px;">
+        <div style="padding:8px 10px;border-radius:var(--radius-sm);background:var(--primary-bg);cursor:pointer;margin-bottom:4px;"><div style="font-size:12px;font-weight:600;">General</div><div style="font-size:11px;color:var(--text-muted);">6 membres</div></div>
+        <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:4px;"><div style="font-size:12px;">Equipe Audit</div><div style="font-size:11px;color:var(--text-muted);">3 membres</div></div>
+        <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;"><div style="font-size:12px;">Veille Reglementaire</div><div style="font-size:11px;color:var(--text-muted);">4 membres</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:10px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">SL</div>
+          <div><div style="font-size:12px;font-weight:600;">Sophie Laurent</div><div style="font-size:11px;color:var(--text-muted);">Il y a 2h</div></div>
+        </div>
+        <p style="font-size:13px;line-height:1.6;margin-bottom:8px;">Bienvenue a notre nouveau client Bernard SAS ! Demarrage du parcours HOSMONY Niveau 1 prevu la semaine prochaine.</p>
+        <div style="font-size:12px;color:var(--text-muted);">4 likes &bull; 2 commentaires</div>
+      </div>
+      <div class="card" style="margin-bottom:10px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">JR</div>
+          <div><div style="font-size:12px;font-weight:600;">Julie Robert</div><div style="font-size:11px;color:var(--text-muted);">Hier</div></div>
+        </div>
+        <p style="font-size:13px;line-height:1.6;margin-bottom:8px;">L'agent IA Fiscal a detecte une opportunite CIR de 12 500 EUR pour Durand SA. Dossier a constituer avant juin.</p>
+        <div style="font-size:12px;color:var(--text-muted);">3 likes &bull; 1 commentaire</div>
+      </div>
+      <div class="card" style="padding:12px;display:flex;gap:8px;">
+        <input style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;outline:none;" placeholder="Ecrire un message...">
+        <button class="btn-primary">Publier</button>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 
 <!-- ========== JAVASCRIPT ========== -->
