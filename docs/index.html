@@ -870,34 +870,19 @@
   <!-- VEILLES IA -->
   <div class="content page" id="page-opportunities">
 
-    <div class="page-header"><div><div class="page-title">Veilles IA</div><div class="page-subtitle">4 agents intelligents debloques par votre progression HOSMONY</div></div><div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Actualiser la veille</button></div></div>
-
-    <!-- Agent selector as sidebar tabs on the left -->
-    <div style="display:flex;gap:14px;">
-      <div style="width:180px;flex-shrink:0;">
-        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px;padding-left:2px;">Agents</div>
-        <div style="display:flex;flex-direction:column;gap:3px;">
-          <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--navy);color:#fff;cursor:pointer;font-size:12px;font-weight:600;border:none;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-            Reglementaire
-          </div>
-          <div class="agent-tab" onclick="showAgent('finance')" data-agent="finance" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--surface);color:var(--text);cursor:pointer;font-size:12px;font-weight:500;border:1px solid var(--border);">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-            Financement
-          </div>
-          <div class="agent-tab disabled" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;border:1px solid var(--border-light);opacity:.45;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-            Business <span style="font-size:9px;color:var(--text-muted);margin-left:auto;">Niv.3</span>
-          </div>
-          <div class="agent-tab disabled" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;border:1px solid var(--border-light);opacity:.45;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            Image <span style="font-size:9px;color:var(--text-muted);margin-left:auto;">Niv.4</span>
-          </div>
-        </div>
+    <div class="page-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="page-title">Veilles IA</div>
+        <select onchange="showAgent(this.value)" style="padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:inherit;font-weight:600;color:var(--text);background:var(--surface);cursor:pointer;">
+          <option value="reglem">Agent Reglementaire</option>
+          <option value="finance">Agent Financement</option>
+          <option value="" disabled>Agent Business (Niv.3)</option>
+          <option value="" disabled>Agent Image (Niv.4)</option>
+        </select>
+        <div class="page-subtitle" style="margin-top:0;">4 agents debloques par niveau</div>
       </div>
-
-      <!-- Agent content area -->
-      <div style="flex:1;min-width:0;">
+      <div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Actualiser la veille</button></div>
+    </div>
 
     <!-- AGENT REGLEMENTAIRE — Detail -->
     <div id="agent-reglem">
@@ -1054,9 +1039,6 @@
         <button class="btn sm">Voir le dossier</button>
       </div>
     </div>
-
-      </div><!-- end agent content area -->
-    </div><!-- end flex layout -->
   </div>
 
   <!-- STUDIO IA -->
@@ -1351,21 +1333,9 @@
 
   // Agent switching on Opportunities page
   function showAgent(id) {
+    if (!id) return;
     document.getElementById('agent-reglem').style.display = id === 'reglem' ? 'block' : 'none';
     document.getElementById('agent-finance').style.display = id === 'finance' ? 'block' : 'none';
-    document.querySelectorAll('.agent-tab:not(.disabled)').forEach(tab => {
-      if (tab.dataset.agent === id) {
-        tab.style.background = 'var(--navy)';
-        tab.style.color = '#fff';
-        tab.style.fontWeight = '600';
-        tab.style.border = 'none';
-      } else {
-        tab.style.background = 'var(--surface)';
-        tab.style.color = 'var(--text)';
-        tab.style.fontWeight = '500';
-        tab.style.border = '1px solid var(--border)';
-      }
-    });
   }
 </script>
 </body>
