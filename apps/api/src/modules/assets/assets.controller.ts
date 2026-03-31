@@ -71,6 +71,8 @@ export const assetsController = {
         data: {
           organizationId: orgId,
           ...body,
+          impactMetrics: body.impactMetrics as any,
+          hosmonyAlignment: body.hosmonyAlignment as any,
         },
       });
 
@@ -108,7 +110,11 @@ export const assetsController = {
 
       const asset = await prisma.hosmonicAsset.update({
         where: { id },
-        data: body,
+        data: {
+          ...body,
+          impactMetrics: body.impactMetrics as any,
+          hosmonyAlignment: body.hosmonyAlignment as any,
+        },
       });
 
       res.json(asset);

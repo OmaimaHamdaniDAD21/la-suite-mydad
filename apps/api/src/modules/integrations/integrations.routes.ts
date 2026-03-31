@@ -9,9 +9,9 @@ integrationsRoutes.use(authGuard);
 
 // Webhooks
 integrationsRoutes.get("/:orgId/webhooks", ctrl.listWebhooks);
-integrationsRoutes.post("/:orgId/webhooks", requireRole(["CONSULTANT"]), ctrl.createWebhook);
-integrationsRoutes.put("/webhooks/:id", requireRole(["CONSULTANT"]), ctrl.updateWebhook);
-integrationsRoutes.delete("/webhooks/:id", requireRole(["CONSULTANT"]), ctrl.deleteWebhook);
+integrationsRoutes.post("/:orgId/webhooks", requireRole("CONSULTANT"), ctrl.createWebhook);
+integrationsRoutes.put("/webhooks/:id", requireRole("CONSULTANT"), ctrl.updateWebhook);
+integrationsRoutes.delete("/webhooks/:id", requireRole("CONSULTANT"), ctrl.deleteWebhook);
 
 // Public webhook receiver (no auth)
 // This would be mounted separately: app.post("/api/webhooks/:inboundUrl", receiveWebhook)

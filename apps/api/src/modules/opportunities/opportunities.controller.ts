@@ -135,6 +135,7 @@ export const opportunitiesController = {
         where: { id },
         data: {
           ...body,
+          applicationData: body.applicationData as any,
           applicationDeadline: body.applicationDeadline ? new Date(body.applicationDeadline) : undefined,
           startDate: body.startDate ? new Date(body.startDate) : undefined,
           endDate: body.endDate ? new Date(body.endDate) : undefined,

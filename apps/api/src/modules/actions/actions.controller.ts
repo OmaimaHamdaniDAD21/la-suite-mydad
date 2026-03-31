@@ -237,6 +237,7 @@ export const actionsController = {
         where: { id: actionId },
         data: {
           ...body,
+          notes: body.notes as any,
           dueDate: body.dueDate !== undefined ? (body.dueDate ? new Date(body.dueDate) : null) : undefined,
           impactEffortRatio,
         },

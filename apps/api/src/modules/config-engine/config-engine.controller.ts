@@ -91,7 +91,7 @@ export const configController = {
 
       const orgConfig = await prisma.orgConfig.update({
         where: { organizationId: orgId },
-        data: { globalSettings: body.globalSettings },
+        data: { globalSettings: body.globalSettings as any },
       });
 
       await logAudit({
@@ -162,13 +162,13 @@ export const configController = {
             },
             update: {
               status: mod.status,
-              ...(mod.settings !== undefined ? { settings: mod.settings } : {}),
+              ...(mod.settings !== undefined ? { settings: mod.settings as any } : {}),
             },
             create: {
               organizationId: orgId,
               moduleDefinitionId: mod.moduleCode,
               status: mod.status,
-              settings: mod.settings ?? {},
+              settings: (mod.settings ?? {}) as any,
             },
           }),
         ),
@@ -295,6 +295,7 @@ export const configController = {
         data: {
           organizationId: orgId,
           ...body,
+          displayConfig: body.displayConfig as any,
         },
       });
 
@@ -339,7 +340,10 @@ export const configController = {
 
       const kpi = await prisma.kpiConfig.update({
         where: { id: kpiId },
-        data: body,
+        data: {
+          ...body,
+          displayConfig: body.displayConfig as any,
+        },
       });
 
       await logAudit({
@@ -424,6 +428,8 @@ export const configController = {
         data: {
           organizationId: orgId,
           ...body,
+          steps: body.steps as any,
+          triggers: body.triggers as any,
         },
       });
 
@@ -462,7 +468,11 @@ export const configController = {
 
       const workflow = await prisma.workflowConfig.update({
         where: { id },
-        data: body,
+        data: {
+          ...body,
+          steps: body.steps as any,
+          triggers: body.triggers as any,
+        },
       });
 
       await logAudit({
@@ -521,14 +531,14 @@ export const configController = {
             update: {
               permissions: r.permissions,
               ...(r.restrictions !== undefined
-                ? { restrictions: r.restrictions }
+                ? { restrictions: r.restrictions as any }
                 : {}),
             },
             create: {
               organizationId: orgId,
               role: r.role,
               permissions: r.permissions,
-              restrictions: r.restrictions ?? null,
+              restrictions: (r.restrictions ?? null) as any,
             },
           }),
         ),

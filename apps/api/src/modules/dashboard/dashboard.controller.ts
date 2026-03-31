@@ -148,16 +148,16 @@ export const dashboardController = {
       const config = await prisma.dashboardConfig.upsert({
         where: { userId_organizationId: { userId, organizationId: orgId } },
         update: {
-          layout: body.layout,
-          ...(body.widgetConfigs !== undefined ? { widgetConfigs: body.widgetConfigs } : {}),
-          ...(body.filters !== undefined ? { filters: body.filters } : {}),
+          layout: body.layout as any,
+          ...(body.widgetConfigs !== undefined ? { widgetConfigs: body.widgetConfigs as any } : {}),
+          ...(body.filters !== undefined ? { filters: body.filters as any } : {}),
         },
         create: {
           userId,
           organizationId: orgId,
-          layout: body.layout,
-          widgetConfigs: body.widgetConfigs ?? null,
-          filters: body.filters ?? null,
+          layout: body.layout as any,
+          widgetConfigs: (body.widgetConfigs ?? null) as any,
+          filters: (body.filters ?? null) as any,
         },
       });
 

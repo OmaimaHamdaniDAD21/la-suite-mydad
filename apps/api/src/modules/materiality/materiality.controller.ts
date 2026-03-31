@@ -73,7 +73,7 @@ export const materialityController = {
           category: body.category,
           linkedStakeholderIds: body.linkedStakeholderIds ?? [],
           linkedKpiCodes: body.linkedKpiCodes ?? [],
-          linkedRisks: body.linkedRisks ?? [],
+          linkedRisks: (body.linkedRisks ?? []) as any,
         },
       });
 
@@ -150,7 +150,7 @@ export const materialityController = {
           ...(body.financialTimeHorizon !== undefined && { financialTimeHorizon: body.financialTimeHorizon }),
           ...(body.linkedStakeholderIds !== undefined && { linkedStakeholderIds: body.linkedStakeholderIds }),
           ...(body.linkedKpiCodes !== undefined && { linkedKpiCodes: body.linkedKpiCodes }),
-          ...(body.linkedRisks !== undefined && { linkedRisks: body.linkedRisks }),
+          ...(body.linkedRisks !== undefined && { linkedRisks: body.linkedRisks as any }),
           ...(body.dataSourceRefs !== undefined && { dataSourceRefs: body.dataSourceRefs }),
           ...(body.aiAssisted !== undefined && { aiAssisted: body.aiAssisted }),
           impactScore: impactScore ?? undefined,

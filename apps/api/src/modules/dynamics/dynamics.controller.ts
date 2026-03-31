@@ -88,7 +88,7 @@ export const dynamicsController = {
           objectives: body.objectives,
           startDate: body.startDate ? new Date(body.startDate) : undefined,
           endDate: body.endDate ? new Date(body.endDate) : undefined,
-          settings: body.settings,
+          settings: body.settings as any,
           targetRoles: body.targetRoles,
           linkedActionIds: body.linkedActionIds,
           createdById: req.user!.userId,
@@ -127,6 +127,7 @@ export const dynamicsController = {
         where: { id },
         data: {
           ...body,
+          settings: body.settings as any,
           startDate: body.startDate ? new Date(body.startDate) : undefined,
           endDate: body.endDate ? new Date(body.endDate) : undefined,
         },

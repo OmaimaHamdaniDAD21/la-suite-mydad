@@ -11,7 +11,7 @@ import { authRoutes } from "./modules/auth/auth.routes";
 import { userRoutes } from "./modules/users/users.routes";
 import { organizationRoutes } from "./modules/organizations/organizations.routes";
 import { invitationRoutes } from "./modules/invitations/invitations.routes";
-import { configEngineRoutes } from "./modules/config-engine/config-engine.routes";
+import { configRoutes } from "./modules/config-engine/config-engine.routes";
 
 // Route imports — HOSMONY Engine
 import { hosmonyRoutes } from "./modules/hosmony/hosmony.routes";
@@ -22,7 +22,7 @@ import { auditRoutes } from "./modules/audit/audit.routes";
 // Route imports — Strategy & Value
 import { strategyRoutes } from "./modules/strategy/strategy.routes";
 import { materialityRoutes } from "./modules/materiality/materiality.routes";
-import { stakeholderRoutes } from "./modules/stakeholders/stakeholders.routes";
+import { stakeholdersRoutes } from "./modules/stakeholders/stakeholders.routes";
 import { opportunitiesRoutes } from "./modules/opportunities/opportunities.routes";
 import { assetsRoutes } from "./modules/assets/assets.routes";
 
@@ -54,7 +54,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/organizations", organizationRoutes);
 app.use("/api/invitations", invitationRoutes);
-app.use("/api/config", configEngineRoutes);
+app.use("/api/config", configRoutes);
 
 // ═══ HOSMONY Engine ═══
 app.use("/api/hosmony", hosmonyRoutes);
@@ -65,7 +65,7 @@ app.use("/api/audit", auditRoutes);
 // ═══ Strategy & Value Creation ═══
 app.use("/api/strategy", strategyRoutes);
 app.use("/api/materiality", materialityRoutes);
-app.use("/api/stakeholders", stakeholderRoutes);
+app.use("/api/stakeholders", stakeholdersRoutes);
 app.use("/api/opportunities", opportunitiesRoutes);
 app.use("/api/assets", assetsRoutes);
 

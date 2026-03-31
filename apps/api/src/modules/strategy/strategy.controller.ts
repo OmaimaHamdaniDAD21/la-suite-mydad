@@ -354,23 +354,27 @@ export const strategyController = {
           })
         : [];
 
+      // Build KPI lookup maps
+      const kpiConfigMap = new Map(kpiConfigs.map((k) => [k.code, k]));
+      const kpiConfigIdToCode = new Map(kpiConfigs.map((k) => [k.id, k.code]));
+      const kpiConfigIds = kpiConfigs.map((k) => k.id);
+
       // Fetch latest computed metrics for those KPIs
-      const computedMetrics = uniqueKpiCodes.length > 0
+      const computedMetrics = kpiConfigIds.length > 0
         ? await prisma.computedMetric.findMany({
             where: {
               organizationId: orgId,
-              kpiCode: { in: uniqueKpiCodes },
+              kpiConfigId: { in: kpiConfigIds },
             },
             orderBy: { computedAt: "desc" },
           })
         : [];
 
-      // Build KPI lookup maps
-      const kpiConfigMap = new Map(kpiConfigs.map((k) => [k.code, k]));
       const latestMetricMap = new Map<string, typeof computedMetrics[0]>();
       for (const metric of computedMetrics) {
-        if (!latestMetricMap.has(metric.kpiCode)) {
-          latestMetricMap.set(metric.kpiCode, metric);
+        const code = kpiConfigIdToCode.get(metric.kpiConfigId);
+        if (code && !latestMetricMap.has(code)) {
+          latestMetricMap.set(code, metric);
         }
       }
 

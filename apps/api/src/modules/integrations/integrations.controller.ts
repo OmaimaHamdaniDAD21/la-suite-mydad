@@ -7,7 +7,7 @@ import { randomUUID } from "crypto";
 
 export async function listWebhooks(req: Request, res: Response, next: NextFunction) {
   try {
-    const { orgId } = req.params;
+    const orgId = req.params.orgId as string;
 
     const webhooks = await prisma.webhook.findMany({
       where: { organizationId: orgId },
@@ -50,7 +50,7 @@ export async function createWebhook(req: Request, res: Response, next: NextFunct
 
 export async function updateWebhook(req: Request, res: Response, next: NextFunction) {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const { outboundUrl, outboundEvents, outboundHeaders, isActive } = req.body;
 
     const webhook = await prisma.webhook.update({
@@ -71,7 +71,7 @@ export async function updateWebhook(req: Request, res: Response, next: NextFunct
 
 export async function deleteWebhook(req: Request, res: Response, next: NextFunction) {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     await prisma.webhook.delete({ where: { id } });
 

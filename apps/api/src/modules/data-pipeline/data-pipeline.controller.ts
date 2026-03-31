@@ -69,6 +69,8 @@ export const dataPipelineController = {
         data: {
           organizationId: orgId,
           ...body,
+          connectionConfig: body.connectionConfig as any,
+          fieldMapping: body.fieldMapping as any,
         },
       });
 
@@ -109,7 +111,11 @@ export const dataPipelineController = {
 
       const source = await prisma.dataSource.update({
         where: { id },
-        data: body,
+        data: {
+          ...body,
+          connectionConfig: body.connectionConfig as any,
+          fieldMapping: body.fieldMapping as any,
+        },
       });
 
       await logAudit({
@@ -404,7 +410,7 @@ export const dataPipelineController = {
           metricKey: body.metricKey,
           numericValue: body.numericValue,
           textValue: body.textValue,
-          jsonValue: body.jsonValue,
+          jsonValue: body.jsonValue as any,
           periodStart: body.periodStart,
           periodEnd: body.periodEnd,
           source: "MANUAL",

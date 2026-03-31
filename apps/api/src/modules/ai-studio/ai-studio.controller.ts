@@ -63,6 +63,9 @@ export const aiStudioController = {
           organizationId: orgId,
           createdById: req.user!.userId,
           ...body,
+          dataScopeConfig: body.dataScopeConfig as any,
+          toolsConfig: body.toolsConfig as any,
+          knowledgeBaseIds: body.knowledgeBaseIds as any,
         },
       });
 
@@ -108,7 +111,12 @@ export const aiStudioController = {
 
       const agent = await prisma.agent.update({
         where: { id },
-        data: body,
+        data: {
+          ...body,
+          dataScopeConfig: body.dataScopeConfig as any,
+          toolsConfig: body.toolsConfig as any,
+          knowledgeBaseIds: body.knowledgeBaseIds as any,
+        },
       });
 
       await logAudit({
@@ -181,7 +189,7 @@ export const aiStudioController = {
           agentId: id,
           userId: req.user!.userId,
           status: "QUEUED",
-          input: body.input,
+          input: body.input as any,
         },
       });
 
@@ -293,7 +301,10 @@ export const aiStudioController = {
       }
 
       const prompt = await prisma.prompt.create({
-        data: body,
+        data: {
+          ...body,
+          variables: body.variables as any,
+        },
       });
 
       await logAudit({
@@ -338,7 +349,10 @@ export const aiStudioController = {
 
       const prompt = await prisma.prompt.update({
         where: { id },
-        data: body,
+        data: {
+          ...body,
+          variables: body.variables as any,
+        },
       });
 
       await logAudit({
