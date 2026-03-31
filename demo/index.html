@@ -10,11 +10,11 @@
     --bg: #FAFBFD;
     --surface: #FFFFFF;
     --surface-hover: #F8F9FB;
-    --border: #E8ECF2;
-    --border-light: #F3F5F8;
-    --text: #0A0F1E;
-    --text-secondary: #4A5568;
-    --text-muted: #6B7A8D;
+    --border: #EBEBEB;
+    --border-light: #F5F5F5;
+    --text: #1A1A2E;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
     --primary: #2B4A8C;
     --primary-hover: #1E3670;
     --primary-bg: #EBF0F8;
@@ -36,17 +36,17 @@
     --hosmony-3: #059669;
     --hosmony-4: #D97706;
     --hosmony-5: #7C3AED;
-    --radius: 14px;
-    --radius-sm: 10px;
-    --radius-lg: 20px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-    --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --radius-lg: 24px;
+    --shadow: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
     font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    background: #FFFFFF;
+    background: #FAFAFA;
     color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
@@ -59,10 +59,10 @@
   /* ═══ SIDEBAR ═══ */
   .sidebar {
     width: 240px;
-    background: rgba(255,255,255,0.82);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border-right: 1px solid rgba(255,255,255,0.5);
+    background: #FFFFFF;
+    
+    -webkit-
+    border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -109,13 +109,7 @@
     color: var(--text);
   }
   .nav-item:hover { background: var(--bg); color: var(--text); }
-  .nav-item.active {
-    background: linear-gradient(135deg, #315299, #2a6bb5);
-    color: #fff;
-    font-weight: 600;
-    box-shadow: 0 4px 16px rgba(49,82,153,0.35), 0 0 0 1px rgba(69,224,238,0.15);
-    border: none;
-  }
+  .nav-item.active { background: var(--navy); color: #fff; font-weight: 600; border-radius: var(--radius-sm); }
   /* Nav groups */
   .nav-group { margin-bottom: 2px; }
   .nav-group-header {
@@ -169,11 +163,11 @@
   .main { margin-left: 240px; flex: 1; min-height: 100vh; }
 
   .topbar {
-    height: 48px;
-    background: rgba(255,255,255,0.78);
-    backdrop-filter: blur(20px) saturate(200%);
-    -webkit-backdrop-filter: blur(20px) saturate(200%);
-    border-bottom: 1px solid rgba(255,255,255,0.5);
+    height: 52px;
+    background: #FFFFFF;
+    
+    -webkit-
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -224,10 +218,10 @@
     display: none;
     position: absolute; top: 40px; right: 0;
     width: 320px;
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border: 1px solid rgba(255,255,255,0.5);
+    background: #FFFFFF;
+    
+    -webkit-
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: 0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.5);
     z-index: 200;
@@ -254,48 +248,33 @@
     line-height: 1.4;
   }
   .btn:hover { background: var(--bg); border-color: var(--text-muted); transform: translateY(-1px); }
-  .btn.primary { background: linear-gradient(135deg, #315299, #2a6bb5); color: #fff; border: none; box-shadow: 0 2px 8px rgba(49,82,153,0.3); }
-  .btn.primary:hover { background: linear-gradient(135deg, #273f7a, #315299); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(49,82,153,0.4); }
+  .btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .btn.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
   .btn.sm { padding: 3px 8px; font-size: 11px; }
   .btn.ghost { border: none; color: var(--text-secondary); padding: 4px 8px; }
   .btn.ghost:hover { background: var(--bg); color: var(--text); }
 
-  .content { padding: 24px 28px; max-width: 1280px; }
+  .content { padding: 28px 32px; max-width: 1280px; }
   .page { display: none; }
   .page.active { display: block; }
 
   .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-  .page-title { font-size: 24px; font-weight: 800; letter-spacing: -0.6px; color: var(--text); line-height: 1.2; }
+  .page-title { font-size: 26px; font-weight: 800; letter-spacing: -0.8px; color: var(--text); line-height: 1.2; }
   .page-subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 3px; font-weight: 400; }
 
   /* ═══ CARDS ═══ */
   .card {
-    background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255,255,255,0.6);
+    background: #FFFFFF;
+    
+    -webkit-
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: 0 1px 4px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.02);
     transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
     position: relative;
     overflow: hidden;
   }
-  .card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius);
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(69,224,238,0.3), rgba(49,82,153,0.2), rgba(139,92,246,0.2));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  .card:hover::before { opacity: 1; }
-  .card:hover {
+    .card:hover {
     box-shadow: 0 8px 32px rgba(49,82,153,0.1), 0 2px 8px rgba(0,0,0,0.04);
     transform: translateY(-2px);
   }
@@ -356,10 +335,10 @@
 
   /* ═══ KPI ═══ */
   .kpi-card {
-    background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255,255,255,0.6);
+    background: #FFFFFF;
+    
+    -webkit-
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 14px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -376,7 +355,7 @@
   .kpi-card:nth-child(3) { border-top-color: var(--amber); }
   .kpi-card:nth-child(4) { border-top-color: var(--purple); }
   .kpi-label { font-size: 11px; font-weight: 500; color: var(--text-muted); margin-bottom: 4px; }
-  .kpi-value { font-size: 30px; font-weight: 800; letter-spacing: -0.8px; color: var(--text); }
+  .kpi-value { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
   .kpi-detail { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
   .kpi-badge { font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; position: absolute; top: 12px; right: 12px; }
   .kpi-badge.up { background: var(--green-bg); color: var(--green); }
@@ -418,10 +397,10 @@
   .tag { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.2px; }
 
   /* ═══ TABS ═══ */
-  .tabs { display: flex; gap: 4px; margin-bottom: 14px; background: rgba(255,255,255,0.5); padding: 4px; border-radius: var(--radius); border: 1px solid rgba(226,232,240,0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .tabs { display: flex; gap: 4px; margin-bottom: 16px; background: var(--bg); padding: 4px; border-radius: var(--radius-sm); border: 1px solid var(--border); width: fit-content; }
   .tab { padding: 6px 14px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 500; cursor: pointer; color: var(--text-secondary); transition: all 0.2s; }
-  .tab:hover { background: rgba(255,255,255,0.6); color: var(--text); }
-  .tab.active { background: rgba(255,255,255,0.9); color: var(--navy); font-weight: 600; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .tab:hover { background: #FFFFFF; color: var(--text); }
+  .tab.active { background: #FFFFFF; color: var(--text); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
   .tab.disabled { opacity: 0.3; cursor: not-allowed; }
 
   /* ═══ TABLE ═══ */
@@ -461,7 +440,7 @@
 
   /* ═══ KANBAN ═══ */
   .kanban { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
-  .kanban-col { background: rgba(255,255,255,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: var(--radius); padding: 10px; border: 1px solid rgba(226,232,240,0.4); }
+  .kanban-col { background: #FFFFFF;  -webkit- border-radius: var(--radius); padding: 10px; border: 1px solid var(--border); }
   .kanban-head { padding: 8px 10px; font-size: 11px; font-weight: 700; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .kanban-count { font-size: 10px; font-weight: 600; color: var(--text-muted); }
   .kanban-body { padding: 6px; display: flex; flex-direction: column; gap: 5px; }
@@ -518,12 +497,22 @@
   .chat-context { padding: 6px 14px; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 10px; display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
   .chat-msgs { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
   .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: var(--radius); font-size: 12px; line-height: 1.6; }
-  .chat-msg.user { background: var(--primary); color: #fff; align-self: flex-end; }
-  .chat-msg.bot { background: var(--bg); align-self: flex-start; border: 1px solid var(--border); }
+  .chat-msg.user { background: #dbeafe; color: var(--text); align-self: flex-end; border-radius: var(--radius) var(--radius) 4px var(--radius); }
+  .chat-msg.bot { background: var(--bg); align-self: flex-start; border: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; border-radius: var(--radius) var(--radius) var(--radius) 4px; }
+  .chat-msg.bot .ia-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; flex-shrink: 0; }
   .chat-input-bar { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; gap: 6px; }
   .chat-input { flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 12px; font-family: inherit; outline: none; }
   .chat-input:focus { border-color: var(--text); }
   .chat-send { padding: 7px 14px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .agent-pill-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; min-width: 160px; }
+  .agent-pill-card:hover { border-color: var(--navy); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .agent-pill-card.selected { border-color: var(--navy); background: var(--primary-bg); }
+  .agent-pill-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .agent-pill-status { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .studio-typing { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg); border-radius: var(--radius); font-size: 11px; color: var(--text-secondary); align-self: flex-start; border: 1px solid var(--border); }
+  .studio-typing .dot { display: inline-block; width: 5px; height: 5px; background: var(--navy); border-radius: 50%; animation: typing 1.2s infinite; }
+  .studio-typing .dot:nth-child(2) { animation-delay: 0.2s; }
+  .studio-typing .dot:nth-child(3) { animation-delay: 0.4s; }
 
   /* ═══ CLIENTS ═══ */
   .client-card {
@@ -542,7 +531,7 @@
   .client-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; font-size: 10px; color: var(--text-secondary); }
   .client-kpis strong { color: var(--text); font-size: 12px; display: block; }
 
-  .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255,255,255,0.6); border-radius: var(--radius); padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-align: center; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+  .stat-card { background: #FFFFFF;  -webkit- border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-align: center; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
   .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(49,82,153,0.1); }
   .stat-card:nth-child(1) { border-left: 3px solid var(--accent); }
   .stat-card:nth-child(2) { border-left: 3px solid var(--green); }
@@ -792,8 +781,7 @@
 <body>
 
 <aside class="sidebar">
-  <div style="height:3px;background:linear-gradient(90deg,#315299,#45E0EE,#8B5CF6);flex-shrink:0;"></div>
-  <div class="sidebar-logo">
+    <div class="sidebar-logo">
     <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="8.13" y1="25" x2="40.81" y2="25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7cf5ff"/><stop offset="1" stop-color="#0cd"/></linearGradient></defs><path fill="#315299" d="M31.32,26.41c.32-3.28-2.5-5.43-4.46-6.04-1.38-.43-2.99-.65-4.61-.65-.91,0-1.82,0-2.74,0-.05,0-.1,0-.14.02-.04.01-.08.03-.11.05-.1.06-.17.16-.17.27v1.21s0,0-.02,0v.04s0,0,.02,0v8.09c0,.2-.15.38-.36.42-.75.15-1.48.28-2.19.4.31-.06.63-.12.95-.18.05,0,.09-.03.13-.06.08-.06.13-.17.13-.29v-9.43s0,0-.01,0v-.04s0,0,.01,0v-1.21c0-.14.12-.27.28-.32.04-.01.09-.02.14-.02l5.71-.53c2.73,0,8.8,3.52,7.44,8.27Z"/><path fill="#4f75ff" d="M8.51,33.14c.06.04.1.11.1.19,0,.09-.06.18-.13.21s-.15.04-.22.04c-1.19,0-2.39-.08-3.55-.45-.42-.14-.84-.32-1.21-.62-.6-.5-.97-1.3-.76-2.19.18-.76.64-1.39,1.1-1.91.82-.94,1.78-1.68,2.74-2.36l1.54-.98c.03.53.09,1.05.16,1.56l-1.53.98c-2,1.52-2.92,2.78-2.65,3.51.19.52.62.77,1.03.93.92.34,1.85.62,2.78.89.19.06.42.07.59.21Z"/><path fill="url(#g1)" d="M40.81,25c0,.31,0,.63-.03.94-.03.59-.1,1.17-.21,1.75,0,.04-.01.08-.02.12-.11.61-.26,1.2-.44,1.78-2.03,6.49-8.27,11.22-15.64,11.22-3.71,0-7.13-1.2-9.87-3.21-1.27-.93-2.39-2.04-3.33-3.28-.22-.29-.43-.58-.62-.89.35-.03.7-.07,1.05-.11.23-.03.46-.06.69-.09,1.24-.17,2.43-.35,3.61-.53.49-.07.99-.15,1.48-.23.09-.02.19-.03.29-.05,1.04-.17,2.07-.33,3.12-.51l.02,0c.57-.1,1.15-.19,1.74-.29.22-.04.62-.13,1.05-.23.43-.1.89-.21,1.23-.27l.23-.04.02,0c.55-.08,1.16-.14,1.65-.36l.09-.04c2.27-1.02,4.48-3.03,4.48-5.68,0-1.43-.61-2.75-1.64-3.81-1.47-1.51-3.78-2.5-6.37-2.5l-1.16-.13c-.15,0-.4-.07-.56-.07l-.47-.05-3.12.24s-.1,0-.13.02c-.16.05-.27.18-.27.32v1.21s0,0-.01,0v.04s0,0,.01,0v9.43c0,.12-.05.22-.12.29-.04.03-.08.05-.12.06-.91.19-1.8.36-2.66.51l-.06.01c-1.11.19-2.18.33-3.18.42-.46.04-.89.08-1.29.1-.24.01-.47.02-.69.03-.11,0-.21-.07-.25-.19-.35-.82-.62-1.68-.81-2.56-.04-.18-.08-.37-.11-.56-.06-.32-.11-.63-.14-.95,0-.06-.02-.13-.02-.19l-.02-.16c-.04-.33-.06-.67-.06-1.01h-.02V25h.01c0-.06,0-.11,0-.16.33-8.44,7.51-15.18,16.32-15.18,4.31,0,8.24,1.62,11.16,4.26.25.22.49.45.72.69l.31.32c.08.09,2.55,2.75,3.32,5.56.48,1.39.65,2.81.81,4.26.02.14.02.24.01.25,0,.15,0,.3,0,.45Z"/><path fill="#4f75ff" d="M47.3,22.18c-.19,1.53-1.92,3.16-5.17,4.84-.51.27-1.06.54-1.65.81l-.1.04-.1.04c-5.19,2.24-10.48,3.96-16.16,4.57-1.27.14-4.66.33-5.32.3-.36-.02-1.89.07-2.85-.1h.01c1.16-.16,6.95-.97,11.73-2.2l.78-.2.54-.14.46-.12.26-.07c4.43-1.21,8.01-2.55,10.65-3.82l.02-.01c.57-.28,1.1-.55,1.58-.81,1.3-.73,5.24-2.85,2.89-4.94-.98-.87-2.47-1.23-3.6-1.74-.13-.06-1.02-.35-.99-.56.11-.57,4.15.86,4.6,1.05.92.38,2.07.98,2.37,2.24.07.27.08.55.05.82Z"/><path fill="#4f75ff" d="M16.91,30.16l.32-11.51v-.25c2.33-.27,4.66-.28,6.97.08,3.79.51,7.5,2.89,7.17,7.2.25-3.18-2.15-5.52-5.08-6.37-2.81-.81-5.85-.74-8.73-.37l.24-.28.03,11.34-.92.16Z"/></svg>
     <div><h1>La Suite MyDAD</h1><span>Plateforme de performance</span></div>
   </div>
@@ -867,7 +855,7 @@
     </div>
     <div class="topbar-right">
       <div style="position:relative;">
-        <input type="text" placeholder="Rechercher clients, actions, documents..." style="width:260px;padding:6px 12px 6px 32px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;font-family:inherit;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);outline:none;transition:all 0.2s;" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px rgba(69,224,238,0.15)';" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';">
+        <input type="text" placeholder="Rechercher clients, actions, documents..." style="width:260px;padding:6px 12px 6px 32px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;font-family:inherit;background: #FFFFFF;-webkit-outline:none;transition:all 0.2s;" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px rgba(69,224,238,0.15)';" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
       <button class="notif-btn" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-chatbot').classList.add('active');" title="Fil d'actualite">
@@ -890,10 +878,10 @@
 
   <!-- DASHBOARD -->
   <div class="content page active" id="page-dashboard">
-    <div class="page-header"><div><div class="page-title">Boulangerie Martin</div><div class="page-subtitle">Derniere mise a jour : 28 mars 2026 &bull; T1 2026</div></div><div style="display:flex;gap:6px;align-items:center;"><button class="btn sm" onclick="document.getElementById('onboarding-card').style.display=document.getElementById('onboarding-card').style.display==='none'?'block':'none';" style="display:inline-flex;align-items:center;gap:6px;">Guide de demarrage <span style="font-size:10px;color:var(--text-muted);background:var(--bg);padding:1px 6px;border-radius:99px;">3/8</span></button><button class="btn sm ghost" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=settings]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-settings').classList.add('active');">Configurer</button></div></div>
+    <div style="margin-bottom:20px;"><div style="font-size:28px;font-weight:800;letter-spacing:-0.8px;color:var(--text);">Bonjour Sophie</div><div style="font-size:14px;color:var(--text-secondary);margin-top:4px;">3 actions vous attendent aujourd'hui &bull; Boulangerie Martin &bull; T1 2026</div></div>
 
     <!-- ONBOARDING BANNER -->
-    <div id="onboarding-card" style="display:flex;align-items:center;gap:12px;padding:10px 16px;background:linear-gradient(135deg, rgba(49,82,153,0.08), rgba(69,224,238,0.08));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(69,224,238,0.3);border-radius:var(--radius);margin-bottom:16px;">
+    <div id="onboarding-card" style="display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--primary-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;">
       <div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">3</div>
       <div style="flex:1;font-size:12px;"><strong>Configuration en cours</strong> — 3/8 etapes completees</div>
       <div class="progress-track" style="width:120px;"><div class="progress-fill" style="width:37.5%;background:var(--navy);"></div></div>
@@ -1570,6 +1558,114 @@
       <div class="card" style="padding:12px;cursor:pointer;"><div style="font-size:12px;font-weight:600;margin-bottom:3px;">Analyse tresorerie</div><div style="font-size:11px;color:var(--text-secondary);">Previsions de tresorerie et alertes cash-flow</div><div style="margin-top:6px;"><span class="pill purple">Finance</span></div></div>
       <div class="card" style="padding:12px;cursor:pointer;"><div style="font-size:12px;font-weight:600;margin-bottom:3px;">Scoring fournisseurs</div><div style="font-size:11px;color:var(--text-secondary);">Evaluez vos fournisseurs sur des criteres RSE</div><div style="margin-top:6px;"><span class="pill amber">Achats</span></div></div>
     </div>
+
+    <!-- Immersive Chat Section -->
+    <div style="margin-top:20px;margin-bottom:10px;font-size:14px;font-weight:700;">Conversation avec un agent</div>
+
+    <!-- Agent pill cards -->
+    <div style="display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">
+      <div class="agent-pill-card selected">
+        <div class="agent-pill-icon" style="background:var(--navy);">C</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Commercial <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Portefeuille et scoring</div>
+        </div>
+      </div>
+      <div class="agent-pill-card">
+        <div class="agent-pill-icon" style="background:var(--green);">C</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Comptable <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Analyse financiere</div>
+        </div>
+      </div>
+      <div class="agent-pill-card">
+        <div class="agent-pill-icon" style="background:var(--purple);">M</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">Marketing <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Strategie et contenu</div>
+        </div>
+      </div>
+      <div class="agent-pill-card">
+        <div class="agent-pill-icon" style="background:var(--amber);">S</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">SEO <span class="agent-pill-status"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Referencement et audit</div>
+        </div>
+      </div>
+      <div class="agent-pill-card">
+        <div class="agent-pill-icon" style="background:var(--text-secondary);">R</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">RH <span class="agent-pill-status" style="background:var(--amber);"></span></div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Recrutement, droit social</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat area -->
+    <div class="chat-layout">
+      <!-- History sidebar -->
+      <div class="card" style="padding:0;overflow:hidden;align-self:start;">
+        <div style="padding:10px 12px;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;">Historique</div>
+        <div style="padding:4px;">
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);background:var(--primary-bg);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:600;">Analyse portefeuille Q1</div>
+            <div style="font-size:10px;color:var(--text-muted);">Il y a 2h</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:500;">Scoring prospects mars</div>
+            <div style="font-size:10px;color:var(--text-muted);">Hier</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:500;">Recommandations upsell</div>
+            <div style="font-size:10px;color:var(--text-muted);">28 mars</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:500;">Prevision CA avril</div>
+            <div style="font-size:10px;color:var(--text-muted);">25 mars</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat area -->
+      <div class="chat-area">
+        <div class="chat-head" style="display:flex;align-items:center;gap:8px;">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;">C</div>
+          <div>Agent Commercial</div>
+          <span class="pill green" style="margin-left:auto;font-size:9px;">En ligne</span>
+        </div>
+        <div class="chat-context">
+          <span class="pill blue" style="font-size:9px;">Portefeuille clients</span>
+          <span class="pill gray" style="font-size:9px;">CRM connecte</span>
+          <span class="pill gray" style="font-size:9px;">Pennylane sync</span>
+        </div>
+        <div class="chat-msgs">
+          <div class="chat-msg bot">
+            <div class="ia-avatar">IA</div>
+            <div>Bonjour ! Je suis votre agent commercial. J'ai analyse votre portefeuille clients du T1. Voici les points cles : votre taux de conversion est passe a 32%, et 3 nouveaux prospects sont en phase chaude.</div>
+          </div>
+          <div class="chat-msg user">Quels sont les prospects les plus prometteurs ce mois-ci ?</div>
+          <div class="chat-msg bot">
+            <div class="ia-avatar">IA</div>
+            <div>D'apres mon analyse, voici le top 3 :<br><strong>1. Cabinet Leroy</strong> &mdash; 22 000 &euro;, scoring 87/100, decision imminente<br><strong>2. Restaurant Le Moderne</strong> &mdash; 15 000 &euro;, scoring 72/100, relance recommandee<br><strong>3. Garage du Centre</strong> &mdash; 18 000 &euro;, RDV planifie le 5 avril</div>
+          </div>
+          <div class="chat-msg user">Genere-moi un email de relance pour Le Moderne</div>
+          <div class="chat-msg bot">
+            <div class="ia-avatar">IA</div>
+            <div>Voici une proposition d'email personnalise pour Restaurant Le Moderne :<br><br><em>Objet : Suite a notre echange &mdash; offre MyDAD pour Le Moderne</em><br><br>J'ai integre les donnees de votre dernier echange avec J. Dubois et les specificites de leur secteur (restauration, 15 employes). Souhaitez-vous que je l'envoie ou que je l'ajuste ?</div>
+          </div>
+          <!-- Typing indicator -->
+          <div class="studio-typing">
+            <div class="ia-avatar" style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;">IA</div>
+            <div style="display:flex;gap:3px;"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          </div>
+        </div>
+        <!-- Enhanced chat input -->
+        <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;background: #FFFFFF;">
+          <input type="text" placeholder="Posez votre question a l'agent..." style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;font-family:inherit;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+          <button class="btn primary" style="padding:10px 16px;border-radius:var(--radius);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg></button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- MES OUTILS -->
@@ -1997,23 +2093,23 @@
     </div>
     <div class="kanban">
       <div class="kanban-col"><div class="kanban-head">Prospect <span class="kanban-count">3</span></div><div class="kanban-body">
-        <div class="k-card"><div class="k-card-title">Restaurant Le Moderne</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">15 000 &euro;</span></div><div class="k-card-details"><div>Contact : <strong>J. Dubois</strong></div><div>3 mars</div></div></div>
-        <div class="k-card"><div class="k-card-title">Pharmacie Centrale</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">8 000 &euro;</span></div><div class="k-card-details"><div>Contact : <strong>P. Moreau</strong></div><div>15 mars</div></div></div>
-        <div class="k-card"><div class="k-card-title">Cabinet Leroy</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">22 000 &euro;</span></div><div class="k-card-details"><div>Contact : <strong>N. Leroy</strong></div><div>28 mars</div></div></div>
+        <div class="k-card"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">RL</div><div style="font-size:12px;font-weight:600;">Restaurant Le Moderne</div></div><div class="k-card-meta" style="display:flex;align-items:center;gap:6px;"><span style="font-size:12px;font-weight:700;color:var(--primary);">15 000 &euro;</span><span style="font-size:9px;padding:2px 6px;border-radius:8px;background:#fee2e2;color:#dc2626;">&#128293; Chaud</span></div><div class="k-card-details"><div>Contact : <strong>J. Dubois</strong></div><div>3 mars</div></div></div>
+        <div class="k-card"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">PC</div><div style="font-size:12px;font-weight:600;">Pharmacie Centrale</div></div><div class="k-card-meta" style="display:flex;align-items:center;gap:6px;"><span style="font-size:12px;font-weight:700;color:var(--primary);">8 000 &euro;</span><span style="font-size:9px;padding:2px 6px;border-radius:8px;background:var(--amber-bg);color:var(--amber);">&#9728;&#65039; Tiede</span></div><div class="k-card-details"><div>Contact : <strong>P. Moreau</strong></div><div>15 mars</div></div></div>
+        <div class="k-card"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">CL</div><div style="font-size:12px;font-weight:600;">Cabinet Leroy</div></div><div class="k-card-meta" style="display:flex;align-items:center;gap:6px;"><span style="font-size:12px;font-weight:700;color:var(--primary);">22 000 &euro;</span><span style="font-size:9px;padding:2px 6px;border-radius:8px;background:#fee2e2;color:#dc2626;">&#128293; Chaud</span></div><div class="k-card-details"><div>Contact : <strong>N. Leroy</strong></div><div>28 mars</div></div></div>
       </div></div>
       <div class="kanban-col"><div class="kanban-head">Qualifie <span class="kanban-count">2</span></div><div class="kanban-body">
-        <div class="k-card"><div class="k-card-title">Garage du Centre</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">18 000 &euro;</span></div><div class="k-card-details"><div>RDV planifie 5 avr.</div></div></div>
-        <div class="k-card"><div class="k-card-title">Fleuriste Rosalie</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">5 000 &euro;</span></div><div class="k-card-details"><div>Devis envoye</div></div></div>
+        <div class="k-card"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">GC</div><div style="font-size:12px;font-weight:600;">Garage du Centre</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">18 000 &euro;</span></div><div class="k-card-details"><div>RDV planifie 5 avr.</div></div></div>
+        <div class="k-card"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">FR</div><div style="font-size:12px;font-weight:600;">Fleuriste Rosalie</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">5 000 &euro;</span></div><div class="k-card-details"><div>Devis envoye</div></div></div>
       </div></div>
       <div class="kanban-col"><div class="kanban-head">Proposition <span class="kanban-count">2</span></div><div class="kanban-body">
-        <div class="k-card"><div class="k-card-title">Boucherie Dupont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">12 000 &euro;</span></div><div class="k-card-details"><div>En attente retour</div></div></div>
-        <div class="k-card"><div class="k-card-title">Hotel Bellevue</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">35 000 &euro;</span></div><div class="k-card-details"><div>Presentation 10 avr.</div></div></div>
+        <div class="k-card"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">BD</div><div style="font-size:12px;font-weight:600;">Boucherie Dupont</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">12 000 &euro;</span></div><div class="k-card-details"><div>En attente retour</div></div></div>
+        <div class="k-card"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">HB</div><div style="font-size:12px;font-weight:600;">Hotel Bellevue</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">35 000 &euro;</span></div><div class="k-card-details"><div>Presentation 10 avr.</div></div></div>
       </div></div>
       <div class="kanban-col"><div class="kanban-head">Gagne <span class="kanban-count">4</span></div><div class="kanban-body">
-        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Boulangerie Martin</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">9 500 &euro;</span></div><div class="k-card-details"><div>Signe 15 fev.</div></div></div>
-        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Vignobles Beaumont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">28 000 &euro;</span></div><div class="k-card-details"><div>Signe 1 mars</div></div></div>
-        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Garage Thibault</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">15 000 &euro;</span></div><div class="k-card-details"><div>Signe 12 mars</div></div></div>
-        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div class="k-card-title">Cabinet Dupont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">22 000 &euro;</span></div><div class="k-card-details"><div>Signe 25 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">BM</div><div style="font-size:12px;font-weight:600;">Boulangerie Martin</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">9 500 &euro;</span></div><div class="k-card-details"><div>Signe 15 fev.</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">VB</div><div style="font-size:12px;font-weight:600;">Vignobles Beaumont</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">28 000 &euro;</span></div><div class="k-card-details"><div>Signe 1 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">GT</div><div style="font-size:12px;font-weight:600;">Garage Thibault</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">15 000 &euro;</span></div><div class="k-card-details"><div>Signe 12 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);background:var(--green-bg);"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;">CD</div><div style="font-size:12px;font-weight:600;">Cabinet Dupont</div></div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">22 000 &euro;</span></div><div class="k-card-details"><div>Signe 25 mars</div></div></div>
       </div></div>
     </div>
     <!-- Pipeline total banner -->
@@ -2031,6 +2127,14 @@
         <tr><td>25 mars</td><td><span class="pill green">Email</span></td><td><strong>Hotel Bellevue</strong></td><td>Proposition commerciale</td></tr>
         <tr><td>22 mars</td><td><span class="pill blue">Appel</span></td><td><strong>Fleuriste Rosalie</strong></td><td>Suivi devis</td></tr>
       </tbody></table>
+    </div>
+    <div class="card" style="padding:14px;margin-top:14px;">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;">Previsions</div>
+      <div style="display:flex;gap:24px;">
+        <div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Avril 2026</div><div style="font-size:18px;font-weight:800;">23 000 &euro;</div><div style="font-size:10px;color:var(--green);">3 deals probables</div></div>
+        <div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Mai 2026</div><div style="font-size:18px;font-weight:800;">47 000 &euro;</div><div style="font-size:10px;color:var(--amber);">2 deals en attente</div></div>
+        <div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">T2 Total</div><div style="font-size:18px;font-weight:800;">70 000 &euro;</div><div style="font-size:10px;color:var(--text-secondary);">Estimation pipeline</div></div>
+      </div>
     </div>
   </div>
 
