@@ -959,28 +959,15 @@
 
     <!-- AGENT FINANCEMENT — Detail (hidden by default) -->
     <div id="agent-finance" style="display:none;">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
-        <div><div style="font-size:15px;font-weight:700;">Financements eligibles</div><div style="font-size:12px;color:var(--text-secondary);">Subventions, aides et financements pour votre entreprise</div></div>
-        <div style="margin-left:auto;display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Chercher de nouvelles aides</button></div>
+      <!-- Tabs + filters matching reglementaire style -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+        <span style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--navy);color:#fff;border-radius:4px;font-weight:600;">Toutes &nbsp;<strong>5</strong></span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Subventions &nbsp;<strong>2</strong></span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Credit d'impot &nbsp;<strong>1</strong></span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Aides &nbsp;<strong>2</strong></span>
+        <div style="flex:1;"></div>
+        <input style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;width:200px;font-family:inherit;" placeholder="Rechercher un dispositif...">
       </div>
-
-      <!-- Search -->
-      <div style="margin-bottom:14px;">
-        <input style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:12px;font-family:inherit;background:var(--surface);" placeholder="Rechercher un dispositif, un organisme...">
-      </div>
-
-      <!-- Filter chips -->
-      <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
-        <span class="pill blue" style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--primary);color:#fff;">Toutes</span>
-        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Subvention</span>
-        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Credit d'impot</span>
-        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Pret</span>
-        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Aide directe</span>
-      </div>
-
-      <div style="font-size:13px;font-weight:700;margin-bottom:14px;">5 dispositifs eligibles</div>
-
-      <!-- Financement cards -->
       <div class="card" style="margin-bottom:12px;padding:16px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
           <div>
