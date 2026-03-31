@@ -71,7 +71,7 @@
     overflow-y: auto;
     box-shadow: 4px 0 24px rgba(49,82,153,0.06);
   }
-  .sidebar-logo { padding: 12px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #F0F0F0; }
+  .sidebar-logo { height: 52px; padding: 0 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #EBEBEB; box-sizing: border-box; }
   .sidebar-logo svg { width: 28px; height: 28px; flex-shrink: 0; }
   .sidebar-logo h1 { font-size: 13px; font-weight: 700; color: var(--text); }
   .sidebar-logo span { font-size: 8px; color: var(--text-muted); display: block; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
@@ -141,7 +141,7 @@
   /* ═══ MAIN ═══ */
   .main { margin-left: 240px; flex: 1; min-height: 100vh; }
 
-  .topbar { height: 52px; background: #FFFFFF; border-bottom: 1px solid #EBEBEB;
+  .topbar { height: 52px; background: #FFFFFF; border-bottom: 1px solid #EBEBEB; box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -785,8 +785,7 @@
   <div class="topbar">
     <div class="topbar-left">
       <button class="mobile-menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('mobile-open')">&#9776;</button>
-      <span class="breadcrumb">Supervision &rsaquo; <strong>Boulangerie Martin</strong></span>
-      <div class="client-selector">&#9662; Changer de client</div>
+      <span class="breadcrumb"><strong>Cabinet Laurent &amp; Associes</strong></span>
     </div>
     <div class="topbar-right">
       <div style="position:relative;">
@@ -813,7 +812,7 @@
 
   <!-- DASHBOARD -->
   <div class="content page active" id="page-dashboard">
-    <div style="margin-bottom:20px;"><div style="font-size:28px;font-weight:800;letter-spacing:-0.8px;color:var(--text);">Bonjour Sophie</div><div style="font-size:14px;color:var(--text-secondary);margin-top:4px;">3 actions vous attendent aujourd'hui &bull; Boulangerie Martin &bull; T1 2026</div></div>
+    <div style="margin-bottom:20px;"><div style="font-size:28px;font-weight:800;letter-spacing:-0.8px;color:var(--text);">Bonjour Sophie</div><div style="font-size:14px;color:var(--text-secondary);margin-top:4px;">5 missions en cours &bull; 12 clients actifs &bull; T1 2026</div></div>
 
     <!-- ONBOARDING BANNER -->
     <div id="onboarding-card" style="display:flex;align-items:center;gap:12px;padding:10px 16px;background: #F8F9FB; border: 1px solid #EBEBEB;border-radius:var(--radius);margin-bottom:16px;">
@@ -825,47 +824,47 @@
     </div>
 
     <div class="grid-4">
-      <div class="kpi-card slide-up" ><div class="kpi-badge up">+12%</div><div class="kpi-label">CA du jour</div><div class="kpi-value">2 340 &euro;</div><div class="kpi-detail">+12% vs hier</div></div>
-      <div class="kpi-card slide-up" style="animation-delay:0.05s;"><div class="kpi-badge neutral">=</div><div class="kpi-label">Tresorerie</div><div class="kpi-value">34.2 K&euro;</div><div class="kpi-detail">Solde ce matin</div></div>
-      <div class="kpi-card slide-up" style="animation-delay:0.1s;"><div class="kpi-badge up">+6%</div><div class="kpi-label">Panier moyen</div><div class="kpi-value">8.70 &euro;</div><div class="kpi-detail">vs 8.20 &euro; moy. semaine</div></div>
-      <div class="kpi-card slide-up" style="animation-delay:0.15s;"><div class="kpi-badge up">+3</div><div class="kpi-label">Commandes</div><div class="kpi-value">42</div><div class="kpi-detail">dont 8 reservations</div></div>
+      <div class="kpi-card slide-up" ><div class="kpi-badge up">+3</div><div class="kpi-label">Clients actifs</div><div class="kpi-value">12</div><div class="kpi-detail">dont 3 nouveaux ce trimestre</div></div>
+      <div class="kpi-card slide-up" style="animation-delay:0.05s;"><div class="kpi-badge up">+18%</div><div class="kpi-label">CA Cabinet T1</div><div class="kpi-value">142 K&euro;</div><div class="kpi-detail">+18% vs T1 2025</div></div>
+      <div class="kpi-card slide-up" style="animation-delay:0.1s;"><div class="kpi-badge neutral">5</div><div class="kpi-label">Missions en cours</div><div class="kpi-value">5</div><div class="kpi-detail">2 audits, 2 bilans, 1 conseil</div></div>
+      <div class="kpi-card slide-up" style="animation-delay:0.15s;"><div class="kpi-badge up">+2%</div><div class="kpi-label">Taux satisfaction</div><div class="kpi-value">94%</div><div class="kpi-detail">Enquete clients Q1</div></div>
     </div>
 
     <!-- TREND CHART + ALERTS -->
     <div class="grid-2" style="margin-bottom:16px;">
       <div class="card" style="padding:14px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <div style="font-size:13px;font-weight:700;">Evolution CA 7 derniers jours</div>
+          <div style="font-size:13px;font-weight:700;">CA mensuel par client</div>
           <button class="btn sm ghost">Voir tout</button>
         </div>
         <div style="display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 4px;">
           <div style="flex:1;text-align:center;">
             <div style="background:#F97066;border-radius:6px 6px 0 0;height:55%;margin:0 auto;"></div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Lun</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Martin</div>
           </div>
           <div style="flex:1;text-align:center;">
             <div style="background:#F97066;border-radius:6px 6px 0 0;height:68%;margin:0 auto;"></div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Mar</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Thibault</div>
           </div>
           <div style="flex:1;text-align:center;">
             <div style="background:#F97066;opacity:0.7;border-radius:6px 6px 0 0;height:60%;margin:0 auto;"></div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Mer</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Rousseau</div>
           </div>
           <div style="flex:1;text-align:center;">
             <div style="background:#F97066;opacity:0.7;border-radius:6px 6px 0 0;height:75%;margin:0 auto;"></div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Jeu</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Dupont</div>
           </div>
           <div style="flex:1;text-align:center;">
             <div style="background:#F97066;border-radius:6px 6px 0 0;height:82%;margin:0 auto;"></div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Ven</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Beaumont</div>
           </div>
           <div style="flex:1;text-align:center;">
             <div style="background:#F97066;opacity:0.6;border-radius:6px 6px 0 0;height:70%;margin:0 auto;"></div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Sam</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Lys</div>
           </div>
           <div style="flex:1;text-align:center;">
             <div style="background:var(--navy);border-radius:6px 6px 0 0;height:90%;margin:0 auto;"></div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Dim</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Autres</div>
           </div>
         </div>
       </div>
@@ -874,19 +873,19 @@
         <div class="card-body" style="display:flex;flex-direction:column;gap:8px;">
           <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
             <span class="pill red" style="flex-shrink:0;">Urgent</span>
-            <span style="flex:1;">Echeance bilan carbone dans 15 jours</span>
+            <span style="flex:1;">Bilan annuel Boulangerie Martin a finaliser</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
             <span class="pill green" style="flex-shrink:0;">Opportunite</span>
-            <span style="flex:1;">Aide regionale 12 000&euro; acceptee</span>
+            <span style="flex:1;">Garage Thibault passe Niveau 2 HOSMONY</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
             <span class="pill blue" style="flex-shrink:0;">Rappel</span>
-            <span style="flex:1;">Formation eco-circulaire demain 14h</span>
+            <span style="flex:1;">3 declarations fiscales a deposer avant le 15 avril</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
             <span class="pill amber" style="flex-shrink:0;">Attention</span>
-            <span style="flex:1;">KPI satisfaction equipe sous seuil</span>
+            <span style="flex:1;">Nouveau prospect : Restaurant Le Lys (RDV mercredi)</span>
           </div>
         </div>
       </div>
@@ -896,27 +895,28 @@
       <div class="card slide-up">
         <div class="card-header"><div class="card-title">Plan d'Actions</div><div class="card-badge">5/12</div></div>
         <div class="card-body">
-          <div class="action-item"><div class="action-dot" style="background:var(--primary);"></div><div style="flex:1"><div class="action-title">Bilan carbone Scope 1+2</div><div class="action-meta"><span class="tag" style="background:var(--red-bg);color:var(--red);">Haute</span> &bull; M. Martin &bull; 15 avr.</div></div></div>
-          <div class="action-item"><div class="action-dot" style="background:var(--primary);"></div><div style="flex:1"><div class="action-title">Comite RSE trimestriel</div><div class="action-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">Moy.</span> &bull; Direction &bull; 30 avr.</div></div></div>
-          <div class="action-item"><div class="action-dot" style="background:var(--green);"></div><div style="flex:1"><div class="action-title" style="text-decoration:line-through;color:var(--text-muted);">Formaliser strategie RSE</div><div class="action-meta">12 mars</div></div></div>
+          <div class="action-item"><div class="action-dot" style="background:var(--primary);"></div><div style="flex:1"><div class="action-title">Finaliser bilan Boulangerie Martin</div><div class="action-meta"><span class="tag" style="background:var(--red-bg);color:var(--red);">HAUTE</span> &bull; 15 avr.</div></div></div>
+          <div class="action-item"><div class="action-dot" style="background:var(--primary);"></div><div style="flex:1"><div class="action-title">Audit Garage Thibault</div><div class="action-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">MOY.</span> &bull; 30 avr.</div></div></div>
+          <div class="action-item"><div class="action-dot" style="background:var(--green);"></div><div style="flex:1"><div class="action-title" style="text-decoration:line-through;color:var(--text-muted);">Declaration TVA Q1 Cabinet</div><div class="action-meta">12 mars</div></div></div>
           <div style="margin-top:8px;text-align:center;"><button class="btn sm" style="width:100%;justify-content:center;">Voir tout le plan d'actions &rarr;</button></div>
         </div>
       </div>
       <div class="card slide-up" style="animation-delay:0.1s;">
-        <div class="card-header"><div class="card-title">Etapes HOSMONY &mdash; Niveau 2</div><div class="card-badge">7/9</div></div>
-        <div class="card-body">
-          <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Formation HOSMONY Niv.2</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
-          <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne : Gouvernance</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
-          <div class="step-item"><div class="step-num current">6</div><div style="flex:1"><div class="step-title">Definition valeurs et raison d'etre</div></div><div class="step-status" style="color:var(--amber);">En cours</div></div>
-          <div class="step-item"><div class="step-num locked">7</div><div style="flex:1"><div class="step-title">Ambitions DURABILITE</div></div><div class="step-status" style="color:var(--text-muted);">A faire</div></div>
-        </div>
+        <div class="card-header"><div class="card-title">Portefeuille Clients</div><div class="card-badge">12</div></div>
+<div class="card-body">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #F5F5F5;"><div><strong style="font-size:12px;">Boulangerie Martin</strong></div><div><span class="pill green" style="font-size:11px;">Niv. 2</span></div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #F5F5F5;"><div><strong style="font-size:12px;">Garage Thibault</strong></div><div><span class="pill green" style="font-size:11px;">Niv. 2</span></div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #F5F5F5;"><div><strong style="font-size:12px;">Pharmacie Rousseau</strong></div><div><span class="pill blue" style="font-size:11px;">Niv. 1</span></div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;"><div><strong style="font-size:12px;">Cabinet Dupont</strong></div><div><span class="pill amber" style="font-size:11px;">Onboarding</span></div></div>
+  <div style="margin-top:8px;text-align:center;"><button class="btn sm" style="width:100%;justify-content:center;">Voir tous les clients &rarr;</button></div>
+</div>
       </div>
     </div>
   </div>
 
   <!-- PARCOURS HOSMONY -->
   <div class="content page" id="page-hosmony">
-    <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">Niveau actuel : 2 &mdash; Dynamique &bull; 7/9 etapes validees</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
+    <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">12 clients accompagnes &bull; 4 niveaux actifs</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
 
     <div class="context-hint">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -960,7 +960,7 @@
 
   <!-- INDICATEURS -->
   <div class="content page" id="page-indicateurs">
-    <div class="page-header"><div><div class="page-title">Indicateurs</div><div class="page-subtitle">Pilotage et suivi de tous vos indicateurs</div></div>
+    <div class="page-header"><div><div class="page-title">Indicateurs</div><div class="page-subtitle">KPIs cabinet et indicateurs clients consolides</div></div>
     <div style="display:flex;gap:6px;"><button class="btn">Importer</button><button class="btn">Exporter</button><button class="btn primary">+ Creer un indicateur</button><button class="btn primary" style="background:var(--accent);border-color:var(--accent);color:var(--navy);">+ Creer un graphique</button></div></div>
 
     <!-- Tabs: types d'indicateurs -->
@@ -1151,33 +1151,31 @@
     <div style="display:flex;gap:6px;"><button class="btn ai-powered" onclick="document.getElementById('stratAI').classList.toggle('visible')">Revue IA</button><button class="btn primary">Modifier la strategie</button></div></div>
     <div class="vision-box">
       <div class="vision-label">Vision 2028</div>
-      <p style="font-size:14px;font-weight:500;line-height:1.6;">Devenir la boulangerie de reference de la region en alliant excellence artisanale, performance economique et engagement environnemental.</p>
+      <p style="font-size:14px;font-weight:500;line-height:1.6;">Devenir le cabinet de reference en accompagnement RSE et performance durable des TPE/PME de la region Ile-de-France d'ici 2028.</p>
       <div class="edit-hover"><button class="btn sm">Modifier</button></div>
     </div>
     <div class="grid-2" style="margin-bottom:12px;">
-      <div class="card"><div class="card-header"><div class="card-title">Mission</div><button class="btn sm">Modifier</button></div><div class="card-body"><p style="font-size:12px;">Produire des pains et patisseries artisanaux de qualite en minimisant notre impact environnemental tout en maximisant le bien-etre de nos equipes.</p></div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Mission</div><button class="btn sm">Modifier</button></div><div class="card-body"><p style="font-size:12px;">Accompagner nos clients dans leur transformation durable en combinant expertise comptable, methodologie HOSMONY et intelligence artificielle.</p></div></div>
       <div class="card"><div class="card-header"><div class="card-title">Valeurs</div><button class="btn sm">Modifier</button></div><div class="card-body"><div style="display:flex;gap:5px;flex-wrap:wrap;"><span class="pill blue">Excellence artisanale</span><span class="pill green">Responsabilite ecologique</span><span class="pill purple">Bien-etre au travail</span><span class="pill amber">Ancrage local</span></div><div style="margin-top:6px;"><button class="btn sm">+ Ajouter une valeur</button></div></div></div>
     </div>
     <div class="ai-result" id="stratAI" style="margin-bottom:14px;"><div class="ai-tag">Revue IA T1 2026</div><p><strong>Forces :</strong> Financier +8.2%, Ecologique &minus;12% carbone. <strong>Vigilance :</strong> Social en retard (14h/20h formation). <strong>Action :</strong> Prioriser RH au T2, securiser tresorerie 3 mois.</p></div>
     <div class="grid-3">
-      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--primary);"></div><div style="flex:1"><div class="pillar-name">Performance Financiere</div><div style="font-size:11px;color:var(--text-muted);">3 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
-        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">CA &ge; 1.2M&euro;</div><div class="obj-kpi">847K</div><div class="obj-pct" style="color:var(--green);">71%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Marge &ge; 15%</div><div class="obj-kpi">12.4%</div><div class="obj-pct" style="color:var(--green);">83%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Tresorerie 3 mois</div><div class="obj-kpi">2.1 m.</div><div class="obj-pct" style="color:var(--amber);">70%</div></div>
+      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--primary);"></div><div style="flex:1"><div class="pillar-name">Croissance Cabinet</div><div style="font-size:11px;color:var(--text-muted);">3 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">CA &gt; 500K</div><div class="obj-kpi">142K</div><div class="obj-pct" style="color:var(--green);">28%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">20 clients actifs</div><div class="obj-kpi">12</div><div class="obj-pct" style="color:var(--amber);">60%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Marge &gt; 40%</div><div class="obj-kpi">38%</div><div class="obj-pct" style="color:var(--amber);">95%</div></div>
         <div style="padding-top:6px;"><button class="btn sm" style="width:100%;justify-content:center;">+ Objectif</button></div>
       </div></div>
-      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--green);"></div><div style="flex:1"><div class="pillar-name">Transition Ecologique</div><div style="font-size:11px;color:var(--text-muted);">4 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
-        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Carbone &minus;20%</div><div class="obj-kpi">&minus;12%</div><div class="obj-pct" style="color:var(--green);">60%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Zero gaspillage</div><div class="obj-kpi">&minus;35%</div><div class="obj-pct" style="color:var(--green);">70%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Fournisseurs &lt;100km</div><div class="obj-kpi">72%</div><div class="obj-pct" style="color:var(--amber);">72%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Energie renouv. 50%</div><div class="obj-kpi">38%</div><div class="obj-pct" style="color:var(--green);">76%</div></div>
+      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--green);"></div><div style="flex:1"><div class="pillar-name">Excellence Client</div><div style="font-size:11px;color:var(--text-muted);">3 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Satisfaction &gt; 95%</div><div class="obj-kpi">94%</div><div class="obj-pct" style="color:var(--green);">99%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Retention &gt; 90%</div><div class="obj-kpi">92%</div><div class="obj-pct" style="color:var(--green);">100%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">NPS &gt; 50</div><div class="obj-kpi">42</div><div class="obj-pct" style="color:var(--amber);">84%</div></div>
         <div style="padding-top:6px;"><button class="btn sm" style="width:100%;justify-content:center;">+ Objectif</button></div>
       </div></div>
-      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--purple);"></div><div style="flex:1"><div class="pillar-name">Capital Humain</div><div style="font-size:11px;color:var(--text-muted);">4 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
-        <div class="obj-item"><div class="obj-dot" style="background:var(--red);"></div><div class="obj-title">Formation &ge; 20h</div><div class="obj-kpi">14h</div><div class="obj-pct" style="color:var(--red);">70%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Satisfaction &ge; 8</div><div class="obj-kpi">7.1</div><div class="obj-pct" style="color:var(--amber);">89%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Turnover &lt; 10%</div><div class="obj-kpi">7.2%</div><div class="obj-pct" style="color:var(--green);">100%</div></div>
-        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Parite</div><div class="obj-kpi">40%F</div><div class="obj-pct" style="color:var(--green);">100%</div></div>
+      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--purple);"></div><div style="flex:1"><div class="pillar-name">Innovation &amp; IA</div><div style="font-size:11px;color:var(--text-muted);">3 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">100% agents IA actifs</div><div class="obj-kpi">80%</div><div class="obj-pct" style="color:var(--green);">80%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Automatisation 60%</div><div class="obj-kpi">45%</div><div class="obj-pct" style="color:var(--amber);">75%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Formation equipe IA</div><div class="obj-kpi">4/10</div><div class="obj-pct" style="color:var(--amber);">40%</div></div>
         <div style="padding-top:6px;"><button class="btn sm" style="width:100%;justify-content:center;">+ Objectif</button></div>
       </div></div>
     </div>
