@@ -14,7 +14,7 @@
     --border-light: #F1F5F9;
     --text: #0F172A;
     --text-secondary: #64748B;
-    --text-muted: #94A3B8;
+    --text-muted: #78889A;
     --primary: #315299;
     --primary-hover: #273f7a;
     --primary-bg: #EEF1F8;
@@ -48,7 +48,7 @@
     font-family: 'Inter', -apple-system, system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.5;
+    line-height: 1.6;
     min-height: 100vh;
     display: flex;
     -webkit-font-smoothing: antialiased;
@@ -90,16 +90,17 @@
   .nav-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 7px 10px;
+    gap: 10px;
+    padding: 9px 12px;
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
     cursor: pointer;
     font-size: 13px;
     font-weight: 500;
-    transition: all 0.1s;
-    margin-bottom: 1px;
+    transition: all 0.15s;
+    margin-bottom: 2px;
     user-select: none;
+    min-height: 36px;
   }
   .nav-item:hover { background: var(--bg); color: var(--text); }
   .nav-item.active {
@@ -677,6 +678,51 @@
     .page-header { flex-direction: column; gap: 8px; }
     .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
   }
+
+  /* ═══ AI CONSISTENCY ═══ */
+  .ai-powered {
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-powered::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--navy), var(--accent));
+    background-size: 200% 100%;
+    animation: aiShimmer 3s linear infinite;
+  }
+  @keyframes aiShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .ai-badge {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    color: var(--navy); background: linear-gradient(135deg, var(--accent-bg), var(--primary-bg));
+    padding: 2px 7px; border-radius: 4px;
+  }
+
+  /* ═══ ACCESSIBILITY ═══ */
+  .btn:focus-visible, .nav-item:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ═══ CONTEXTUAL HINTS ═══ */
+  .context-hint {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .context-hint strong { color: var(--navy); }
+  .context-hint .dismiss { margin-left: auto; cursor: pointer; color: var(--text-muted); font-size: 10px; }
 </style>
 </head>
 <body>
@@ -689,16 +735,22 @@
   <nav class="sidebar-nav">
     <div class="nav-item active" data-page="dashboard"><div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div> Dashboard</div>
     <div class="nav-item hosmony-accent" data-page="hosmony"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div> Parcours</div>
-    <div class="nav-item" data-page="actions"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div> Plan d'Actions</div>
+    <div class="nav-item" data-page="actions"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div> Plan d'Actions<span style="margin-left:auto;font-size:10px;font-weight:600;color:var(--text-muted);background:var(--bg);padding:1px 5px;border-radius:3px;">4</span></div>
     <div style="height:8px;"></div>
     <div class="nav-item" data-page="strategy"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div> Strategie</div>
     <div class="nav-item" data-page="indicateurs"><div class="icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div> Indicateurs</div>
-    <div class="nav-item" data-page="opportunities"><div class="icon"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div> Opportunites</div>
+    <div class="nav-item" data-page="opportunities"><div class="icon"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div> Opportunites<span style="margin-left:auto;font-size:10px;font-weight:600;color:var(--text-muted);background:var(--bg);padding:1px 5px;border-radius:3px;">3</span></div>
     <div style="height:8px;"></div>
     <div class="nav-item" data-page="dynamics"><div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div> Organisation</div>
-    <div class="nav-item" data-page="ai-studio"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1.27A7 7 0 015.27 19H4a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="1" fill="currentColor" stroke="none"/><path d="M9 17c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg></div> Studio IA</div>
+    <div class="nav-item" data-page="competences"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg></div> Competences</div>
+    <div class="nav-item" data-page="formations"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div> Formations</div>
+    <div class="nav-item" data-page="chatbot"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div> Fil d'Actualite</div>
     <div style="height:8px;"></div>
-    <div class="nav-item" data-page="crm"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div> CRM</div>
+    <div class="nav-item" data-page="ai-studio"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1.27A7 7 0 015.27 19H4a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="1" fill="currentColor" stroke="none"/><path d="M9 17c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg></div> Studio IA <span class="ai-badge">IA</span></div>
+    <div class="nav-item" data-page="tools"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div> Outils MyDAD</div>
+    <div class="nav-item" data-page="connectors"><div class="icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div> Connecteurs API</div>
+    <div style="height:8px;"></div>
+    <div class="nav-item" data-page="crm"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div> CRM<span style="margin-left:auto;font-size:10px;font-weight:600;color:var(--text-muted);background:var(--bg);padding:1px 5px;border-radius:3px;">8</span></div>
     <div class="nav-item" data-page="clients"><div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div> Mes Clients</div>
     <div style="height:8px;"></div>
     <div class="nav-item" data-page="documents"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div> Documents</div>
@@ -715,6 +767,7 @@
     <div class="topbar-left">
       <button class="mobile-menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('mobile-open')">&#9776;</button>
       <span class="breadcrumb">Portefeuille &rsaquo; <strong>Boulangerie Martin</strong></span>
+      <span style="font-size:10px;color:var(--text-muted);margin-left:4px;">Mis a jour il y a 5 min</span>
       <div class="client-selector">&#9662; Changer de client</div>
     </div>
     <div class="topbar-right">
@@ -834,7 +887,7 @@
           <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne : Gouvernance</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
           <div class="step-item"><div class="step-num current">6</div><div style="flex:1"><div class="step-title">Definition valeurs et raison d'etre</div></div><div class="step-status" style="color:var(--amber);">En cours</div></div>
           <div class="step-item"><div class="step-num locked">7</div><div style="flex:1"><div class="step-title">Ambitions DURABILITE</div></div><div class="step-status" style="color:var(--text-muted);">A faire</div></div>
-          <button class="ai-btn" onclick="showAI()">Recommandation IA</button>
+          <button class="ai-btn ai-powered" onclick="showAI()">Recommandation IA <span class="ai-badge">IA</span></button>
           <div class="ai-typing" id="aiT"><div class="typing-dots"><span></span><span></span><span></span></div>Analyse...</div>
           <div class="ai-result" id="aiR"><div class="ai-tag">Recommandation IA</div><p><strong>Priorite : Formation.</strong> 14h/20h requis. Lancez le e-learning des avril. <strong>Niveau 3 realiste d'ici juin 2026</strong> &rarr; 3 appels d'offres + credit impot ~8 500&euro;.</p></div>
         </div>
@@ -845,6 +898,12 @@
   <!-- PARCOURS HOSMONY -->
   <div class="content page" id="page-hosmony">
     <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">Niveau actuel : 2 &mdash; Dynamique &bull; 7/9 etapes validees</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
+
+    <div class="context-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <span><strong>Astuce :</strong> Completez les etapes dans l'ordre pour debloquer le niveau suivant et acceder a de nouveaux outils.</span>
+      <span class="dismiss" onclick="this.parentElement.style.display='none'">&#10005;</span>
+    </div>
 
     <div class="journey">
       <div class="j-level"><div class="j-circle done" style="background:var(--hosmony-1);">1</div><div class="j-name">Essentiel</div><div class="j-desc">6/6 &bull; Valide</div><div class="j-connector done"></div></div>
@@ -993,7 +1052,14 @@
   <!-- PLAN D'ACTIONS -->
   <div class="content page" id="page-actions">
     <div class="page-header"><div><div class="page-title">Plan d'Actions</div><div class="page-subtitle">12 actions &bull; 5 completees &bull; 4 en cours &bull; 3 a faire</div></div>
-    <div style="display:flex;gap:6px;"><button class="btn" onclick="document.getElementById('aiSug').classList.toggle('visible')">Suggestions IA</button><button class="btn">Filtrer</button><button class="btn primary">+ Nouvelle action</button></div></div>
+    <div style="display:flex;gap:6px;"><button class="btn ai-powered" onclick="document.getElementById('aiSug').classList.toggle('visible')">Suggestions IA <span class="ai-badge">IA</span></button><button class="btn">Filtrer</button><button class="btn primary">+ Nouvelle action</button></div></div>
+
+    <div class="context-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <span><strong>Astuce :</strong> Glissez les cartes entre colonnes pour suivre l'avancement. Les idees elues dans Organisation arrivent ici automatiquement.</span>
+      <span class="dismiss" onclick="this.parentElement.style.display='none'">&#10005;</span>
+    </div>
+
     <div class="kanban">
       <div class="kanban-col"><div class="kanban-head">A faire <span class="kanban-count">3</span></div><div class="kanban-body">
         <div class="k-card"><div class="k-card-title">Plan formation 20h/an</div><div class="k-card-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">Moy.</span><span style="font-size:9px;color:var(--text-muted);">30 juin</span><div class="k-avatar" style="background:var(--amber);">AM</div></div><div class="k-card-details"><div>Indicateur : <strong>14h/20h</strong></div><div>Mesure : <strong>PayFit</strong></div><div>Budget : <strong>3 200&euro;</strong></div><div>Resp. : <strong>A. Morel</strong></div></div></div>
@@ -1063,7 +1129,7 @@
   <!-- STRATEGIE -->
   <div class="content page" id="page-strategy">
     <div class="page-header"><div><div class="page-title">Strategie</div><div class="page-subtitle">Vision, mission, piliers et execution</div></div>
-    <div style="display:flex;gap:6px;"><button class="btn" onclick="document.getElementById('stratAI').classList.toggle('visible')">Revue IA</button><button class="btn primary">Modifier la strategie</button></div></div>
+    <div style="display:flex;gap:6px;"><button class="btn ai-powered" onclick="document.getElementById('stratAI').classList.toggle('visible')">Revue IA</button><button class="btn primary">Modifier la strategie</button></div></div>
     <div class="vision-box">
       <div class="vision-label">Vision 2028</div>
       <p style="font-size:14px;font-weight:500;line-height:1.6;">Devenir la boulangerie de reference de la region en alliant excellence artisanale, performance economique et engagement environnemental.</p>
@@ -1150,7 +1216,7 @@
         </div>
         <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">Ce document presente le nouvel ensemble de reglementations europeennes relatives a la cybersecurite et a l'intelligence artificielle. La conformite a ces nouvelles exigences est essentielle pour les acteurs concernes.</p>
         <div style="display:flex;gap:8px;align-items:center;">
-          <button class="btn sm primary">Analyse IA</button>
+          <button class="btn sm primary ai-powered">Analyse IA</button>
           <button class="btn sm">Plan d'actions</button>
           <button class="btn sm">Voir plus</button>
         </div>
@@ -1170,7 +1236,7 @@
         </div>
         <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">Nouvelles exigences en matiere de tracabilite et de controle des temperatures. Sanctions renforcees en cas de non-conformite. Controles inopines prevus au S2 2026.</p>
         <div style="display:flex;gap:8px;align-items:center;">
-          <button class="btn sm primary">Analyse IA</button>
+          <button class="btn sm primary ai-powered">Analyse IA</button>
           <button class="btn sm">Plan d'actions</button>
         </div>
       </div>
@@ -1269,6 +1335,12 @@
   <div class="content page" id="page-ai-studio">
     <div class="page-header"><div><div class="page-title">Studio IA</div><div class="page-subtitle">Creez des agents et automatisations sur mesure</div></div><div style="display:flex;gap:6px;"><button class="btn primary">+ Creer un agent</button><button class="btn primary" style="background:var(--accent);border-color:var(--accent);color:var(--navy);">+ Automatisation</button></div></div>
 
+    <div class="context-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <span><strong>Astuce :</strong> Creez des agents specialises pour automatiser vos taches. Commencez par un template ou partez de zero.</span>
+      <span class="dismiss" onclick="this.parentElement.style.display='none'">&#10005;</span>
+    </div>
+
     <!-- Tabs -->
     <div class="tabs" style="margin-bottom:18px;">
       <div class="tab active">Mes Agents <strong>6</strong></div>
@@ -1280,7 +1352,7 @@
     <!-- Agents grid -->
     <div class="grid-3" style="margin-bottom:20px;">
       <!-- Agent card 1 -->
-      <div class="card" style="padding:16px;border-top:3px solid var(--navy);">
+      <div class="card ai-powered" style="padding:16px;border-top:3px solid var(--navy);">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
           <div style="width:36px;height:36px;border-radius:10px;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
@@ -1299,7 +1371,7 @@
         </div>
       </div>
       <!-- Agent card 2 -->
-      <div class="card" style="padding:16px;border-top:3px solid var(--green);">
+      <div class="card ai-powered" style="padding:16px;border-top:3px solid var(--green);">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
           <div style="width:36px;height:36px;border-radius:10px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
@@ -1317,7 +1389,7 @@
         </div>
       </div>
       <!-- Agent card 3 -->
-      <div class="card" style="padding:16px;border-top:3px solid var(--purple);">
+      <div class="card ai-powered" style="padding:16px;border-top:3px solid var(--purple);">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
           <div style="width:36px;height:36px;border-radius:10px;background:var(--purple-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
@@ -1335,7 +1407,7 @@
         </div>
       </div>
       <!-- Agent card 4 -->
-      <div class="card" style="padding:16px;border-top:3px solid var(--amber);">
+      <div class="card ai-powered" style="padding:16px;border-top:3px solid var(--amber);">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
           <div style="width:36px;height:36px;border-radius:10px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -1353,7 +1425,7 @@
         </div>
       </div>
       <!-- Agent card 5 -->
-      <div class="card" style="padding:16px;border-top:3px solid var(--accent);">
+      <div class="card ai-powered" style="padding:16px;border-top:3px solid var(--accent);">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
           <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
