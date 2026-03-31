@@ -772,6 +772,29 @@
     <div style="height:2px;border-top:1px solid var(--border);margin:8px 0;"></div>
     <div class="nav-item" data-page="documents"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div> Documents</div>
     <div class="nav-item" data-page="settings"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1.08z"/></svg></div> Parametres</div>
+  
+  <nav class="sidebar-nav" id="sidebar-supervision" style="display:none;">
+    <div class="nav-item active" data-page="supervision" style="margin-bottom:6px;"><div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div> <strong>Vue globale</strong></div>
+    <div class="nav-group" style="margin-bottom:6px;">
+      <div class="nav-group-header" onclick="toggleGroup(this)"><div class="icon"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div> Opportunit&eacute;s <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg></div>
+      <div class="nav-group-items">
+        <div class="nav-item sub" onclick="alert('Artisanat alimentaire : Boulangerie Martin, Fleuriste Rosalie')">Artisanat</div>
+        <div class="nav-item sub" onclick="alert('Automobile : Garage Thibault')">Automobile</div>
+        <div class="nav-item sub" onclick="alert('Sante : Pharmacie Rousseau')">Sant&eacute;</div>
+        <div class="nav-item sub" onclick="alert('Hotellerie : Hotel Bellevue')">H&ocirc;tellerie</div>
+      </div>
+    </div>
+    <div class="nav-group" style="margin-bottom:6px;">
+      <div class="nav-group-header" onclick="toggleGroup(this)"><div class="icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div> Indicateurs <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg></div>
+      <div class="nav-group-items">
+        <div class="nav-item sub" onclick="alert('Indicateurs Artisanat')">Artisanat</div>
+        <div class="nav-item sub" onclick="alert('Indicateurs Automobile')">Automobile</div>
+        <div class="nav-item sub" onclick="alert('Indicateurs Sante')">Sant&eacute;</div>
+        <div class="nav-item sub" onclick="alert('Indicateurs Hotellerie')">H&ocirc;tellerie</div>
+      </div>
+    </div>
+    <div class="nav-item" data-page="actions" style="margin-bottom:6px;"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div> Actions clients</div>
+    <div class="nav-item" data-page="clients"><div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div> Mes Clients</div>
   </nav>
   <div class="sidebar-user">
     <div class="avatar">SL</div>
@@ -928,19 +951,28 @@
         <div style="font-size:14px;font-weight:700;">R&eacute;partition par niveau HOSMONY</div>
         <div style="font-size:12px;color:var(--text-muted);">12 clients actifs</div>
       </div>
-      <div style="display:flex;gap:8px;margin-bottom:12px;">
-        <div style="flex:3;background:var(--hosmony-1);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">3</div><div style="font-size:11px;opacity:0.9;">Niveau 1</div></div>
-        <div style="flex:5;background:var(--hosmony-2);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">5</div><div style="font-size:11px;opacity:0.9;">Niveau 2</div></div>
-        <div style="flex:2;background:var(--hosmony-3);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">2</div><div style="font-size:11px;opacity:0.9;">Niveau 3</div></div>
-        <div style="flex:1;background:var(--hosmony-4);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">1</div><div style="font-size:11px;opacity:0.9;">Niveau 4</div></div>
-        <div style="flex:1;background:var(--hosmony-5);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">1</div><div style="font-size:11px;opacity:0.9;">Niveau 5</div></div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+        <div style="display:flex;gap:4px;flex:1;height:8px;border-radius:4px;overflow:hidden;">
+          <div style="flex:3;background:var(--hosmony-1);" title="Niveau 1 : 3 clients"></div>
+          <div style="flex:5;background:var(--hosmony-2);" title="Niveau 2 : 5 clients"></div>
+          <div style="flex:2;background:var(--hosmony-3);" title="Niveau 3 : 2 clients"></div>
+          <div style="flex:1;background:var(--hosmony-4);" title="Niveau 4 : 1 client"></div>
+          <div style="flex:1;background:var(--hosmony-5);" title="Niveau 5 : 1 client"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;font-size:12px;">
+        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:50%;background:var(--hosmony-1);"></div> Niv.1 : 3</div>
+        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:50%;background:var(--hosmony-2);"></div> Niv.2 : 5</div>
+        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:50%;background:var(--hosmony-3);"></div> Niv.3 : 2</div>
+        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:50%;background:var(--hosmony-4);"></div> Niv.4 : 1</div>
+        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:50%;background:var(--hosmony-5);"></div> Niv.5 : 1</div>
       </div>
     </div>
 
     <div class="grid-2">
       <!-- Opportunites detectees -->
       <div class="card">
-        <div class="card-header"><div class="card-title" style="color:var(--navy);">&#128293; Opportunit&eacute;s d&eacute;tect&eacute;es</div><div class="card-badge">7 nouvelles</div></div>
+        <div class="card-header"><div class="card-title" style="color:var(--navy);">Opportunit&eacute;s d&eacute;tect&eacute;es</div><div class="card-badge">7 nouvelles</div></div>
         <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FAFAFA;border-radius:10px;">
             <div style="width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">BM</div>
@@ -968,7 +1000,7 @@
 
       <!-- Actions urgentes -->
       <div class="card">
-        <div class="card-header"><div class="card-title" style="color:var(--red);">&#9888;&#65039; Actions urgentes</div><div class="card-badge">5 actions</div></div>
+        <div class="card-header"><div class="card-title" style="color:var(--red);">Actions urgentes</div><div class="card-badge">5 actions</div></div>
         <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FEF2F2;border-radius:10px;border-left:3px solid var(--red);">
             <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Bilan annuel Boulangerie Martin</div><div style="font-size:11px;color:var(--text-secondary);">Ech&eacute;ance 15 avril &bull; <strong>J-15</strong></div></div>
@@ -990,26 +1022,7 @@
       </div>
     </div>
 
-    <!-- Liste clients -->
-    <div class="card" style="margin-top:16px;">
-      <div class="card-header">
-        <div class="card-title">Clients</div>
-        <div style="display:flex;gap:6px;"><input type="text" placeholder="Filtrer..." style="padding:5px 10px;border:1px solid #EBEBEB;border-radius:8px;font-size:12px;font-family:inherit;outline:none;width:160px;"><button class="btn sm">Tous niveaux &#9662;</button></div>
-      </div>
-      <div class="card-body" style="padding:0;">
-        <table class="data-table" style="width:100%;">
-          <thead><tr><th>Client</th><th>Niveau</th><th>Progression</th><th>Opportunit&eacute;s</th><th>Actions</th><th>Valeur</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">BM</div><strong>Boulangerie Martin</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:78%;"></div></div> 72%</td><td><strong style="color:var(--green);">3</strong></td><td>2</td><td style="color:var(--green);font-weight:700;">23.4K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
-            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">GT</div><strong>Garage Thibault</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:65%;"></div></div> 65%</td><td><strong style="color:var(--green);">2</strong></td><td>1</td><td style="color:var(--green);font-weight:700;">41.2K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
-            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">FR</div><strong>Fleuriste Rosalie</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:48%;background:var(--amber);"></div></div> 48%</td><td><strong style="color:var(--amber);">1</strong></td><td>3</td><td style="font-weight:700;">5.4K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
-            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">PR</div><strong>Pharmacie Rousseau</strong></div></td><td><span class="pill green">Niv. 1</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:100%;background:var(--green);"></div></div> 100%</td><td><strong>0</strong></td><td>0</td><td style="font-weight:700;">5.4K&euro;</td><td><button class="btn sm">Voir</button></td></tr>
-            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">HB</div><strong>Hotel Bellevue</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:55%;"></div></div> 55%</td><td><strong style="color:var(--green);">1</strong></td><td>1</td><td style="color:var(--green);font-weight:700;">18.7K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
-            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">VB</div><strong>Vignobles Beaumont</strong></div></td><td><span class="pill purple">Niv. 3</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:40%;background:var(--purple);"></div></div> 40%</td><td><strong>0</strong></td><td>2</td><td style="color:var(--green);font-weight:700;">67.3K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <!-- Clients accessible via sidebar Mes Clients -->
   </div>
 
   <!-- PARCOURS HOSMONY -->
@@ -1017,7 +1030,6 @@
     <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">Niveau actuel : 2 &mdash; Dynamique &bull; Parcours du cabinet</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
 
 
-    <div id="parcours-mon">
     <div class="journey">
       <div class="j-level"><div class="j-circle done" style="background:var(--hosmony-1);">1</div><div class="j-name">Essentiel</div><div class="j-desc">6/6 &bull; Valide</div><div class="j-connector done"></div></div>
       <div class="j-level"><div class="j-circle current" style="background:var(--hosmony-2);color:var(--hosmony-2);">2</div><div class="j-name">Dynamique</div><div class="j-desc">7/9 &bull; En cours</div><div class="j-connector active"></div></div>
@@ -1025,7 +1037,7 @@
       <div class="j-level"><div class="j-circle future" style="background:var(--hosmony-4);">4</div><div class="j-name">Excellence</div><div class="j-desc">Innovation</div><div class="j-connector"></div></div>
       <div class="j-level"><div class="j-circle future" style="background:var(--hosmony-5);">5</div><div class="j-name">Etoile</div><div class="j-desc">Modele</div></div>
     </div>
-    </div><!-- end parcours-mon -->
+    
 
     </div><!-- end parcours-mon -->
   </div>
@@ -2301,8 +2313,11 @@
       document.querySelectorAll('.page').forEach(p => p.style.display = '');
       supervisionPage.style.display = 'block';
       supervisionPage.classList.add('active');
-      // Deactivate sidebar items
+      // Switch sidebar
+      document.querySelector('.sidebar-nav:not(#sidebar-supervision)').style.display = 'none';
+      document.getElementById('sidebar-supervision').style.display = 'block';
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.querySelector('#sidebar-supervision .nav-item').classList.add('active');
     } else {
       // Activate cabinet button
       cabinetBtn.style.background = 'var(--navy)';
@@ -2315,6 +2330,9 @@
       supervisionPage.style.display = 'none';
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       dashboardPage.classList.add('active');
+      // Switch sidebar back
+      document.querySelector('.sidebar-nav:not(#sidebar-supervision)').style.display = 'block';
+      document.getElementById('sidebar-supervision').style.display = 'none';
       // Activate Accueil
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       document.querySelector('[data-page=dashboard]').classList.add('active');
