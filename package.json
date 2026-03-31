@@ -1,0 +1,19 @@
+{
+  "name": "la-suite-mydad",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "db:migrate": "pnpm --filter @mydad/database db:migrate",
+    "db:seed": "pnpm --filter @mydad/database db:seed",
+    "db:generate": "pnpm --filter @mydad/database db:generate",
+    "db:studio": "pnpm --filter @mydad/database db:studio"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Suite MyDAD — Expert-Comptable</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F9FAFB;
+    --surface: #FFFFFF;
+    --surface-hover: #FAFBFC;
+    --border: #E5E7EB;
+    --border-light: #F0F1F3;
+    --text: #1E3A5F;
+    --text-secondary: #64748B;
+    --text-muted: #94A3B8;
+    --primary: #3B82F6;
+    --primary-hover: #2563EB;
+    --primary-bg: #EFF6FF;
+    --green: #059669;
+    --green-bg: #ECFDF5;
+    --amber: #D97706;
+    --amber-bg: #FFFBEB;
+    --red: #DC2626;
+    --red-bg: #FEF2F2;
+    --purple: #7C3AED;
+    --purple-bg: #F5F3FF;
+    --hosmony-1: #94A3B8;
+    --hosmony-2: #3B82F6;
+    --hosmony-3: #059669;
+    --hosmony-4: #D97706;
+    --hosmony-5: #7C3AED;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══ SIDEBAR ═══ */
+  .sidebar {
+    width: 240px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100vh;
+    position: fixed;
+    left: 0; top: 0;
+    z-index: 100;
+    overflow-y: auto;
+  }
+  .sidebar-logo {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-logo svg { width: 32px; height: 32px; flex-shrink: 0; }
+  .sidebar-logo h1 { font-size: 14px; font-weight: 700; color: var(--text); }
+  .sidebar-logo span { font-size: 9px; color: var(--text-muted); display: block; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+  .sidebar-section {
+    padding: 16px 14px 4px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .sidebar-nav { padding: 2px 8px; flex: 1; }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.1s;
+    margin-bottom: 1px;
+    user-select: none;
+  }
+  .nav-item:hover { background: var(--bg); color: var(--text); }
+  .nav-item.active {
+    background: var(--text);
+    color: #fff;
+    font-weight: 600;
+  }
+  .nav-item .icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.6; display: flex; align-items: center; justify-content: center; }
+  .nav-item .icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .nav-item.active .icon { opacity: 1; }
+
+  .sidebar-user {
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .avatar {
+    width: 30px; height: 30px;
+    background: var(--text);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 10px;
+    color: #fff;
+  }
+  .sidebar-user .user-name { font-size: 12px; font-weight: 600; }
+  .sidebar-user .user-role { font-size: 10px; color: var(--text-muted); }
+
+  /* ═══ MAIN ═══ */
+  .main { margin-left: 240px; flex: 1; min-height: 100vh; }
+
+  .topbar {
+    height: 48px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 10px; }
+  .breadcrumb { font-size: 13px; color: var(--text-secondary); }
+  .breadcrumb strong { color: var(--text); font-weight: 600; }
+  .client-selector {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 11px; font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    background: var(--surface);
+  }
+  .client-selector:hover { border-color: var(--text-muted); }
+  .topbar-right { display: flex; align-items: center; gap: 6px; }
+
+  .notif-btn {
+    position: relative;
+    width: 32px; height: 32px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .notif-btn:hover { background: var(--bg); }
+  .notif-badge {
+    position: absolute; top: -3px; right: -3px;
+    min-width: 14px; height: 14px;
+    background: var(--red);
+    color: #fff;
+    font-size: 8px; font-weight: 700;
+    border-radius: 99px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 3px;
+  }
+  .notif-dropdown {
+    display: none;
+    position: absolute; top: 40px; right: 0;
+    width: 320px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+  }
+  .notif-dropdown.open { display: block; }
+  .notif-header { padding: 10px 12px; font-size: 11px; font-weight: 700; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+  .notif-item { padding: 10px 12px; border-bottom: 1px solid var(--border-light); font-size: 12px; cursor: pointer; }
+  .notif-item:hover { background: var(--bg); }
+  .notif-item:last-child { border-bottom: none; }
+  .notif-item .n-title { font-weight: 500; margin-bottom: 1px; display: flex; align-items: center; gap: 6px; }
+  .notif-item .n-time { font-size: 10px; color: var(--text-muted); }
+  .n-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .btn {
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 12px; font-weight: 500;
+    cursor: pointer; color: var(--text);
+    display: inline-flex; align-items: center; gap: 4px;
+    transition: all 0.1s;
+    font-family: inherit;
+    line-height: 1.4;
+  }
+  .btn:hover { background: var(--bg); border-color: var(--text-muted); }
+  .btn.primary { background: var(--text); color: #fff; border-color: var(--text); }
+  .btn.primary:hover { background: #000; }
+  .btn.sm { padding: 3px 8px; font-size: 11px; }
+  .btn.ghost { border: none; color: var(--text-secondary); padding: 4px 8px; }
+  .btn.ghost:hover { background: var(--bg); color: var(--text); }
+
+  .content { padding: 20px; max-width: 1280px; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .page-title { font-size: 18px; font-weight: 700; letter-spacing: -0.2px; }
+  .page-subtitle { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* ═══ CARDS ═══ */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  .card-header {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-title { font-size: 13px; font-weight: 600; }
+  .card-badge { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+
+  .card-body { padding: 12px 14px; }
+
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+
+  /* ═══ HOSMONY BANNER ═══ */
+  .hosmony-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: var(--shadow);
+  }
+  .hosmony-level-badge {
+    width: 40px; height: 40px;
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+  .hosmony-info { flex: 1; }
+  .hosmony-info h3 { font-size: 13px; font-weight: 700; }
+  .hosmony-info p { font-size: 11px; color: var(--text-secondary); }
+  .hosmony-progress { flex-shrink: 0; text-align: right; width: 220px; }
+  .hosmony-score { font-size: 20px; font-weight: 800; }
+  .hosmony-score small { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+  .progress-label { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
+  .progress-track { height: 4px; background: var(--border-light); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; }
+  .levels-mini { display: flex; gap: 3px; margin-top: 4px; justify-content: flex-end; }
+  .level-dot {
+    width: 16px; height: 16px;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: #fff;
+    opacity: 0.15;
+  }
+  .level-dot.active { opacity: 1; }
+  .level-dot.done { opacity: 0.4; }
+
+  /* ═══ KPI ═══ */
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .kpi-label { font-size: 11px; font-weight: 500; color: var(--text-muted); margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+  .kpi-detail { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+  .kpi-badge { font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; position: absolute; top: 12px; right: 12px; }
+  .kpi-badge.up { background: var(--green-bg); color: var(--green); }
+  .kpi-badge.down { background: var(--red-bg); color: var(--red); }
+  .kpi-badge.neutral { background: var(--amber-bg); color: var(--amber); }
+  .kpi-sparkline { margin-top: 8px; height: 24px; display: flex; align-items: flex-end; gap: 1px; }
+  .spark-bar { flex: 1; border-radius: 1px 1px 0 0; min-height: 1px; transition: height 0.4s ease; }
+
+  /* ═══ STEPS ═══ */
+  .step-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 10px; font-weight: 700;
+  }
+  .step-num.done { background: var(--green); color: #fff; }
+  .step-num.current { background: var(--amber-bg); color: var(--amber); border: 1.5px solid var(--amber); }
+  .step-num.locked { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
+  .step-title { font-size: 12px; font-weight: 600; }
+  .step-desc { font-size: 11px; color: var(--text-secondary); }
+  .step-status { margin-left: auto; font-size: 11px; font-weight: 500; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+
+  .action-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .action-item:last-child { border-bottom: none; }
+  .action-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .action-title { font-size: 12px; font-weight: 600; }
+  .action-meta { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+  .tag { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.2px; }
+
+  /* ═══ TABS ═══ */
+  .tabs { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .tab { padding: 8px 14px; font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); border-bottom-color: var(--text); font-weight: 600; }
+  .tab.disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* ═══ TABLE ═══ */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .data-table th { text-align: left; padding: 7px 10px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .3px; color: var(--text-muted); background: var(--bg); border-bottom: 1px solid var(--border); }
+  .data-table td { padding: 9px 10px; border-bottom: 1px solid var(--border-light); vertical-align: middle; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--surface-hover); }
+  .pill { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .pill.green { background: var(--green-bg); color: var(--green); }
+  .pill.amber { background: var(--amber-bg); color: var(--amber); }
+  .pill.red { background: var(--red-bg); color: var(--red); }
+  .pill.gray { background: var(--bg); color: var(--text-muted); }
+  .pill.blue { background: var(--primary-bg); color: var(--primary); }
+  .pill.purple { background: var(--purple-bg); color: var(--purple); }
+
+  /* ═══ JOURNEY ═══ */
+  .journey { display: flex; gap: 0; margin-bottom: 20px; position: relative; }
+  .j-level { flex: 1; text-align: center; position: relative; }
+  .j-circle {
+    width: 44px; height: 44px;
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: #fff;
+    margin: 0 auto 6px;
+    position: relative; z-index: 2;
+  }
+  .j-circle.done { opacity: .4; }
+  .j-circle.current { opacity: 1; outline: 2px solid currentColor; outline-offset: 2px; }
+  .j-circle.future { opacity: .12; }
+  .j-name { font-size: 11px; font-weight: 600; }
+  .j-desc { font-size: 10px; color: var(--text-muted); }
+  .j-connector { position: absolute; top: 22px; left: calc(50% + 26px); right: calc(-50% + 26px); height: 2px; background: var(--border); z-index: 1; }
+  .j-connector.done { background: var(--green); }
+  .j-connector.active { background: linear-gradient(90deg, var(--primary), var(--border)); }
+  .j-level:last-child .j-connector { display: none; }
+
+  /* ═══ KANBAN ═══ */
+  .kanban { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+  .kanban-col { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); }
+  .kanban-head { padding: 8px 10px; font-size: 11px; font-weight: 700; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .kanban-count { font-size: 10px; font-weight: 600; color: var(--text-muted); }
+  .kanban-body { padding: 6px; display: flex; flex-direction: column; gap: 5px; }
+  .k-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 12px;
+    box-shadow: var(--shadow);
+  }
+  .k-card-title { font-size: 12px; font-weight: 600; margin-bottom: 5px; }
+  .k-card-meta { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; font-size: 11px; }
+  .k-avatar { width: 18px; height: 18px; border-radius: 50%; font-size: 8px; font-weight: 700; color: #fff; display: flex; align-items: center; justify-content: center; margin-left: auto; }
+  .k-card-details { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border-light); font-size: 11px; color: var(--text-secondary); display: flex; flex-wrap: wrap; gap: 2px 10px; }
+  .k-card-details strong { color: var(--text); font-weight: 600; }
+
+  /* ═══ TOOLS ═══ */
+  .tool-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px;
+    box-shadow: var(--shadow); position: relative;
+  }
+  .tool-card.locked { opacity: .4; }
+  .tool-level { position: absolute; top: 8px; right: 8px; font-size: 9px; font-weight: 600; padding: 2px 5px; border-radius: 3px; }
+  .tool-icon { font-size: 20px; margin-bottom: 8px; display: flex; align-items: center; height: 24px; }
+  .tool-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .tool-desc { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.4; }
+  .tool-btn { width: 100%; padding: 6px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 11px; font-weight: 600; cursor: pointer; background: var(--surface); font-family: inherit; }
+  .tool-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+  .tool-btn.locked { color: var(--text-muted); cursor: not-allowed; }
+
+  .connector-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px; text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .connector-card.connected { border-color: var(--green); }
+  .connector-icon { font-size: 22px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; height: 28px; }
+  .connector-name { font-size: 12px; font-weight: 700; }
+  .connector-desc { font-size: 10px; color: var(--text-secondary); margin: 2px 0 8px; }
+
+  /* ═══ CHAT ═══ */
+  .chat-layout { display: grid; grid-template-columns: 220px 1fr; gap: 14px; }
+  .agent-list { display: flex; flex-direction: column; gap: 3px; }
+  .agent-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; cursor: pointer; }
+  .agent-card:hover { background: var(--bg); }
+  .agent-card.selected { background: var(--text); color: #fff; border-color: var(--text); }
+  .agent-card.selected .agent-desc { color: rgba(255,255,255,0.6); }
+  .agent-name { font-size: 11px; font-weight: 600; }
+  .agent-desc { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+  .chat-area { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; min-height: 420px; }
+  .chat-head { padding: 10px 14px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 12px; }
+  .chat-context { padding: 6px 14px; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 10px; display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
+  .chat-msgs { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+  .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: var(--radius); font-size: 12px; line-height: 1.6; }
+  .chat-msg.user { background: var(--text); color: #fff; align-self: flex-end; }
+  .chat-msg.bot { background: var(--bg); align-self: flex-start; border: 1px solid var(--border); }
+  .chat-input-bar { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; gap: 6px; }
+  .chat-input { flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 12px; font-family: inherit; outline: none; }
+  .chat-input:focus { border-color: var(--text); }
+  .chat-send { padding: 7px 14px; background: var(--text); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+
+  /* ═══ CLIENTS ═══ */
+  .client-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px;
+    box-shadow: var(--shadow); cursor: pointer;
+    border-left: 3px solid transparent;
+  }
+  .client-card:hover { box-shadow: var(--shadow-md); }
+  .client-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .client-avatar { width: 28px; height: 28px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10px; color: #fff; }
+  .client-name { font-size: 13px; font-weight: 600; }
+  .client-sector { font-size: 10px; color: var(--text-muted); }
+  .client-level { display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
+  .client-lv { width: 18px; height: 18px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: #fff; }
+  .client-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; font-size: 10px; color: var(--text-secondary); }
+  .client-kpis strong { color: var(--text); font-size: 12px; display: block; }
+
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; box-shadow: var(--shadow); text-align: center; }
+  .stat-val { font-size: 20px; font-weight: 800; }
+  .stat-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+  .opp-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; box-shadow: var(--shadow); margin-bottom: 5px; }
+  .opp-title { font-size: 11px; font-weight: 600; margin-bottom: 2px; }
+  .opp-val { font-size: 14px; font-weight: 800; color: var(--green); }
+  .opp-src { font-size: 9px; color: var(--text-muted); }
+  .opp-tags { display: flex; gap: 3px; margin-top: 4px; flex-wrap: wrap; }
+  .opp-actions { margin-top: 6px; display: flex; gap: 4px; }
+
+  .roi-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px;
+    margin-bottom: 16px; display: flex; align-items: center; gap: 16px;
+    box-shadow: var(--shadow);
+  }
+  .roi-val { font-size: 24px; font-weight: 800; color: var(--green); }
+  .roi-val small { font-size: 12px; font-weight: 400; color: var(--text-secondary); }
+
+  .vision-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .vision-label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+  .edit-hover { position: absolute; top: 12px; right: 12px; }
+  .pillar-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .pillar-head { padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .pillar-color { width: 3px; height: 20px; border-radius: 99px; flex-shrink: 0; }
+  .pillar-name { font-size: 13px; font-weight: 600; }
+  .pillar-body { padding: 10px 14px; }
+  .obj-item { padding: 6px 0; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 6px; }
+  .obj-item:last-child { border-bottom: none; }
+  .obj-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .obj-title { font-size: 11px; font-weight: 500; flex: 1; }
+  .obj-kpi { font-size: 10px; color: var(--text-secondary); }
+  .obj-pct { font-size: 10px; font-weight: 700; }
+
+  .ai-btn {
+    width: 100%; padding: 8px;
+    background: var(--text); color: #fff;
+    border: none; border-radius: var(--radius-sm);
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    margin-top: 8px; font-family: inherit;
+  }
+  .ai-btn:hover { background: #000; }
+  .ai-result {
+    display: none; margin-top: 8px; padding: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 12px; line-height: 1.6;
+  }
+  .ai-result.visible { display: block; }
+  .ai-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-muted); margin-bottom: 4px; }
+  .ai-typing { display: none; margin-top: 8px; padding: 10px; background: var(--bg); border-radius: var(--radius-sm); font-size: 12px; color: var(--text-secondary); }
+  .ai-typing.visible { display: flex; align-items: center; gap: 8px; }
+  .typing-dots span { display: inline-block; width: 4px; height: 4px; background: var(--text); border-radius: 50%; animation: typing 1.2s infinite; }
+  .typing-dots span:nth-child(2) { animation-delay: .2s; }
+  .typing-dots span:nth-child(3) { animation-delay: .4s; }
+  @keyframes typing { 0%,60%,100%{opacity:.2} 30%{opacity:1} }
+
+  .import-bar {
+    display: flex; gap: 6px; align-items: center; margin-bottom: 12px;
+    padding: 8px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 12px;
+  }
+  .import-bar select {
+    padding: 4px 6px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-size: 11px; font-family: inherit; background: var(--surface);
+  }
+
+  .empty-state { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; }
+
+  @media (max-width:1200px) { .grid-4,.kanban { grid-template-columns: repeat(2,1fr); } .grid-3 { grid-template-columns: repeat(2,1fr); } .chat-layout { grid-template-columns: 1fr; } }
+  @media (max-width:768px) { .sidebar { display: none; } .main { margin-left: 0; } .grid-4,.grid-3,.grid-2,.kanban { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="8.13" y1="25" x2="40.81" y2="25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7cf5ff"/><stop offset="1" stop-color="#0cd"/></linearGradient></defs><path fill="#315299" d="M31.32,26.41c.32-3.28-2.5-5.43-4.46-6.04-1.38-.43-2.99-.65-4.61-.65-.91,0-1.82,0-2.74,0-.05,0-.1,0-.14.02-.04.01-.08.03-.11.05-.1.06-.17.16-.17.27v1.21s0,0-.02,0v.04s0,0,.02,0v8.09c0,.2-.15.38-.36.42-.75.15-1.48.28-2.19.4.31-.06.63-.12.95-.18.05,0,.09-.03.13-.06.08-.06.13-.17.13-.29v-9.43s0,0-.01,0v-.04s0,0,.01,0v-1.21c0-.14.12-.27.28-.32.04-.01.09-.02.14-.02l5.71-.53c2.73,0,8.8,3.52,7.44,8.27Z"/><path fill="#4f75ff" d="M8.51,33.14c.06.04.1.11.1.19,0,.09-.06.18-.13.21s-.15.04-.22.04c-1.19,0-2.39-.08-3.55-.45-.42-.14-.84-.32-1.21-.62-.6-.5-.97-1.3-.76-2.19.18-.76.64-1.39,1.1-1.91.82-.94,1.78-1.68,2.74-2.36l1.54-.98c.03.53.09,1.05.16,1.56l-1.53.98c-2,1.52-2.92,2.78-2.65,3.51.19.52.62.77,1.03.93.92.34,1.85.62,2.78.89.19.06.42.07.59.21Z"/><path fill="url(#g1)" d="M40.81,25c0,.31,0,.63-.03.94-.03.59-.1,1.17-.21,1.75,0,.04-.01.08-.02.12-.11.61-.26,1.2-.44,1.78-2.03,6.49-8.27,11.22-15.64,11.22-3.71,0-7.13-1.2-9.87-3.21-1.27-.93-2.39-2.04-3.33-3.28-.22-.29-.43-.58-.62-.89.35-.03.7-.07,1.05-.11.23-.03.46-.06.69-.09,1.24-.17,2.43-.35,3.61-.53.49-.07.99-.15,1.48-.23.09-.02.19-.03.29-.05,1.04-.17,2.07-.33,3.12-.51l.02,0c.57-.1,1.15-.19,1.74-.29.22-.04.62-.13,1.05-.23.43-.1.89-.21,1.23-.27l.23-.04.02,0c.55-.08,1.16-.14,1.65-.36l.09-.04c2.27-1.02,4.48-3.03,4.48-5.68,0-1.43-.61-2.75-1.64-3.81-1.47-1.51-3.78-2.5-6.37-2.5l-1.16-.13c-.15,0-.4-.07-.56-.07l-.47-.05-3.12.24s-.1,0-.13.02c-.16.05-.27.18-.27.32v1.21s0,0-.01,0v.04s0,0,.01,0v9.43c0,.12-.05.22-.12.29-.04.03-.08.05-.12.06-.91.19-1.8.36-2.66.51l-.06.01c-1.11.19-2.18.33-3.18.42-.46.04-.89.08-1.29.1-.24.01-.47.02-.69.03-.11,0-.21-.07-.25-.19-.35-.82-.62-1.68-.81-2.56-.04-.18-.08-.37-.11-.56-.06-.32-.11-.63-.14-.95,0-.06-.02-.13-.02-.19l-.02-.16c-.04-.33-.06-.67-.06-1.01h-.02V25h.01c0-.06,0-.11,0-.16.33-8.44,7.51-15.18,16.32-15.18,4.31,0,8.24,1.62,11.16,4.26.25.22.49.45.72.69l.31.32c.08.09,2.55,2.75,3.32,5.56.48,1.39.65,2.81.81,4.26.02.14.02.24.01.25,0,.15,0,.3,0,.45Z"/><path fill="#4f75ff" d="M47.3,22.18c-.19,1.53-1.92,3.16-5.17,4.84-.51.27-1.06.54-1.65.81l-.1.04-.1.04c-5.19,2.24-10.48,3.96-16.16,4.57-1.27.14-4.66.33-5.32.3-.36-.02-1.89.07-2.85-.1h.01c1.16-.16,6.95-.97,11.73-2.2l.78-.2.54-.14.46-.12.26-.07c4.43-1.21,8.01-2.55,10.65-3.82l.02-.01c.57-.28,1.1-.55,1.58-.81,1.3-.73,5.24-2.85,2.89-4.94-.98-.87-2.47-1.23-3.6-1.74-.13-.06-1.02-.35-.99-.56.11-.57,4.15.86,4.6,1.05.92.38,2.07.98,2.37,2.24.07.27.08.55.05.82Z"/><path fill="#4f75ff" d="M16.91,30.16l.32-11.51v-.25c2.33-.27,4.66-.28,6.97.08,3.79.51,7.5,2.89,7.17,7.2.25-3.18-2.15-5.52-5.08-6.37-2.81-.81-5.85-.74-8.73-.37l.24-.28.03,11.34-.92.16Z"/></svg>
+    <div><h1>La Suite MyDAD</h1><span>Plateforme de performance</span></div>
+  </div>
+  <div class="sidebar-section">Pilotage</div>
+  <nav class="sidebar-nav">
+    <div class="nav-item active" data-page="dashboard"><div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div> Dashboard</div>
+    <div class="nav-item" data-page="hosmony"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div> Parcours</div>
+    <div class="nav-item" data-page="actions"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div> Plan d'Actions</div>
+    <div class="sidebar-section">Performance</div>
+    <div class="nav-item" data-page="strategy"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div> Strategie</div>
+    <div class="nav-item" data-page="indicateurs"><div class="icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div> Indicateurs</div>
+    <div class="nav-item" data-page="opportunities"><div class="icon"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div> Opportunites</div>
+    <div class="sidebar-section">Equipe & Formation</div>
+    <div class="nav-item" data-page="dynamics"><div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div> Equipe</div>
+    <div class="nav-item" data-page="formations"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div> Formations</div>
+    <div class="sidebar-section">IA & Outils</div>
+    <div class="nav-item" data-page="ai-studio"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1.27A7 7 0 015.27 19H4a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="1" fill="currentColor" stroke="none"/><path d="M9 17c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg></div> Studio IA</div>
+    <div class="nav-item" data-page="tools"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div> Outils MyDAD</div>
+    <div class="nav-item" data-page="connectors"><div class="icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div> Connecteurs API</div>
+    <div class="sidebar-section">Portefeuille</div>
+    <div class="nav-item" data-page="clients"><div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div> Mes Clients</div>
+    <div class="sidebar-section">Documentation</div>
+    <div class="nav-item" data-page="documents"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div> Documents & Audit</div>
+  </nav>
+  <div class="sidebar-user">
+    <div class="avatar">SL</div>
+    <div><div class="user-name">Sophie Laurent</div><div class="user-role">Expert-Comptable</div></div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="breadcrumb">Portefeuille &rsaquo; <strong>Boulangerie Martin</strong></span>
+      <div class="client-selector">&#9662; Changer de client</div>
+    </div>
+    <div class="topbar-right">
+      <div style="position:relative;">
+        <button class="notif-btn" onclick="document.querySelector('.notif-dropdown').classList.toggle('open')">&#128276;<div class="notif-badge">4</div></button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><span>Notifications</span><span style="color:var(--primary);cursor:pointer;font-weight:500;font-size:10px;">Tout marquer lu</span></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--red);"></span>Echeance bilan carbone dans 15 jours</div><div class="n-time">Il y a 2h &bull; Action requise</div></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--amber);"></span>Indicateur formation : 14h/20h</div><div class="n-time">Il y a 5h &bull; Indicateurs</div></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--green);"></span>Aide numerisation TPE : 5 400&euro; obtenue</div><div class="n-time">Hier &bull; Opportunites</div></div>
+          <div class="notif-item"><div class="n-title"><span class="n-dot" style="background:var(--primary);"></span>Etape 6 &laquo;Valeurs et raison d'etre&raquo; : rappel</div><div class="n-time">28 mars &bull; Parcours</div></div>
+        </div>
+      </div>
+      <button class="btn">Exporter</button>
+      <button class="btn primary">+ Nouvelle mission</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="content page active" id="page-dashboard">
+    <div class="page-header"><div><div class="page-title">Boulangerie Martin</div><div class="page-subtitle">Derniere mise a jour : 28 mars 2026 &bull; T1 2026</div></div></div>
+    <div class="hosmony-banner">
+      <div class="hosmony-level-badge" style="background:var(--hosmony-2);">2</div>
+      <div class="hosmony-info"><h3>Niveau 2 &mdash; Dynamique</h3><p>Strategie formalisee, suivi semestriel, premiers financements</p></div>
+      <div class="hosmony-progress">
+        <div class="hosmony-score">47 <small>/ 100</small></div>
+        <div class="progress-label">Progression vers Niveau 3</div>
+        <div class="progress-track"><div class="progress-fill" style="width:47%;background:var(--primary);"></div></div>
+        <div class="levels-mini">
+          <div class="level-dot done" style="background:var(--hosmony-1);">1</div>
+          <div class="level-dot active" style="background:var(--hosmony-2);">2</div>
+          <div class="level-dot" style="background:var(--hosmony-3);">3</div>
+          <div class="level-dot" style="background:var(--hosmony-4);">4</div>
+          <div class="level-dot" style="background:var(--hosmony-5);">5</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-4">
+      <div class="kpi-card"><div class="kpi-badge up">+8.2%</div><div class="kpi-label">Chiffre d'Affaires</div><div class="kpi-value">847 K&euro;</div><div class="kpi-detail">vs 783 K&euro; T1 2025</div><div class="kpi-sparkline" id="sp1"></div></div>
+      <div class="kpi-card"><div class="kpi-badge up">+1.3 pts</div><div class="kpi-label">Marge Nette</div><div class="kpi-value">12.4%</div><div class="kpi-detail">Objectif 15%</div><div class="kpi-sparkline" id="sp2"></div></div>
+      <div class="kpi-card"><div class="kpi-badge up">&minus;12%</div><div class="kpi-label">Empreinte Carbone</div><div class="kpi-value">18.2 <small style="font-size:13px;font-weight:400;">tCO2e</small></div><div class="kpi-detail">vs 20.7 en 2025</div><div class="kpi-sparkline" id="sp3"></div></div>
+      <div class="kpi-card"><div class="kpi-badge neutral">=</div><div class="kpi-label">Satisfaction Equipe</div><div class="kpi-value">7.1 <small style="font-size:13px;font-weight:400;">/ 10</small></div><div class="kpi-detail">Seuil Niv.3 : &ge; 7.5</div><div class="kpi-sparkline" id="sp4"></div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Plan d'Actions</div><div class="card-badge">5/12</div></div>
+        <div class="card-body">
+          <div class="action-item"><div class="action-dot" style="background:var(--primary);"></div><div style="flex:1"><div class="action-title">Bilan carbone Scope 1+2</div><div class="action-meta"><span class="tag" style="background:var(--red-bg);color:var(--red);">Haute</span> &bull; M. Martin &bull; 15 avr.</div></div></div>
+          <div class="action-item"><div class="action-dot" style="background:var(--primary);"></div><div style="flex:1"><div class="action-title">Comite RSE trimestriel</div><div class="action-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">Moy.</span> &bull; Direction &bull; 30 avr.</div></div></div>
+          <div class="action-item"><div class="action-dot" style="background:var(--green);"></div><div style="flex:1"><div class="action-title" style="text-decoration:line-through;color:var(--text-muted);">Formaliser strategie RSE</div><div class="action-meta">12 mars</div></div></div>
+          <div style="margin-top:8px;text-align:center;"><button class="btn sm" style="width:100%;justify-content:center;">Voir tout le plan d'actions &rarr;</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Etapes HOSMONY &mdash; Niveau 2</div><div class="card-badge">7/9</div></div>
+        <div class="card-body">
+          <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Formation HOSMONY Niv.2</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+          <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne : Gouvernance</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+          <div class="step-item"><div class="step-num current">6</div><div style="flex:1"><div class="step-title">Definition valeurs et raison d'etre</div></div><div class="step-status" style="color:var(--amber);">En cours</div></div>
+          <div class="step-item"><div class="step-num locked">7</div><div style="flex:1"><div class="step-title">Ambitions DURABILITE</div></div><div class="step-status" style="color:var(--text-muted);">A faire</div></div>
+          <button class="ai-btn" onclick="showAI()">Recommandation IA</button>
+          <div class="ai-typing" id="aiT"><div class="typing-dots"><span></span><span></span><span></span></div>Analyse...</div>
+          <div class="ai-result" id="aiR"><div class="ai-tag">Recommandation IA</div><p><strong>Priorite : Formation.</strong> 14h/20h requis. Lancez le e-learning des avril. <strong>Niveau 3 realiste d'ici juin 2026</strong> &rarr; 3 appels d'offres + credit impot ~8 500&euro;.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARCOURS HOSMONY -->
+  <div class="content page" id="page-hosmony">
+    <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">Niveau actuel : 2 &mdash; Dynamique &bull; 7/9 etapes validees</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
+
+    <div class="journey">
+      <div class="j-level"><div class="j-circle done" style="background:var(--hosmony-1);">1</div><div class="j-name">Essentiel</div><div class="j-desc">6/6 &bull; Valide</div><div class="j-connector done"></div></div>
+      <div class="j-level"><div class="j-circle current" style="background:var(--hosmony-2);color:var(--hosmony-2);">2</div><div class="j-name">Dynamique</div><div class="j-desc">7/9 &bull; En cours</div><div class="j-connector active"></div></div>
+      <div class="j-level"><div class="j-circle future" style="background:var(--hosmony-3);">3</div><div class="j-name">Performance</div><div class="j-desc">KPIs & certif.</div><div class="j-connector"></div></div>
+      <div class="j-level"><div class="j-circle future" style="background:var(--hosmony-4);">4</div><div class="j-name">Excellence</div><div class="j-desc">Innovation</div><div class="j-connector"></div></div>
+      <div class="j-level"><div class="j-circle future" style="background:var(--hosmony-5);">5</div><div class="j-name">Etoile</div><div class="j-desc">Modele</div></div>
+    </div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-header"><div class="card-title">Etapes &mdash; Niveau 2 : Dynamique</div><div class="card-badge">7/9</div></div>
+      <div class="card-body">
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Formation HOSMONY Niveau 2</div><div class="step-desc">Je construis ma strategie &mdash; 2 jours</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne : Gouvernance</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning niveau 2</div><div class="step-desc">Approfondissement et mise a jour reglementaire</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Diagnostic progression durabilite accompagne</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite niveau 2</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item"><div class="step-num current">6</div><div style="flex:1"><div class="step-title">Definition des valeurs et raison d'etre</div><div class="step-desc">Definir les valeurs fondamentales de l'entreprise</div></div><div class="step-status"><button class="btn sm primary">Continuer</button></div></div>
+        <div class="step-item"><div class="step-num locked">7</div><div style="flex:1"><div class="step-title">Ambitions DURABILITE (carte mentale)</div><div class="step-desc">Formaliser les ambitions via carte mentale</div></div><div class="step-status"><button class="btn sm" disabled>Verrouille</button></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning complementaire</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Bilan niveau 2</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Etapes &mdash; Niveau 1 : Essentiel</div><div style="display:flex;align-items:center;gap:8px;"><span class="pill green">6/6 &#10003;</span><button class="btn sm ghost">Voir le rapport</button></div></div>
+      <div class="card-body">
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Sensibilisation HOSMONY</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning initial durabilite</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Autodiagnostic progression durabilite</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Rapport de progression niveau 1</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDICATEURS RSE -->
+  <div class="content page" id="page-indicateurs">
+    <div class="page-header"><div><div class="page-title">Indicateurs RSE</div><div class="page-subtitle">Frequence : Semestrielle (Niveau 2)</div></div>
+    <div style="display:flex;gap:6px;"><button class="btn">Importer des donnees</button><button class="btn">Exporter</button><button class="btn primary">+ Ajouter un indicateur</button></div></div>
+    <div class="import-bar">
+      <span style="font-weight:600;">Filtrer :</span>
+      <select><option>Toutes categories</option><option>Environnement</option><option>Social</option><option>Societale</option><option>Ethique</option><option>Gouvernance</option></select>
+      <select><option>Tous statuts</option><option>Conforme</option><option>En progres</option><option>Non conforme</option></select>
+      <select><option>Toutes sources</option><option>Saisie manuelle</option><option>Pennylane</option><option>PayFit</option><option>Calcul auto</option></select>
+      <div style="flex:1;"></div>
+      <span class="pill blue">Niv.2 Semestriel</span>
+      <span class="pill gray">Niv.3 Trim.</span>
+      <span class="pill gray">Niv.4 Mens.</span>
+    </div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="stat-val">32</div><div class="stat-label">Indicateurs suivis</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">22</div><div class="stat-label">Conformes</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--amber);">7</div><div class="stat-label">En progres</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--red);">3</div><div class="stat-label">Non conformes</div></div>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-header"><div class="card-title">Environnement</div><div style="display:flex;gap:6px;align-items:center;"><span class="card-badge">8 indicateurs</span><button class="btn sm">+ Ajouter</button></div></div>
+      <table class="data-table"><thead><tr><th>Indicateur</th><th>Valeur</th><th>Objectif</th><th>Tendance</th><th>Source</th><th>Statut</th><th>Prochaine</th><th></th></tr></thead><tbody>
+        <tr><td><strong>Emissions CO2 (Scope 1+2)</strong></td><td>18.2 tCO2e</td><td>&le; 16.5</td><td style="color:var(--green);">&darr; &minus;12%</td><td>Calcul auto</td><td><span class="pill green">OK</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Consommation energetique</strong></td><td>42 500 kWh</td><td>&le; 40 000</td><td style="color:var(--green);">&darr; &minus;8%</td><td>Compteurs</td><td><span class="pill amber">Progres</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Dechets alimentaires</strong></td><td>3.2%</td><td>&le; 2%</td><td style="color:var(--green);">&darr; &minus;35%</td><td>Saisie</td><td><span class="pill amber">Progres</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Fournisseurs locaux</strong></td><td>72%</td><td>&ge; 80%</td><td style="color:var(--green);">&uarr; +5pts</td><td>Pennylane</td><td><span class="pill amber">Progres</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+      </tbody></table>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-header"><div class="card-title">Social</div><div style="display:flex;gap:6px;align-items:center;"><span class="card-badge">6 indicateurs</span><button class="btn sm">+ Ajouter</button></div></div>
+      <table class="data-table"><thead><tr><th>Indicateur</th><th>Valeur</th><th>Objectif</th><th>Tendance</th><th>Source</th><th>Statut</th><th>Prochaine</th><th></th></tr></thead><tbody>
+        <tr><td><strong>Heures formation / employe</strong></td><td>14h</td><td>&ge; 20h</td><td style="color:var(--green);">&uarr; +4h</td><td>PayFit</td><td><span class="pill red">Non conf.</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Satisfaction equipe</strong></td><td>7.1/10</td><td>&ge; 7.5</td><td>&equals;</td><td>Enquete</td><td><span class="pill amber">Progres</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Turnover</strong></td><td>7.2%</td><td>&lt; 10%</td><td style="color:var(--green);">&darr;</td><td>PayFit</td><td><span class="pill green">OK</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Parite H/F encadrement</strong></td><td>40% F</td><td>&ge; 40%</td><td>&uarr;</td><td>PayFit</td><td><span class="pill green">OK</span></td><td>Juin 26</td><td><button class="btn sm">Piloter</button></td></tr>
+      </tbody></table>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-header"><div class="card-title">Societale & Ethique</div><div style="display:flex;gap:6px;align-items:center;"><span class="card-badge">5 indicateurs</span><button class="btn sm">+ Ajouter</button></div></div>
+      <table class="data-table"><thead><tr><th>Indicateur</th><th>Valeur</th><th>Objectif</th><th>Source</th><th>Statut</th><th></th></tr></thead><tbody>
+        <tr><td><strong>NPS clients</strong></td><td>+42</td><td>&ge; +50</td><td>Enquete</td><td><span class="pill amber">Progres</span></td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Actions solidaires / an</strong></td><td>3</td><td>&ge; 4</td><td>Saisie</td><td><span class="pill amber">Progres</span></td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Charte ethique</strong></td><td>Oui</td><td>En place</td><td>Document</td><td><span class="pill green">OK</span></td><td><button class="btn sm">Voir</button></td></tr>
+      </tbody></table>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Gouvernance</div><div style="display:flex;gap:6px;align-items:center;"><span class="card-badge">4 indicateurs</span><button class="btn sm">+ Ajouter</button></div></div>
+      <table class="data-table"><thead><tr><th>Indicateur</th><th>Valeur</th><th>Objectif</th><th>Source</th><th>Statut</th><th></th></tr></thead><tbody>
+        <tr><td><strong>Reunions comite RSE</strong></td><td>2/an</td><td>&ge; 4</td><td>PV</td><td><span class="pill red">Non conf.</span></td><td><button class="btn sm">Piloter</button></td></tr>
+        <tr><td><strong>Conformite RGPD</strong></td><td>85%</td><td>100%</td><td>Audit</td><td><span class="pill amber">Progres</span></td><td><button class="btn sm">Piloter</button></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- PLAN D'ACTIONS -->
+  <div class="content page" id="page-actions">
+    <div class="page-header"><div><div class="page-title">Plan d'Actions</div><div class="page-subtitle">12 actions &bull; 5 completees &bull; 4 en cours &bull; 3 a faire</div></div>
+    <div style="display:flex;gap:6px;"><button class="btn" onclick="document.getElementById('aiSug').classList.toggle('visible')">Suggestions IA</button><button class="btn">Filtrer</button><button class="btn primary">+ Nouvelle action</button></div></div>
+    <div class="kanban">
+      <div class="kanban-col"><div class="kanban-head">A faire <span class="kanban-count">3</span></div><div class="kanban-body">
+        <div class="k-card"><div class="k-card-title">Plan formation 20h/an</div><div class="k-card-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">Moy.</span><span style="font-size:9px;color:var(--text-muted);">30 juin</span><div class="k-avatar" style="background:var(--amber);">AM</div></div><div class="k-card-details"><div>Indicateur : <strong>14h/20h</strong></div><div>Mesure : <strong>PayFit</strong></div><div>Budget : <strong>3 200&euro;</strong></div><div>Resp. : <strong>A. Morel</strong></div></div></div>
+        <div class="k-card"><div class="k-card-title">Compteurs energetiques</div><div class="k-card-meta"><span class="tag" style="background:var(--green-bg);color:var(--green);">Basse</span><span style="font-size:9px;color:var(--text-muted);">15 juil.</span><div class="k-avatar" style="background:var(--green);">MM</div></div><div class="k-card-details"><div>Indicateur : <strong>kWh/mois</strong></div><div>Mesure : <strong>IoT</strong></div><div>Budget : <strong>1 800&euro;</strong></div><div>Resp. : <strong>M. Martin</strong></div></div></div>
+        <div class="k-card"><div class="k-card-title">Charte RSE</div><div class="k-card-meta"><span class="tag" style="background:var(--green-bg);color:var(--green);">Basse</span><span style="font-size:9px;color:var(--text-muted);">30 juil.</span><div class="k-avatar" style="background:var(--text);">SL</div></div><div class="k-card-details"><div>Indicateur : <strong>Document</strong></div><div>Mesure : <strong>Validation</strong></div><div>Budget : <strong>0&euro;</strong></div><div>Resp. : <strong>S. Laurent</strong></div></div></div>
+      </div></div>
+      <div class="kanban-col"><div class="kanban-head">En cours <span class="kanban-count">4</span></div><div class="kanban-body">
+        <div class="k-card"><div class="k-card-title">Bilan carbone Scope 1+2</div><div class="k-card-meta"><span class="tag" style="background:var(--red-bg);color:var(--red);">Haute</span><span style="font-size:9px;color:var(--text-muted);">15 avr.</span><div class="k-avatar" style="background:var(--green);">MM</div></div><div class="k-card-details"><div>Indicateur : <strong>tCO2e</strong></div><div>Mesure : <strong>ADEME</strong></div><div>Budget : <strong>4 500&euro;</strong></div><div>Resp. : <strong>M. Martin</strong></div></div></div>
+        <div class="k-card"><div class="k-card-title">Comite RSE trimestriel</div><div class="k-card-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">Moy.</span><span style="font-size:9px;color:var(--text-muted);">30 avr.</span><div class="k-avatar" style="background:var(--purple);">DIR</div></div><div class="k-card-details"><div>Indicateur : <strong>4 reunions</strong></div><div>Mesure : <strong>PV</strong></div><div>Budget : <strong>0&euro;</strong></div><div>Resp. : <strong>Direction</strong></div></div></div>
+        <div class="k-card"><div class="k-card-title">Enquete satisfaction</div><div class="k-card-meta"><span class="tag" style="background:var(--amber-bg);color:var(--amber);">Moy.</span><span style="font-size:9px;color:var(--text-muted);">15 mai</span><div class="k-avatar" style="background:var(--amber);">AM</div></div><div class="k-card-details"><div>Indicateur : <strong>Score /10</strong></div><div>Mesure : <strong>Questionnaire</strong></div><div>Budget : <strong>200&euro;</strong></div><div>Resp. : <strong>A. Morel</strong></div></div></div>
+      </div></div>
+      <div class="kanban-col"><div class="kanban-head">En revue <span class="kanban-count">0</span></div><div class="kanban-body"><div class="empty-state" style="padding:20px 12px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 6px;display:block;"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Aucune action en revue</div></div></div>
+      <div class="kanban-col"><div class="kanban-head">Completees <span class="kanban-count">5</span></div><div class="kanban-body">
+        <div class="k-card" style="opacity:.4;"><div class="k-card-title" style="text-decoration:line-through;">Formaliser strategie RSE</div><div class="k-card-meta"><span style="font-size:9px;color:var(--green);">12 mars</span></div></div>
+        <div class="k-card" style="opacity:.4;"><div class="k-card-title" style="text-decoration:line-through;">Centraliser donnees comptables</div><div class="k-card-meta"><span style="font-size:9px;color:var(--green);">28 fev.</span></div></div>
+      </div></div>
+    </div>
+    <div class="ai-result" id="aiSug"><div class="ai-tag">Suggestions IA</div><p><strong>1. E-learning accelere</strong> (impact 9/10) &mdash; Combler les 6h manquantes. ROI : FNE ~3 200&euro;.</p><p><strong>2. Pre-audit flash IA</strong> (impact 8/10) &mdash; Identifier ecarts, ~2h.</p><p><strong>3. ISO 14001</strong> (impact 7/10) &mdash; 70% des exigences deja atteintes.</p></div>
+  </div>
+
+  <!-- DOCUMENTS & AUDIT -->
+  <div class="content page" id="page-documents">
+    <div class="page-header"><div><div class="page-title">Documents & Audit</div><div class="page-subtitle">Centre documentaire et suivi audit</div></div>
+    <div style="display:flex;gap:6px;"><button class="btn primary">Generer rapport durabilite</button><button class="btn">+ Importer document</button></div></div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">67%</div><div class="stat-label">Readiness Audit</div></div>
+      <div class="stat-card"><div class="stat-val">12</div><div class="stat-label">Documents (8 valides)</div></div>
+      <div class="stat-card"><div class="stat-val">15 mai</div><div class="stat-label">Prochain pre-audit</div></div>
+      <div class="stat-card"><div class="stat-val">1</div><div class="stat-label">Rapport genere</div></div>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-header"><div class="card-title">Rapports de Durabilite IA</div><div><button class="btn sm primary">Generer un nouveau rapport</button></div></div>
+      <div class="card-body">
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Rapport Niveau 1 &mdash; Essentiel</div><div class="step-desc">14 pages &bull; Genere le 15 fev.</div></div><div class="step-status"><button class="btn sm">Telecharger</button><button class="btn sm ghost">Partager</button></div></div>
+        <div class="step-item"><div class="step-num current">2</div><div style="flex:1"><div class="step-title">Rapport Niveau 2 &mdash; Dynamique</div><div class="step-desc">Sera genere a la validation du bilan niv.2</div></div><div class="step-status"><span class="pill amber">En attente</span></div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-header"><div class="card-title">Preparation Audit</div><div class="card-badge">Pre-audit 15 mai</div></div>
+      <div class="card-body">
+        <div class="progress-label" style="font-size:11px;">67% pret</div>
+        <div class="progress-track" style="margin-bottom:8px;"><div class="progress-fill" style="width:67%;background:var(--green);"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:11px;">
+          <div><strong style="color:var(--green);">8</strong> documents conformes</div>
+          <div><strong style="color:var(--amber);">3</strong> en attente</div>
+          <div><strong style="color:var(--red);">1</strong> manquant &mdash; <a href="#" style="color:var(--primary);text-decoration:none;font-weight:600;">Importer</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Tous les documents</div><div style="display:flex;gap:6px;"><button class="btn sm">Filtrer</button><button class="btn sm">+ Importer</button></div></div>
+      <table class="data-table"><thead><tr><th>Document</th><th>Type</th><th>Etape</th><th>Statut</th><th>Date</th><th></th></tr></thead><tbody>
+        <tr><td><strong>Bilan comptable 2025</strong></td><td><span class="pill blue">Financier</span></td><td>CA &ge; 5%</td><td><span class="pill green">Valide</span></td><td>15 fev.</td><td><button class="btn sm">Voir</button><button class="btn sm ghost">Partager</button></td></tr>
+        <tr><td><strong>Strategie RSE</strong></td><td><span class="pill purple">Strategie</span></td><td>Formalisation</td><td><span class="pill green">Valide</span></td><td>12 mars</td><td><button class="btn sm">Voir</button><button class="btn sm ghost">Partager</button></td></tr>
+        <tr><td><strong>Factures energie</strong></td><td><span class="pill green">Enviro.</span></td><td>Reduction</td><td><span class="pill green">Valide</span></td><td>28 mars</td><td><button class="btn sm">Voir</button></td></tr>
+        <tr><td><strong>Bilan carbone Scope 1+2</strong></td><td><span class="pill green">Enviro.</span></td><td>Bilan carbone</td><td><span class="pill amber">En attente</span></td><td>&mdash;</td><td><button class="btn sm primary">Importer</button></td></tr>
+        <tr><td><strong>PV Comite RSE Q1</strong></td><td><span class="pill purple">Gouv.</span></td><td>Comite RSE</td><td><span class="pill green">Valide</span></td><td>25 mars</td><td><button class="btn sm">Voir</button></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- STRATEGIE -->
+  <div class="content page" id="page-strategy">
+    <div class="page-header"><div><div class="page-title">Strategie</div><div class="page-subtitle">Vision, mission, piliers et execution</div></div>
+    <div style="display:flex;gap:6px;"><button class="btn" onclick="document.getElementById('stratAI').classList.toggle('visible')">Revue IA</button><button class="btn primary">Modifier la strategie</button></div></div>
+    <div class="vision-box">
+      <div class="vision-label">Vision 2028</div>
+      <p style="font-size:14px;font-weight:500;line-height:1.6;">Devenir la boulangerie de reference de la region en alliant excellence artisanale, performance economique et engagement environnemental.</p>
+      <div class="edit-hover"><button class="btn sm">Modifier</button></div>
+    </div>
+    <div class="grid-2" style="margin-bottom:12px;">
+      <div class="card"><div class="card-header"><div class="card-title">Mission</div><button class="btn sm">Modifier</button></div><div class="card-body"><p style="font-size:12px;">Produire des pains et patisseries artisanaux de qualite en minimisant notre impact environnemental tout en maximisant le bien-etre de nos equipes.</p></div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Valeurs</div><button class="btn sm">Modifier</button></div><div class="card-body"><div style="display:flex;gap:5px;flex-wrap:wrap;"><span class="pill blue">Excellence artisanale</span><span class="pill green">Responsabilite ecologique</span><span class="pill purple">Bien-etre au travail</span><span class="pill amber">Ancrage local</span></div><div style="margin-top:6px;"><button class="btn sm">+ Ajouter une valeur</button></div></div></div>
+    </div>
+    <div class="ai-result" id="stratAI" style="margin-bottom:14px;"><div class="ai-tag">Revue IA T1 2026</div><p><strong>Forces :</strong> Financier +8.2%, Ecologique &minus;12% carbone. <strong>Vigilance :</strong> Social en retard (14h/20h formation). <strong>Action :</strong> Prioriser RH au T2, securiser tresorerie 3 mois.</p></div>
+    <div class="grid-3">
+      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--primary);"></div><div style="flex:1"><div class="pillar-name">Performance Financiere</div><div style="font-size:9px;color:var(--text-muted);">3 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">CA &ge; 1.2M&euro;</div><div class="obj-kpi">847K</div><div class="obj-pct" style="color:var(--green);">71%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Marge &ge; 15%</div><div class="obj-kpi">12.4%</div><div class="obj-pct" style="color:var(--green);">83%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Tresorerie 3 mois</div><div class="obj-kpi">2.1 m.</div><div class="obj-pct" style="color:var(--amber);">70%</div></div>
+        <div style="padding-top:6px;"><button class="btn sm" style="width:100%;justify-content:center;">+ Objectif</button></div>
+      </div></div>
+      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--green);"></div><div style="flex:1"><div class="pillar-name">Transition Ecologique</div><div style="font-size:9px;color:var(--text-muted);">4 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Carbone &minus;20%</div><div class="obj-kpi">&minus;12%</div><div class="obj-pct" style="color:var(--green);">60%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Zero gaspillage</div><div class="obj-kpi">&minus;35%</div><div class="obj-pct" style="color:var(--green);">70%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Fournisseurs &lt;100km</div><div class="obj-kpi">72%</div><div class="obj-pct" style="color:var(--amber);">72%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Energie renouv. 50%</div><div class="obj-kpi">38%</div><div class="obj-pct" style="color:var(--green);">76%</div></div>
+        <div style="padding-top:6px;"><button class="btn sm" style="width:100%;justify-content:center;">+ Objectif</button></div>
+      </div></div>
+      <div class="pillar-card"><div class="pillar-head"><div class="pillar-color" style="background:var(--purple);"></div><div style="flex:1"><div class="pillar-name">Capital Humain</div><div style="font-size:9px;color:var(--text-muted);">4 objectifs</div></div><button class="btn sm">Modifier</button></div><div class="pillar-body">
+        <div class="obj-item"><div class="obj-dot" style="background:var(--red);"></div><div class="obj-title">Formation &ge; 20h</div><div class="obj-kpi">14h</div><div class="obj-pct" style="color:var(--red);">70%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--amber);"></div><div class="obj-title">Satisfaction &ge; 8</div><div class="obj-kpi">7.1</div><div class="obj-pct" style="color:var(--amber);">89%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Turnover &lt; 10%</div><div class="obj-kpi">7.2%</div><div class="obj-pct" style="color:var(--green);">100%</div></div>
+        <div class="obj-item"><div class="obj-dot" style="background:var(--green);"></div><div class="obj-title">Parite</div><div class="obj-kpi">40%F</div><div class="obj-pct" style="color:var(--green);">100%</div></div>
+        <div style="padding-top:6px;"><button class="btn sm" style="width:100%;justify-content:center;">+ Objectif</button></div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- OPPORTUNITES -->
+  <div class="content page" id="page-opportunities">
+    <div class="page-header"><div><div class="page-title">Opportunites</div><div class="page-subtitle">Agents HOSMONY debloques par niveau</div></div></div>
+
+    <!-- Small agent selector tabs -->
+    <div style="display:flex;gap:6px;margin-bottom:18px;align-items:center;">
+      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--text);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        Reglementaire
+      </div>
+      <div class="agent-tab" onclick="showAgent('finance')" data-agent="finance" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:12px;font-weight:500;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Financement
+      </div>
+      <div class="agent-tab disabled" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;opacity:.5;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        Business <span class="pill gray" style="font-size:9px;padding:1px 5px;">Niv.3</span>
+      </div>
+      <div class="agent-tab disabled" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;opacity:.5;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        Image <span class="pill gray" style="font-size:9px;padding:1px 5px;">Niv.4</span>
+      </div>
+    </div>
+
+    <!-- AGENT REGLEMENTAIRE — Detail -->
+    <div id="agent-reglem">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div><div style="font-size:15px;font-weight:700;">Veille reglementaire</div><div style="font-size:12px;color:var(--text-secondary);">RSE, ESG et obligations sectorielles pour votre entreprise</div></div>
+        <div style="margin-left:auto;display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Actualiser la veille</button></div>
+      </div>
+
+      <!-- Tabs -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+        <span class="pill blue" style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--primary);color:#fff;">Reglementations <strong>19</strong></span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Calendrier <strong>3</strong></span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Evolutions sectorielles <strong>6</strong></span>
+        <div style="flex:1;"></div>
+        <select style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;font-family:inherit;"><option>Tous les risques</option><option>Risque eleve</option><option>Risque moyen</option></select>
+        <input style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;width:180px;font-family:inherit;" placeholder="Rechercher...">
+      </div>
+
+      <!-- Reglementation cards -->
+      <div class="card" style="margin-bottom:12px;padding:16px;">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+          <span class="pill blue">Reglementation</span>
+          <span class="pill amber">Risque moyen</span>
+          <span class="pill gray" style="cursor:pointer;">Source</span>
+          <div style="margin-left:auto;font-size:11px;color:var(--text-muted);">1 septembre 2026</div>
+        </div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:6px;">NIS2, CRA, IA Act : le nouveau cadre reglementaire cyber</div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;">
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">cybersecurite</span>
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">reglementation</span>
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">IA</span>
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">NIS2</span>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">Ce document presente le nouvel ensemble de reglementations europeennes relatives a la cybersecurite et a l'intelligence artificielle. La conformite a ces nouvelles exigences est essentielle pour les acteurs concernes.</p>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="btn sm primary">Analyse IA</button>
+          <button class="btn sm">Plan d'actions</button>
+          <button class="btn sm">Voir plus</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;padding:16px;">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+          <span class="pill blue">Reglementation</span>
+          <span class="pill red">Risque eleve</span>
+          <div style="margin-left:auto;font-size:11px;color:var(--text-muted);">1 juillet 2026</div>
+        </div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Mise a jour normes d'hygiene alimentaire 2026</div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">hygiene</span>
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">alimentaire</span>
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">DDPP</span>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">Nouvelles exigences en matiere de tracabilite et de controle des temperatures. Sanctions renforcees en cas de non-conformite. Controles inopines prevus au S2 2026.</p>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="btn sm primary">Analyse IA</button>
+          <button class="btn sm">Plan d'actions</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;padding:16px;">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+          <span class="pill blue">Reglementation</span>
+          <span class="pill green">Conforme</span>
+          <div style="margin-left:auto;font-size:11px;color:var(--text-muted);">En vigueur</div>
+        </div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Obligation de tri des biodechets (loi AGEC)</div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">dechets</span>
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">AGEC</span>
+          <span style="font-size:10px;padding:3px 8px;background:var(--bg);border-radius:99px;color:var(--text-secondary);">alimentaire</span>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">Obligation de tri a la source des biodechets pour tous les producteurs. Votre entreprise est en conformite grace au composteur installe en janvier 2026.</p>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="btn sm">Voir les preuves</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENT FINANCEMENT — Detail (hidden by default) -->
+    <div id="agent-finance" style="display:none;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div><div style="font-size:15px;font-weight:700;">Financements eligibles</div><div style="font-size:12px;color:var(--text-secondary);">Subventions, aides et financements pour votre entreprise</div></div>
+        <div style="margin-left:auto;display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Chercher de nouvelles aides</button></div>
+      </div>
+
+      <!-- Search -->
+      <div style="margin-bottom:14px;">
+        <input style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:12px;font-family:inherit;background:var(--surface);" placeholder="Rechercher un dispositif, un organisme...">
+      </div>
+
+      <!-- Filter chips -->
+      <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+        <span class="pill blue" style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--primary);color:#fff;">Toutes</span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Subvention</span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Credit d'impot</span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Pret</span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Aide directe</span>
+      </div>
+
+      <div style="font-size:13px;font-weight:700;margin-bottom:14px;">5 dispositifs eligibles</div>
+
+      <!-- Financement cards -->
+      <div class="card" style="margin-bottom:12px;padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <div>
+            <div style="font-size:15px;font-weight:700;">Aide regionale transition ecologique</div>
+            <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">Region Ile-de-France</div>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <span class="pill green" style="padding:4px 10px;">Subvention</span>
+            <div style="width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;">71%</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">Soutien aux PME dans leur transition ecologique avec un accompagnement technique et financier pour les demarches RSE.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div style="padding:10px;background:var(--bg);border-radius:var(--radius-sm);"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);">Montant</div><div style="font-size:15px;font-weight:800;color:var(--primary);">Jusqu'a 12 000 &euro;</div></div>
+          <div style="padding:10px;background:var(--bg);border-radius:var(--radius-sm);"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);">Echeance</div><div style="font-size:15px;font-weight:800;color:var(--text);">31 decembre 2026</div></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn sm primary">Plus d'infos</button>
+          <button class="btn sm">Telecharger</button>
+          <button class="btn sm primary">Pourquoi suis-je eligible ?</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <div>
+            <div style="font-size:15px;font-weight:700;">FNE-Formation &mdash; Transition ecologique</div>
+            <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">OPCO &mdash; Ministere du Travail</div>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <span class="pill green" style="padding:4px 10px;">Aide directe</span>
+            <div style="width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;">85%</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">Financement des formations liees a la transition ecologique pour les salaries. Prise en charge jusqu'a 100% des couts pedagogiques.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div style="padding:10px;background:var(--bg);border-radius:var(--radius-sm);"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);">Montant</div><div style="font-size:15px;font-weight:800;color:var(--primary);">Jusqu'a 3 200 &euro;</div></div>
+          <div style="padding:10px;background:var(--bg);border-radius:var(--radius-sm);"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);">Echeance</div><div style="font-size:15px;font-weight:800;color:var(--text);">30 juin 2026</div></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn sm primary">Plus d'infos</button>
+          <button class="btn sm">Telecharger</button>
+          <button class="btn sm primary">Pourquoi suis-je eligible ?</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;padding:16px;border-left:3px solid var(--green);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <div>
+            <div style="font-size:15px;font-weight:700;">Prime eco-energie (CEE)</div>
+            <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">Certificats d'Economies d'Energie</div>
+          </div>
+          <span class="pill green" style="padding:4px 10px;">Obtenue &mdash; 18 000 &euro;</span>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Prime obtenue en decembre 2025 pour le remplacement du four et l'isolation du local de production.</p>
+        <button class="btn sm">Voir le dossier</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDIO IA -->
+  <div class="content page" id="page-ai-studio">
+    <div class="page-header"><div><div class="page-title">Studio IA</div><div class="page-subtitle">6 assistants metier connectes a vos donnees</div></div><div style="display:flex;gap:6px;"><button class="btn">Configurer</button><button class="btn primary">+ Creer un agent</button></div></div>
+
+    <!-- Agent pills small + layout -->
+    <div style="display:flex;gap:6px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
+      <div class="ai-agent-pill active" onclick="selectAIAgent(this, 'commercial')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--text);background:var(--text);color:#fff;cursor:pointer;font-size:11px;font-weight:600;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Commercial
+      </div>
+      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'comptable')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Comptable
+      </div>
+      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'marketing')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+        Marketing
+      </div>
+      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'comm')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Communication
+      </div>
+      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'seo')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        SEO
+      </div>
+      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'rh')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        RH
+      </div>
+    </div>
+
+    <!-- Main layout: history sidebar + chat -->
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:12px;">
+      <!-- Chat history sidebar -->
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="padding:10px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:11px;font-weight:700;">Historique</span>
+          <button class="btn sm" style="padding:2px 6px;font-size:10px;">+ Nouveau</button>
+        </div>
+        <div style="padding:4px;">
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);background:var(--primary-bg);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Potentiel croissance clients</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">Aujourd'hui &bull; Commercial</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Analyse marges T1 2026</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">Hier &bull; Comptable</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Strategie contenu LinkedIn</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">27 mars &bull; Marketing</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Audit SEO boulangerie</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">25 mars &bull; SEO</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
+            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Obligations formation 2026</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">22 mars &bull; RH</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;">
+            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Communique presse RSE</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">20 mars &bull; Communication</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat area -->
+      <div class="card" style="display:flex;flex-direction:column;min-height:440px;overflow:hidden;">
+        <!-- Chat header -->
+        <div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div style="width:28px;height:28px;border-radius:7px;background:var(--text);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <div style="flex:1;"><div style="font-size:12px;font-weight:700;">Assistant Commercial</div></div>
+          <div style="display:flex;gap:5px;align-items:center;">
+            <span class="pill blue">12 clients</span>
+            <span class="pill green">T1 2026</span>
+            <span class="pill purple">Pennylane</span>
+            <button class="btn sm" style="margin-left:4px;">Contexte</button>
+          </div>
+        </div>
+
+        <!-- Messages — white background -->
+        <div style="flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;">
+          <div style="max-width:82%;padding:10px 14px;border-radius:var(--radius) var(--radius) var(--radius) 4px;font-size:12px;line-height:1.7;background:var(--bg);align-self:flex-start;">
+            <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px;">Assistant Commercial</div>
+            Bonjour Sophie ! Je suis pret a analyser votre portefeuille. Posez-moi une question sur vos clients, leur potentiel HOSMONY ou les opportunites de croissance.
+          </div>
+          <div style="max-width:75%;padding:10px 14px;border-radius:var(--radius) var(--radius) 4px var(--radius);font-size:12px;line-height:1.7;background:var(--text);color:#fff;align-self:flex-end;">
+            Quels clients ont le plus fort potentiel de croissance HOSMONY ?
+          </div>
+          <div style="max-width:82%;padding:10px 14px;border-radius:var(--radius) var(--radius) var(--radius) 4px;font-size:12px;line-height:1.7;background:var(--bg);align-self:flex-start;">
+            <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px;">Assistant Commercial</div>
+            <strong>Top 3 potentiel de croissance :</strong>
+            <div style="margin:8px 0;padding:8px 10px;background:var(--surface);border-radius:var(--radius-sm);border-left:3px solid var(--primary);">
+              <div style="font-weight:600;">1. Cabinet Dupont</div>
+              <div style="font-size:11px;color:var(--text-secondary);">Niv.2 &rarr; Niv.3 d'ici 3 mois &bull; CA +12.4% &bull; <strong style="color:var(--green);">28K&euro;</strong> d'opportunites</div>
+            </div>
+            <div style="margin:8px 0;padding:8px 10px;background:var(--surface);border-radius:var(--radius-sm);border-left:3px solid var(--green);">
+              <div style="font-weight:600;">2. Vignobles Beaumont</div>
+              <div style="font-size:11px;color:var(--text-secondary);">Niv.3, score 62 &bull; 3 appels d'offres bio identifies</div>
+            </div>
+            <div style="margin:8px 0;padding:8px 10px;background:var(--surface);border-radius:var(--radius-sm);border-left:3px solid var(--primary);">
+              <div style="font-weight:600;">3. Boulangerie Martin</div>
+              <div style="font-size:11px;color:var(--text-secondary);">Niv.2 &rarr; Niv.3 realiste juin 2026</div>
+            </div>
+            <div style="margin-top:8px;padding:8px 10px;background:var(--red-bg);border-radius:var(--radius-sm);border-left:3px solid var(--red);">
+              <div style="font-weight:600;color:var(--red);">Alerte</div>
+              <div style="font-size:11px;color:var(--text-secondary);">Restaurant Le Lys (CA &minus;1.2%) &rarr; plan de redressement recommande</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggested prompts -->
+        <div style="padding:8px 16px;border-top:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="font-size:10px;font-weight:600;color:var(--text-muted);padding:4px 0;">Suggestions :</span>
+          <button class="btn sm" style="border-radius:99px;font-size:11px;">Clients a risque</button>
+          <button class="btn sm" style="border-radius:99px;font-size:11px;">Opportunites ce trimestre</button>
+          <button class="btn sm" style="border-radius:99px;font-size:11px;">Comparer les marges</button>
+        </div>
+
+        <!-- Input -->
+        <div style="padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:8px;">
+          <input style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:12px;font-family:inherit;outline:none;" type="text" placeholder="Posez une question sur votre portefeuille...">
+          <button style="padding:8px 16px;background:var(--text);color:#fff;border:none;border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+            Envoyer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MES OUTILS -->
+  <div class="content page" id="page-tools">
+    <div class="page-header"><div><div class="page-title">Mes Outils</div><div class="page-subtitle">Niveau actuel : 2 &mdash; 4 outils debloques</div></div><button class="btn">Voir les prerequis</button></div>
+    <div class="grid-3">
+      <div class="tool-card"><div class="tool-level" style="background:var(--green-bg);color:var(--green);">Niv. 1</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><div class="tool-name">Consultation citoyenne</div><div class="tool-desc">Impliquez vos parties prenantes</div><button class="tool-btn active">Acceder</button></div>
+      <div class="tool-card"><div class="tool-level" style="background:var(--green-bg);color:var(--green);">Niv. 1</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div><div class="tool-name">Files</div><div class="tool-desc">Echange de documents securise</div><button class="tool-btn active">Acceder</button></div>
+      <div class="tool-card"><div class="tool-level" style="background:var(--green-bg);color:var(--green);">Niv. 1</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="tool-name">Extra-financiere</div><div class="tool-desc">Performance extra-financiere</div><button class="tool-btn active">Acceder</button></div>
+      <div class="tool-card"><div class="tool-level" style="background:var(--primary-bg);color:var(--primary);">Niv. 2</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="tool-name">Easy-fi</div><div class="tool-desc">Dossiers bancaires et financements</div><button class="tool-btn active">Acceder</button></div>
+      <div class="tool-card locked"><div class="tool-level" style="background:var(--bg);color:var(--text-muted);">Niv. 3</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="tool-name">Impact4good</div><div class="tool-desc">Mesurez votre impact positif</div><button class="tool-btn locked">Niv. 3 requis</button></div>
+      <div class="tool-card locked"><div class="tool-level" style="background:var(--bg);color:var(--text-muted);">Niv. 3</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="tool-name">IBET</div><div class="tool-desc">Bien-etre au travail</div><button class="tool-btn locked">Niv. 3 requis</button></div>
+      <div class="tool-card locked"><div class="tool-level" style="background:var(--bg);color:var(--text-muted);">Niv. 3</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="tool-name">Wellpass Moove</div><div class="tool-desc">Sport et bien-etre</div><button class="tool-btn locked">Niv. 3 requis</button></div>
+      <div class="tool-card locked"><div class="tool-level" style="background:var(--bg);color:var(--text-muted);">Niv. 4</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div><div class="tool-name">Scoring</div><div class="tool-desc">Benchmark sectoriel</div><button class="tool-btn locked">Niv. 4 requis</button></div>
+      <div class="tool-card locked"><div class="tool-level" style="background:var(--bg);color:var(--text-muted);">Niv. 4</div><div class="tool-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="tool-name">Solvabilite</div><div class="tool-desc">Analyse avancee</div><button class="tool-btn locked">Niv. 4 requis</button></div>
+    </div>
+  </div>
+
+  <!-- CONNECTEURS -->
+  <div class="content page" id="page-connectors">
+    <div class="page-header"><div><div class="page-title">Connecteurs API</div><div class="page-subtitle">Centralisez vos donnees</div></div><button class="btn primary">+ Ajouter un connecteur</button></div>
+    <div class="grid-3">
+      <div class="connector-card connected"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="connector-name">Pennylane</div><div class="connector-desc">Compta, facturation, tresorerie</div><div style="display:flex;gap:4px;justify-content:center;"><button class="tool-btn active" style="width:auto;padding:5px 10px;">Connecte</button><button class="btn sm ghost">Configurer</button></div></div>
+      <div class="connector-card connected"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="connector-name">Banque DSP2</div><div class="connector-desc">Releves, mouvements, soldes</div><div style="display:flex;gap:4px;justify-content:center;"><button class="tool-btn active" style="width:auto;padding:5px 10px;">Connecte</button><button class="btn sm ghost">Configurer</button></div></div>
+      <div class="connector-card"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="connector-name">Sage</div><div class="connector-desc">Compta, paie, gestion</div><button class="tool-btn" style="color:var(--primary);border-color:var(--primary);cursor:pointer;">Connecter</button></div>
+      <div class="connector-card"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><div class="connector-name">PayFit</div><div class="connector-desc">Paie, conges, social</div><button class="tool-btn" style="color:var(--primary);border-color:var(--primary);cursor:pointer;">Connecter</button></div>
+      <div class="connector-card"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="connector-name">Cegid</div><div class="connector-desc">ERP, compta, gestion</div><button class="tool-btn" style="color:var(--primary);border-color:var(--primary);cursor:pointer;">Connecter</button></div>
+      <div class="connector-card"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="connector-name">HubSpot CRM</div><div class="connector-desc">Contacts, pipeline</div><button class="tool-btn" style="color:var(--primary);border-color:var(--primary);cursor:pointer;">Connecter</button></div>
+      <div class="connector-card"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="connector-name">ACD</div><div class="connector-desc">Production comptable</div><button class="tool-btn" style="color:var(--primary);border-color:var(--primary);cursor:pointer;">Connecter</button></div>
+      <div class="connector-card"><div class="connector-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg></div><div class="connector-name">API Custom</div><div class="connector-desc">REST API personnalisee</div><button class="tool-btn" style="color:var(--primary);border-color:var(--primary);cursor:pointer;">Configurer</button></div>
+    </div>
+  </div>
+
+  <!-- FORMATIONS -->
+  <div class="content page" id="page-formations">
+    <div class="page-header"><div><div class="page-title">Formations</div><div class="page-subtitle">Competences durabilite</div></div><div style="display:flex;gap:6px;"><button class="btn">Catalogue complet</button><button class="btn primary">+ S'inscrire</button></div></div>
+    <div class="tabs"><div class="tab active">Dashboard</div><div class="tab">Catalogue</div><div class="tab">Mes Formations</div><div class="tab">Atlas RSE</div><div class="tab">Competences</div></div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="stat-val">1</div><div class="stat-label">En cours</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">3</div><div class="stat-label">Terminees</div></div>
+      <div class="stat-card"><div class="stat-val">14h</div><div class="stat-label">Heures</div></div>
+      <div class="stat-card"><div class="stat-val">1</div><div class="stat-label">Certificat</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><div class="card-header"><div class="card-title">MyDAD Learning</div><button class="btn sm">Voir tout</button></div><div class="card-body">
+        <div class="step-item"><div class="step-num current" style="background:var(--primary-bg);color:var(--primary);border-color:var(--primary);">&#9654;</div><div style="flex:1"><div class="step-title">Economie circulaire & dechets</div><div class="step-desc">5H &bull; 0%</div></div><button class="btn sm primary">Commencer</button></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Bases de la durabilite</div><div class="step-desc">3H</div></div><div style="display:flex;gap:4px;"><span class="pill green">Termine</span><button class="btn sm ghost">Certificat</button></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Cadre reglementaire RSE</div><div class="step-desc">4H</div></div><span class="pill green">Termine</span></div>
+      </div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Sessions HOSMONY</div><button class="btn sm">Planifier</button></div><div class="card-body">
+        <div class="step-item"><div style="background:var(--text);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">30<br>mars</div><div style="flex:1"><div class="step-title">Economie circulaire</div><div class="step-desc">Visio 14h00</div></div><button class="btn sm">Rejoindre</button></div>
+        <div class="step-item"><div style="background:var(--text);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">30<br>mars</div><div style="flex:1"><div class="step-title">Bien-etre au travail</div><div class="step-desc">Visio 16h00</div></div><button class="btn sm">Rejoindre</button></div>
+        <div class="step-item"><div style="background:var(--text-secondary);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">15<br>avr.</div><div style="flex:1"><div class="step-title">Biodiversite et ecosystemes</div><div class="step-desc">Visio 10h00</div></div><button class="btn sm">S'inscrire</button></div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- DYNAMIQUE INTERNE -->
+  <div class="content page" id="page-dynamics">
+    <div class="page-header"><div><div class="page-title">Equipe</div><div class="page-subtitle">Engagement, challenges et initiatives collaborateurs</div></div><button class="btn primary">+ Nouvelle initiative</button></div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">72%</div><div class="stat-label">Engagement</div></div>
+      <div class="stat-card"><div class="stat-val">3</div><div class="stat-label">Initiatives</div></div>
+      <div class="stat-card"><div class="stat-val">6/8</div><div class="stat-label">Collaborateurs</div></div>
+      <div class="stat-card"><div class="stat-val">12</div><div class="stat-label">Idees soumises</div></div>
+    </div>
+    <div class="grid-3">
+      <div class="card"><div class="card-header"><div class="card-title">Challenge Eco-Gestes</div><span class="pill green">Actif</span></div><div class="card-body"><p style="font-size:11px;color:var(--text-secondary);margin-bottom:6px;">Reduire eau et energie au quotidien.</p><div style="font-size:11px;"><strong>7/8</strong> participants &bull; Fin 30 avril</div><div class="progress-track" style="margin-top:5px;margin-bottom:8px;"><div class="progress-fill" style="width:75%;background:var(--green);"></div></div><div style="display:flex;gap:4px;"><button class="btn sm primary">Voir le classement</button><button class="btn sm">Rejoindre</button></div></div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Boite a idees RSE</div><span class="pill green">Actif</span></div><div class="card-body"><p style="font-size:11px;color:var(--text-secondary);margin-bottom:6px;">Proposez vos idees d'amelioration.</p><div style="font-size:11px;"><strong>12</strong> soumises &bull; <strong>4</strong> retenues &bull; <strong>2</strong> en cours</div><div class="progress-track" style="margin-top:5px;margin-bottom:8px;"><div class="progress-fill" style="width:33%;background:var(--primary);"></div></div><div style="display:flex;gap:4px;"><button class="btn sm primary">Soumettre une idee</button><button class="btn sm">Voir les idees</button><button class="btn sm">Voter</button></div></div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Comite RSE</div><span class="pill amber">A venir</span></div><div class="card-body"><p style="font-size:11px;color:var(--text-secondary);margin-bottom:6px;">Reunion trimestrielle de pilotage.</p><div style="font-size:11px;"><strong>15 avril 2026</strong> &bull; 4 membres</div><div style="margin-top:8px;display:flex;gap:4px;"><button class="btn sm primary">Planifier la reunion</button><button class="btn sm">Voir les PV</button><button class="btn sm">Inviter</button></div></div></div>
+    </div>
+  </div>
+
+  <!-- MES CLIENTS -->
+  <div class="content page" id="page-clients">
+    <div class="page-header"><div><div class="page-title">Portefeuille Clients</div><div class="page-subtitle">Supervision expert-comptable</div></div><div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">+ Ajouter un client</button></div></div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="stat-val">12</div><div class="stat-label">Clients actifs</div></div>
+      <div class="stat-card"><div class="stat-val">2.4</div><div class="stat-label">Niveau moyen</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">187 K&euro;</div><div class="stat-label">Valeur creee</div></div>
+      <div class="stat-card"><div class="stat-val">47</div><div class="stat-label">Actions en cours</div></div>
+    </div>
+    <div style="margin-bottom:12px;display:flex;gap:6px;">
+      <input style="flex:1;padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:inherit;" placeholder="Rechercher un client...">
+      <select style="padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;font-family:inherit;"><option>Tous niveaux</option><option>Niv. 1</option><option>Niv. 2</option><option>Niv. 3</option></select>
+      <select style="padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;font-family:inherit;"><option>Tous secteurs</option><option>Artisanat</option><option>Auto</option><option>Sante</option></select>
+    </div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Client</th><th>Niveau</th><th>CA</th><th>Marge</th><th>Actions</th><th>Valeur creee</th><th></th></tr></thead>
+        <tbody>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="client-avatar" style="background:var(--hosmony-2);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;">BM</div><div><strong>Boulangerie Martin</strong><div style="font-size:11px;color:var(--text-muted);">Artisanat &bull; 8 emp.</div></div></div></td><td><div style="display:flex;align-items:center;gap:5px;"><div class="client-lv" style="background:var(--hosmony-2);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;">2</div><span style="font-size:11px;">47/100</span></div></td><td><strong>847K&euro;</strong><div style="font-size:11px;color:var(--green);">+8.2%</div></td><td><strong>12.4%</strong></td><td><span style="font-size:11px;">5/12</span><div class="progress-track" style="width:60px;height:3px;margin-top:3px;"><div class="progress-fill" style="width:42%;background:var(--primary);"></div></div></td><td><strong style="color:var(--green);">23.4K&euro;</strong></td><td><button class="btn sm primary">Dossier</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="client-avatar" style="background:var(--hosmony-3);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;">GT</div><div><strong>Garage Thibault</strong><div style="font-size:11px;color:var(--text-muted);">Auto &bull; 15 emp.</div></div></div></td><td><div style="display:flex;align-items:center;gap:5px;"><div class="client-lv" style="background:var(--hosmony-3);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;">3</div><span style="font-size:11px;">58/100</span></div></td><td><strong>2.1M&euro;</strong><div style="font-size:11px;color:var(--green);">+5.1%</div></td><td><strong>8.7%</strong></td><td><span style="font-size:11px;">9/14</span><div class="progress-track" style="width:60px;height:3px;margin-top:3px;"><div class="progress-fill" style="width:64%;background:var(--green);"></div></div></td><td><strong style="color:var(--green);">41.2K&euro;</strong></td><td><button class="btn sm primary">Dossier</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="client-avatar" style="background:var(--hosmony-1);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;">PR</div><div><strong>Pharmacie Rousseau</strong><div style="font-size:11px;color:var(--text-muted);">Sante &bull; 6 emp.</div></div></div></td><td><div style="display:flex;align-items:center;gap:5px;"><div class="client-lv" style="background:var(--hosmony-1);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;">1</div><span style="font-size:11px;">18/100</span></div></td><td><strong>1.4M&euro;</strong><div style="font-size:11px;color:var(--green);">+2.3%</div></td><td><strong>6.2%</strong></td><td><span style="font-size:11px;">2/8</span><div class="progress-track" style="width:60px;height:3px;margin-top:3px;"><div class="progress-fill" style="width:25%;background:var(--amber);"></div></div></td><td><strong style="color:var(--green);">5.4K&euro;</strong></td><td><button class="btn sm primary">Dossier</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="client-avatar" style="background:var(--hosmony-2);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;">CD</div><div><strong>Cabinet Dupont</strong><div style="font-size:11px;color:var(--text-muted);">Architecture &bull; 22 emp.</div></div></div></td><td><div style="display:flex;align-items:center;gap:5px;"><div class="client-lv" style="background:var(--hosmony-2);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;">2</div><span style="font-size:11px;">35/100</span></div></td><td><strong>3.8M&euro;</strong><div style="font-size:11px;color:var(--green);">+12%</div></td><td><strong>14.1%</strong></td><td><span style="font-size:11px;">4/10</span><div class="progress-track" style="width:60px;height:3px;margin-top:3px;"><div class="progress-fill" style="width:40%;background:var(--primary);"></div></div></td><td><strong style="color:var(--green);">18.7K&euro;</strong></td><td><button class="btn sm primary">Dossier</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="client-avatar" style="background:var(--hosmony-3);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;">VB</div><div><strong>Vignobles Beaumont</strong><div style="font-size:11px;color:var(--text-muted);">Viticulture &bull; 35 emp.</div></div></div></td><td><div style="display:flex;align-items:center;gap:5px;"><div class="client-lv" style="background:var(--hosmony-3);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;">3</div><span style="font-size:11px;">62/100</span></div></td><td><strong>5.2M&euro;</strong><div style="font-size:11px;color:var(--green);">+7.8%</div></td><td><strong>18.3%</strong></td><td><span style="font-size:11px;">11/16</span><div class="progress-track" style="width:60px;height:3px;margin-top:3px;"><div class="progress-fill" style="width:69%;background:var(--green);"></div></div></td><td><strong style="color:var(--green);">67.3K&euro;</strong></td><td><button class="btn sm primary">Dossier</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="client-avatar" style="background:var(--hosmony-1);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;">RL</div><div><strong>Restaurant Le Lys</strong><div style="font-size:11px;color:var(--text-muted);">Restauration &bull; 12 emp.</div></div></div></td><td><div style="display:flex;align-items:center;gap:5px;"><div class="client-lv" style="background:var(--hosmony-1);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;">1</div><span style="font-size:11px;">22/100</span></div></td><td><strong>890K&euro;</strong><div style="font-size:11px;color:var(--red);">&minus;1.2%</div></td><td><strong>4.8%</strong></td><td><span style="font-size:11px;">1/6</span><div class="progress-track" style="width:60px;height:3px;margin-top:3px;"><div class="progress-fill" style="width:17%;background:var(--red);"></div></div></td><td><strong style="color:var(--green);">3.1K&euro;</strong></td><td><button class="btn sm primary">Dossier</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const p = document.getElementById('page-' + item.dataset.page);
+      if (p) p.classList.add('active');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.notif-btn') && !e.target.closest('.notif-dropdown')) {
+      document.querySelector('.notif-dropdown').classList.remove('open');
+    }
+  });
+  function spark(id, data, color) {
+    const c = document.getElementById(id);
+    if (!c) return;
+    const m = Math.max(...data);
+    data.forEach((v, i) => {
+      const b = document.createElement('div');
+      b.className = 'spark-bar';
+      b.style.background = i === data.length - 1 ? color : color + '20';
+      b.style.height = '0%';
+      c.appendChild(b);
+      setTimeout(() => { b.style.height = (v / m * 100) + '%'; }, 50 + i * 25);
+    });
+  }
+  spark('sp1', [62,68,71,75,73,78,80,83,85,89,92,95], '#059669');
+  spark('sp2', [9.2,9.8,10.1,10.5,10.8,11,11.2,11.1,11.5,11.8,12.1,12.4], '#2563EB');
+  spark('sp3', [24,23.5,22.8,22.1,21.5,21,20.7,20.2,19.8,19.3,18.7,18.2], '#059669');
+  spark('sp4', [6.5,6.6,6.7,6.8,6.9,6.9,7,7,7,7.1,7,7.1], '#D97706');
+  function showAI() {
+    const t = document.getElementById('aiT'), r = document.getElementById('aiR');
+    if (r.classList.contains('visible')) { r.classList.remove('visible'); return; }
+    t.classList.add('visible');
+    setTimeout(() => { t.classList.remove('visible'); r.classList.add('visible'); }, 1000);
+  }
+
+  // AI Studio agent switching
+  function selectAIAgent(el, id) {
+    document.querySelectorAll('.ai-agent-pill').forEach(p => {
+      p.style.background = 'var(--surface)';
+      p.style.color = 'var(--text)';
+      p.style.borderColor = 'var(--border)';
+      p.style.fontWeight = '500';
+    });
+    el.style.background = 'var(--text)';
+    el.style.color = '#fff';
+    el.style.borderColor = 'var(--text)';
+    el.style.fontWeight = '600';
+  }
+
+  // Agent switching on Opportunities page
+  function showAgent(id) {
+    document.getElementById('agent-reglem').style.display = id === 'reglem' ? 'block' : 'none';
+    document.getElementById('agent-finance').style.display = id === 'finance' ? 'block' : 'none';
+    document.querySelectorAll('.agent-tab:not(.disabled)').forEach(tab => {
+      if (tab.dataset.agent === id) {
+        tab.style.background = 'var(--text)';
+        tab.style.color = '#fff';
+        tab.style.fontWeight = '600';
+        tab.style.borderColor = 'var(--text)';
+      } else {
+        tab.style.background = 'var(--surface)';
+        tab.style.color = 'var(--text)';
+        tab.style.fontWeight = '500';
+        tab.style.borderColor = 'var(--border)';
+      }
+    });
+  }
+</script>
+</body>
+</html>

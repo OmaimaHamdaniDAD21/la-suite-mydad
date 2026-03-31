@@ -1,0 +1,1326 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+// ═══════════════════════════════════════════════════════════
+// ENUMS
+// ═══════════════════════════════════════════════════════════
+
+enum Role {
+  EXPERT_COMPTABLE
+  DIRIGEANT
+  COLLABORATEUR
+  CONSULTANT
+}
+
+enum OrganizationType {
+  CABINET
+  ENTREPRISE
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  REVOKED
+}
+
+enum ModuleStatus {
+  ACTIVE
+  INACTIVE
+  BETA
+}
+
+enum DataSourceType {
+  API
+  FILE_UPLOAD
+  WEBHOOK
+  DATABASE
+  MANUAL
+}
+
+enum SyncStatus {
+  IDLE
+  QUEUED
+  RUNNING
+  SUCCESS
+  FAILED
+}
+
+enum SyncFrequency {
+  REALTIME
+  HOURLY
+  DAILY
+  WEEKLY
+  MANUAL
+}
+
+enum DataCategory {
+  FINANCIAL
+  ESG_ENVIRONMENTAL
+  ESG_SOCIAL
+  ESG_GOVERNANCE
+  HR
+  OPERATIONAL
+  MARKET
+}
+
+enum AgentStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum AgentRunStatus {
+  QUEUED
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+enum RequirementType {
+  KPI
+  ACTION
+  DOCUMENT
+  AUDIT
+  PROCESS
+}
+
+enum RequirementStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  MET
+  NOT_MET
+  WAIVED
+}
+
+enum ActionPriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum ActionStatus {
+  BACKLOG
+  TODO
+  IN_PROGRESS
+  IN_REVIEW
+  COMPLETED
+  CANCELLED
+}
+
+enum ActionSource {
+  REQUIREMENT
+  AI_SUGGESTION
+  MANUAL
+  WORKFLOW
+}
+
+enum InitiativeType {
+  CHALLENGE
+  IDEA_BOX
+  EVENT
+  SURVEY
+  TRAINING
+  COMMITTEE
+}
+
+enum InitiativeStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum EvidenceStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  VALIDATED
+  REJECTED
+  EXPIRED
+}
+
+enum EvidenceType {
+  DOCUMENT
+  DATA_EXTRACT
+  SCREENSHOT
+  CERTIFICATE
+  DECLARATION
+  PHOTO
+  LINK
+}
+
+enum AuditType {
+  PRE_AUDIT
+  INTERNAL_AUDIT
+  EXTERNAL_AUDIT
+  CERTIFICATION
+}
+
+enum HosmonyAuditStatus {
+  PLANNED
+  IN_PROGRESS
+  REVIEW
+  COMPLETED
+  CERTIFIED
+  FAILED
+}
+
+enum OpportunityType {
+  PUBLIC_FUNDING
+  TAX_CREDIT
+  SUBSIDY
+  TENDER
+  NEW_MARKET
+  PARTNERSHIP
+  GRANT
+  LOAN
+  CERTIFICATION_VALUE
+}
+
+enum OpportunityStatus {
+  DETECTED
+  ELIGIBLE
+  IN_APPLICATION
+  SUBMITTED
+  AWARDED
+  REJECTED
+  EXPIRED
+}
+
+enum AssetStatus {
+  DRAFT
+  SUBMITTED
+  VALIDATED
+  PUBLISHED
+  SUSPENDED
+  ARCHIVED
+}
+
+enum StakeholderType {
+  CLIENT
+  SUPPLIER
+  EMPLOYEE
+  INVESTOR
+  REGULATOR
+  TERRITORY
+  PARTNER
+  COMMUNITY
+  MEDIA
+  NGO
+  OTHER
+}
+
+enum MaterialityIssueCategory {
+  ENVIRONMENTAL_CLIMATE
+  ENVIRONMENTAL_POLLUTION
+  ENVIRONMENTAL_WATER
+  ENVIRONMENTAL_BIODIVERSITY
+  ENVIRONMENTAL_CIRCULAR
+  SOCIAL_WORKFORCE
+  SOCIAL_VALUE_CHAIN
+  SOCIAL_COMMUNITIES
+  SOCIAL_CONSUMERS
+  GOVERNANCE_CONDUCT
+  GOVERNANCE_ETHICS
+  GOVERNANCE_LOBBYING
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  CONFIG_CHANGE
+  DATA_SYNC
+  AGENT_RUN
+  EXPORT
+  INVITE
+}
+
+// ═══════════════════════════════════════════════════════════
+// 1. CORE — Users, Auth, Organizations
+// ═══════════════════════════════════════════════════════════
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  avatarUrl     String?
+  emailVerified Boolean   @default(false)
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  memberships      UserOrganization[]
+  refreshTokens    RefreshToken[]
+  sentInvitations  Invitation[]
+  auditLogs        AuditLog[]
+  agentRuns        AgentRun[]
+  dashboardConfigs DashboardConfig[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid())
+  token     String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
+}
+
+model Organization {
+  id         String           @id @default(uuid())
+  name       String
+  type       OrganizationType
+  siret      String?
+  address    String?
+  city       String?
+  postalCode String?
+  country    String           @default("FR")
+  logoUrl    String?
+  isActive   Boolean          @default(true)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  // Cabinet → Clients hierarchy
+  parentId String?
+  parent   Organization?  @relation("CabinetClients", fields: [parentId], references: [id])
+  clients  Organization[] @relation("CabinetClients")
+
+  members          UserOrganization[]
+  invitations      Invitation[]
+  orgConfig        OrgConfig?
+  moduleConfigs    ModuleConfig[]
+  featureFlags     FeatureFlag[]
+  kpiConfigs       KpiConfig[]
+  workflowConfigs  WorkflowConfig[]
+  roleConfigs      RoleConfig[]
+  dataSources      DataSource[]
+  rawData          RawData[]
+  normalizedData   NormalizedData[]
+  computedMetrics  ComputedMetric[]
+  dashboardConfigs DashboardConfig[]
+  agents           Agent[]
+  knowledgeBases   KnowledgeBase[]
+  auditLogs        AuditLog[]
+  webhooks         Webhook[]
+  // HOSMONY ENGINE
+  hosmonyJourney HosmonyJourney?
+  initiatives    Initiative[]
+  // STRATEGY + VALUE
+  strategy     Strategy?
+  stakeholders Stakeholder[]
+
+  @@map("organizations")
+}
+
+model UserOrganization {
+  id                String       @id @default(uuid())
+  userId            String
+  organizationId    String
+  role              Role
+  isDefault         Boolean      @default(false)
+  customPermissions Json?
+  joinedAt          DateTime     @default(now())
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId, role])
+  @@index([organizationId])
+  @@map("user_organizations")
+}
+
+model Invitation {
+  id             String           @id @default(uuid())
+  email          String
+  role           Role
+  token          String           @unique @default(uuid())
+  status         InvitationStatus @default(PENDING)
+  organizationId String
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User             @relation(fields: [senderId], references: [id])
+  expiresAt      DateTime
+  acceptedAt     DateTime?
+  createdAt      DateTime         @default(now())
+
+  @@index([token])
+  @@index([email])
+  @@map("invitations")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 2. CONFIG ENGINE
+// ═══════════════════════════════════════════════════════════
+
+model OrgConfig {
+  id             String       @id @default(uuid())
+  organizationId String       @unique
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  templateId     String?
+  template       ConfigTemplate? @relation(fields: [templateId], references: [id])
+  globalSettings Json         @default("{}")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@map("org_configs")
+}
+
+model ModuleDefinition {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  category    String
+  isCore      Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  configs ModuleConfig[]
+
+  @@map("module_definitions")
+}
+
+model ModuleConfig {
+  id                 String           @id @default(uuid())
+  organizationId     String
+  organization       Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  moduleDefinitionId String
+  moduleDefinition   ModuleDefinition @relation(fields: [moduleDefinitionId], references: [id])
+  status             ModuleStatus     @default(INACTIVE)
+  settings           Json             @default("{}")
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@unique([organizationId, moduleDefinitionId])
+  @@map("module_configs")
+}
+
+model FeatureFlag {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  key            String
+  enabled        Boolean      @default(false)
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([organizationId, key])
+  @@map("feature_flags")
+}
+
+model KpiConfig {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  code           String
+  name           String
+  description    String?
+  category       DataCategory
+  unit           String
+  formula        String?
+  dataSourceRef  String?
+  targetMin      Float?
+  targetMax      Float?
+  isActive       Boolean      @default(true)
+  sortOrder      Int          @default(0)
+  displayConfig  Json?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  computedMetrics ComputedMetric[]
+
+  @@unique([organizationId, code])
+  @@map("kpi_configs")
+}
+
+model WorkflowConfig {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  code           String
+  name           String
+  description    String?
+  steps          Json
+  triggers       Json?
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([organizationId, code])
+  @@map("workflow_configs")
+}
+
+model RoleConfig {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           Role
+  permissions    Json
+  restrictions   Json?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([organizationId, role])
+  @@map("role_configs")
+}
+
+model ConfigTemplate {
+  id              String   @id @default(uuid())
+  name            String
+  description     String?
+  createdById     String
+  moduleConfigs   Json
+  featureFlags    Json
+  kpiConfigs      Json
+  workflowConfigs Json
+  roleConfigs     Json
+  dashboardLayout Json?
+  isPublic        Boolean  @default(false)
+  version         Int      @default(1)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  appliedTo OrgConfig[]
+
+  @@map("config_templates")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 3. DATA PIPELINE
+// ═══════════════════════════════════════════════════════════
+
+model DataSource {
+  id               String         @id @default(uuid())
+  organizationId   String
+  organization     Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name             String
+  type             DataSourceType
+  category         DataCategory
+  connectionConfig Json
+  fieldMapping     Json
+  syncFrequency    SyncFrequency  @default(MANUAL)
+  lastSyncAt       DateTime?
+  lastSyncStatus   SyncStatus     @default(IDLE)
+  isActive         Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  syncJobs SyncJob[]
+  rawData  RawData[]
+
+  @@map("data_sources")
+}
+
+model SyncJob {
+  id             String     @id @default(uuid())
+  dataSourceId   String
+  dataSource     DataSource @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+  status         SyncStatus @default(QUEUED)
+  recordsTotal   Int?
+  recordsSuccess Int?
+  recordsFailed  Int?
+  errorLog       Json?
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime   @default(now())
+
+  @@map("sync_jobs")
+}
+
+model RawData {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  dataSourceId   String
+  dataSource     DataSource   @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+  category       DataCategory
+  payload        Json
+  sourceRef      String?
+  receivedAt     DateTime     @default(now())
+  processedAt    DateTime?
+  isProcessed    Boolean      @default(false)
+
+  @@index([organizationId, category])
+  @@index([dataSourceId, isProcessed])
+  @@index([sourceRef])
+  @@map("raw_data")
+}
+
+model NormalizedData {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  category       DataCategory
+  metricKey      String
+  numericValue   Float?
+  textValue      String?
+  jsonValue      Json?
+  periodStart    DateTime
+  periodEnd      DateTime
+  source         String
+  confidence     Float?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([organizationId, metricKey, periodStart, periodEnd])
+  @@index([organizationId, category])
+  @@index([organizationId, metricKey])
+  @@map("normalized_data")
+}
+
+model ComputedMetric {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  kpiConfigId    String
+  kpiConfig      KpiConfig    @relation(fields: [kpiConfigId], references: [id], onDelete: Cascade)
+  value          Float
+  previousValue  Float?
+  trend          Float?
+  periodStart    DateTime
+  periodEnd      DateTime
+  computedAt     DateTime     @default(now())
+  sourceDataIds  Json?
+  computeLog     String?
+
+  @@unique([organizationId, kpiConfigId, periodStart, periodEnd])
+  @@index([organizationId, periodStart])
+  @@map("computed_metrics")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 4. AI STUDIO
+// ═══════════════════════════════════════════════════════════
+
+model Agent {
+  id               String       @id @default(uuid())
+  organizationId   String
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name             String
+  description      String?
+  type             String
+  status           AgentStatus  @default(DRAFT)
+  systemPrompt     String       @db.Text
+  model            String       @default("claude-sonnet-4-6")
+  temperature      Float        @default(0.7)
+  maxTokens        Int          @default(4096)
+  dataScopeConfig  Json?
+  knowledgeBaseIds Json?
+  toolsConfig      Json?
+  createdById      String
+  isTemplate       Boolean      @default(false)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  prompts Prompt[]
+  runs    AgentRun[]
+
+  @@map("agents")
+}
+
+model Prompt {
+  id        String  @id @default(uuid())
+  agentId   String?
+  agent     Agent?  @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  name      String
+  content   String  @db.Text
+  category  String
+  variables Json?
+  isGlobal  Boolean @default(false)
+  version   Int     @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("prompts")
+}
+
+model KnowledgeBase {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name           String
+  description    String?
+  type           String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  documents KnowledgeDocument[]
+
+  @@map("knowledge_bases")
+}
+
+model KnowledgeDocument {
+  id              String        @id @default(uuid())
+  knowledgeBaseId String
+  knowledgeBase   KnowledgeBase @relation(fields: [knowledgeBaseId], references: [id], onDelete: Cascade)
+  title           String
+  content         String?       @db.Text
+  fileUrl         String?
+  mimeType        String?
+  chunkCount      Int           @default(0)
+  isEmbedded      Boolean       @default(false)
+  embeddedAt      DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  chunks DocumentChunk[]
+
+  @@map("knowledge_documents")
+}
+
+model DocumentChunk {
+  id         String            @id @default(uuid())
+  documentId String
+  document   KnowledgeDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  content    String            @db.Text
+  chunkIndex Int
+  embedding  Unsupported("vector(1536)")?
+  metadata   Json?
+  createdAt  DateTime          @default(now())
+
+  @@index([documentId, chunkIndex])
+  @@map("document_chunks")
+}
+
+model AgentRun {
+  id              String         @id @default(uuid())
+  agentId         String
+  agent           Agent          @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  userId          String
+  user            User           @relation(fields: [userId], references: [id])
+  status          AgentRunStatus @default(QUEUED)
+  input           Json
+  output          String?        @db.Text
+  tokensUsed      Int?
+  durationMs      Int?
+  retrievedChunkIds Json?
+  startedAt       DateTime?
+  completedAt     DateTime?
+  errorLog        String?
+  createdAt       DateTime       @default(now())
+
+  @@index([agentId])
+  @@index([userId])
+  @@map("agent_runs")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 5. INTEGRATION LAYER
+// ═══════════════════════════════════════════════════════════
+
+model Webhook {
+  id              String       @id @default(uuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  direction       String
+  inboundUrl      String?      @unique
+  inboundSecret   String?
+  outboundUrl     String?
+  outboundEvents  Json?
+  outboundHeaders Json?
+  isActive        Boolean      @default(true)
+  lastTriggeredAt DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("webhooks")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 6. HOSMONY ENGINE
+// ═══════════════════════════════════════════════════════════
+
+model HosmonyLevel {
+  id          String   @id @default(uuid())
+  level       Int      @unique
+  name        String
+  description String?  @db.Text
+  minScore    Float
+  color       String
+  iconName    String?
+  criteria    Json
+  createdAt   DateTime @default(now())
+
+  requirements HosmonyRequirement[]
+  journeys     HosmonyJourney[]
+
+  @@map("hosmony_levels")
+}
+
+model HosmonyJourney {
+  id              String       @id @default(uuid())
+  organizationId  String       @unique
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  currentLevelId  String
+  currentLevel    HosmonyLevel @relation(fields: [currentLevelId], references: [id])
+  targetLevel     Int
+  overallScore    Float        @default(0)
+  dimensionScores Json         @default("{}")
+  progressPercent Float        @default(0)
+  status          String       @default("not_started")
+  startedAt       DateTime     @default(now())
+  lastAssessedAt  DateTime     @default(now())
+  levelAchievedAt DateTime?
+  updatedAt       DateTime     @updatedAt
+
+  progressions JourneyProgression[]
+  actionPlans  ActionPlan[]
+  audits       HosmonyAudit[]
+
+  @@map("hosmony_journeys")
+}
+
+model JourneyProgression {
+  id              String         @id @default(uuid())
+  journeyId       String
+  journey         HosmonyJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  fromLevel       Int
+  toLevel         Int
+  overallScore    Float
+  dimensionScores Json
+  reason          String?
+  validatedBy     String?
+  createdAt       DateTime       @default(now())
+
+  @@index([journeyId, createdAt])
+  @@map("journey_progressions")
+}
+
+model HosmonyRequirement {
+  id             String          @id @default(uuid())
+  levelId        String
+  level          HosmonyLevel    @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  code           String          @unique
+  name           String
+  description    String?         @db.Text
+  type           RequirementType
+  category       DataCategory
+  isMandatory    Boolean         @default(true)
+  weight         Float           @default(1.0)
+  validationRule Json?
+  sortOrder      Int             @default(0)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  orgRequirements OrgRequirement[]
+
+  @@map("hosmony_requirements")
+}
+
+model OrgRequirement {
+  id             String             @id @default(uuid())
+  organizationId String
+  requirementId  String
+  requirement    HosmonyRequirement @relation(fields: [requirementId], references: [id], onDelete: Cascade)
+  status         RequirementStatus  @default(NOT_STARTED)
+  currentValue   Float?
+  targetValue    Float?
+  evidenceIds    Json?
+  validatedAt    DateTime?
+  validatedBy    String?
+  validationNote String?
+  waivedReason   String?
+  lastCheckedAt  DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@unique([organizationId, requirementId])
+  @@index([organizationId, status])
+  @@map("org_requirements")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 6.3 ACTION PLAN ENGINE
+// ═══════════════════════════════════════════════════════════
+
+model ActionPlan {
+  id               String         @id @default(uuid())
+  journeyId        String
+  journey          HosmonyJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  organizationId   String
+  name             String
+  description      String?        @db.Text
+  targetLevel      Int
+  totalActions     Int            @default(0)
+  completedActions Int            @default(0)
+  progressPercent  Float          @default(0)
+  isActive         Boolean        @default(true)
+  startDate        DateTime?
+  targetDate       DateTime?
+  completedAt      DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  actions Action[]
+
+  @@index([organizationId])
+  @@map("action_plans")
+}
+
+model Action {
+  id                String         @id @default(uuid())
+  actionPlanId      String
+  actionPlan        ActionPlan     @relation(fields: [actionPlanId], references: [id], onDelete: Cascade)
+  organizationId    String
+  title             String
+  description       String?        @db.Text
+  category          DataCategory
+  source            ActionSource
+  priority          ActionPriority @default(MEDIUM)
+  impactScore       Float?
+  effortScore       Float?
+  impactEffortRatio Float?
+  assigneeId        String?
+  assigneeRole      Role?
+  teamId            String?
+  status            ActionStatus   @default(BACKLOG)
+  dueDate           DateTime?
+  startedAt         DateTime?
+  completedAt       DateTime?
+  requirementId     String?
+  aiSuggestionId    String?
+  aiRationale       String?
+  evidenceIds       Json?
+  notes             Json?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  @@index([organizationId, status])
+  @@index([assigneeId])
+  @@index([actionPlanId, priority])
+  @@map("actions")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 6.4 INTERNAL DYNAMICS
+// ═══════════════════════════════════════════════════════════
+
+model Initiative {
+  id               String           @id @default(uuid())
+  organizationId   String
+  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  type             InitiativeType
+  status           InitiativeStatus @default(DRAFT)
+  title            String
+  description      String?          @db.Text
+  objectives       Json?
+  startDate        DateTime?
+  endDate          DateTime?
+  settings         Json?
+  targetRoles      Json?
+  createdById      String
+  participantCount Int              @default(0)
+  completionRate   Float?
+  linkedActionIds  Json?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  participations Participation[]
+
+  @@index([organizationId, type])
+  @@map("initiatives")
+}
+
+model Participation {
+  id           String     @id @default(uuid())
+  initiativeId String
+  initiative   Initiative @relation(fields: [initiativeId], references: [id], onDelete: Cascade)
+  userId       String
+  status       String     @default("enrolled")
+  contribution Json?
+  score        Float?
+  completedAt  DateTime?
+  createdAt    DateTime   @default(now())
+
+  @@unique([initiativeId, userId])
+  @@index([userId])
+  @@map("participations")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 6.5 EVIDENCE & DOCUMENTATION
+// ═══════════════════════════════════════════════════════════
+
+model Evidence {
+  id              String         @id @default(uuid())
+  organizationId  String
+  title           String
+  description     String?
+  type            EvidenceType
+  category        DataCategory
+  fileUrl         String?
+  fileName        String?
+  fileSize        Int?
+  mimeType        String?
+  externalUrl     String?
+  requirementIds  Json?
+  actionIds       Json?
+  status          EvidenceStatus @default(DRAFT)
+  submittedAt     DateTime?
+  submittedBy     String?
+  reviewedAt      DateTime?
+  reviewedBy      String?
+  reviewNote      String?
+  rejectionReason String?
+  validFrom       DateTime?
+  validUntil      DateTime?
+  isExpired       Boolean        @default(false)
+  checksum        String?
+  version         Int            @default(1)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([organizationId, status])
+  @@index([organizationId, category])
+  @@map("evidence")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 6.6 AUDIT & CERTIFICATION
+// ═══════════════════════════════════════════════════════════
+
+model HosmonyAudit {
+  id                  String             @id @default(uuid())
+  journeyId           String
+  journey             HosmonyJourney     @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  organizationId      String
+  type                AuditType
+  status              HosmonyAuditStatus @default(PLANNED)
+  targetLevel         Int
+  auditorId           String?
+  auditorName         String?
+  auditorOrg          String?
+  plannedDate         DateTime?
+  startedAt           DateTime?
+  completedAt         DateTime?
+  overallScore        Float?
+  dimensionScores     Json?
+  findings            Json?
+  recommendations     Json?
+  reportUrl           String?
+  reportGeneratedAt   DateTime?
+  certificationStatus String?
+  certificationDate   DateTime?
+  certificationExpiry DateTime?
+  certificateUrl      String?
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  auditResults AuditResult[]
+
+  @@index([organizationId, type])
+  @@index([journeyId])
+  @@map("hosmony_audits")
+}
+
+model AuditResult {
+  id            String       @id @default(uuid())
+  auditId       String
+  audit         HosmonyAudit @relation(fields: [auditId], references: [id], onDelete: Cascade)
+  requirementId String
+  status        String
+  score         Float?
+  comment       String?      @db.Text
+  evidenceIds   Json?
+  createdAt     DateTime     @default(now())
+
+  @@unique([auditId, requirementId])
+  @@map("audit_results")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 7. STRATEGY + VALUE CREATION
+// ═══════════════════════════════════════════════════════════
+
+model Strategy {
+  id             String       @id @default(uuid())
+  organizationId String       @unique
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vision         String?      @db.Text
+  mission        String?      @db.Text
+  values         Json?
+  timeHorizon    Int          @default(3)
+  status         String       @default("draft")
+  version        Int          @default(1)
+  templateId     String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  pillars StrategyPillar[]
+
+  @@map("strategies")
+}
+
+model StrategyPillar {
+  id          String   @id @default(uuid())
+  strategyId  String
+  strategy    Strategy @relation(fields: [strategyId], references: [id], onDelete: Cascade)
+  name        String
+  description String?  @db.Text
+  color       String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  objectives StrategyObjective[]
+
+  @@map("strategy_pillars")
+}
+
+model StrategyObjective {
+  id              String         @id @default(uuid())
+  pillarId        String
+  pillar          StrategyPillar @relation(fields: [pillarId], references: [id], onDelete: Cascade)
+  organizationId  String
+  title           String
+  description     String?        @db.Text
+  targetDate      DateTime?
+  linkedKpiCodes  Json?
+  targetValues    Json?
+  linkedActionIds Json?
+  status          String         @default("not_started")
+  progressPercent Float          @default(0)
+  lastReviewedAt  DateTime?
+  sortOrder       Int            @default(0)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([organizationId])
+  @@map("strategy_objectives")
+}
+
+// 7.2 DOUBLE MATERIALITY
+
+model MaterialityIssue {
+  id                    String                   @id @default(uuid())
+  organizationId        String
+  code                  String
+  name                  String
+  description           String?                  @db.Text
+  category              MaterialityIssueCategory
+  impactScore           Float?
+  impactLikelihood      Float?
+  impactSeverity        Float?
+  impactScope           Float?
+  impactIrreversibility Float?
+  financialScore        Float?
+  financialLikelihood   Float?
+  financialMagnitude    Float?
+  financialTimeHorizon  String?
+  materialityScore      Float?
+  isMaterial            Boolean                  @default(false)
+  dataSourceRefs        Json?
+  aiAssisted            Boolean                  @default(false)
+  linkedStakeholderIds  Json?
+  linkedKpiCodes        Json?
+  linkedRisks           Json?
+  createdAt             DateTime                 @default(now())
+  updatedAt             DateTime                 @updatedAt
+
+  @@unique([organizationId, code])
+  @@index([organizationId, isMaterial])
+  @@map("materiality_issues")
+}
+
+model MaterialityAssessment {
+  id                 String   @id @default(uuid())
+  organizationId     String
+  version            Int      @default(1)
+  impactThreshold    Float    @default(3.0)
+  financialThreshold Float    @default(3.0)
+  totalIssues        Int?
+  materialIssues     Int?
+  topIssues          Json?
+  aiSummary          String?  @db.Text
+  aiRecommendations  Json?
+  assessedAt         DateTime @default(now())
+  assessedBy         String?
+  createdAt          DateTime @default(now())
+
+  @@index([organizationId])
+  @@map("materiality_assessments")
+}
+
+// 7.3 STAKEHOLDERS
+
+model Stakeholder {
+  id                   String          @id @default(uuid())
+  organizationId       String
+  organization         Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name                 String
+  type                 StakeholderType
+  description          String?         @db.Text
+  contactInfo          Json?
+  influenceScore       Float?
+  impactScore          Float?
+  proximityScore       Float?
+  dependencyScore      Float?
+  overallScore         Float?
+  attitude             String?
+  engagementLevel      String?
+  linkedRisks          Json?
+  linkedOpportunities  Json?
+  linkedMaterialityIds Json?
+  linkedStrategyIds    Json?
+  lastInteractionAt    DateTime?
+  notes                Json?
+  isActive             Boolean         @default(true)
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  @@index([organizationId, type])
+  @@index([organizationId, overallScore])
+  @@map("stakeholders")
+}
+
+// 7.4 OPPORTUNITIES
+
+model Opportunity {
+  id                  String            @id @default(uuid())
+  organizationId      String
+  title               String
+  description         String?           @db.Text
+  type                OpportunityType
+  status              OpportunityStatus @default(DETECTED)
+  source              String?
+  sourceUrl           String?
+  detectedBy          String            @default("manual")
+  eligibilityScore    Float?
+  eligibilityCriteria Json?
+  estimatedValue      Float?
+  currency            String            @default("EUR")
+  valueType           String?
+  requiredLevel       Int?
+  requiredKpis        Json?
+  requiredActions     Json?
+  requiredDocuments   Json?
+  applicationDeadline DateTime?
+  startDate           DateTime?
+  endDate             DateTime?
+  applicationData     Json?
+  applicationFileUrl  String?
+  assigneeId          String?
+  aiAnalysis          String?           @db.Text
+  aiMatchScore        Float?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  @@index([organizationId, type])
+  @@index([organizationId, status])
+  @@map("opportunities")
+}
+
+model ValueTracker {
+  id             String   @id @default(uuid())
+  organizationId String
+  category       String
+  description    String
+  amount         Float
+  periodStart    DateTime
+  periodEnd      DateTime
+  opportunityId  String?
+  actionId       String?
+  kpiCode        String?
+  verified       Boolean  @default(false)
+  verifiedBy     String?
+  createdAt      DateTime @default(now())
+
+  @@index([organizationId, category])
+  @@index([organizationId, periodStart])
+  @@map("value_trackers")
+}
+
+// 7.5 MARKETPLACE & ASSETS
+
+model HosmonicAsset {
+  id               String      @id @default(uuid())
+  organizationId   String
+  name             String
+  description      String?     @db.Text
+  category         String
+  impactMetrics    Json
+  hosmonyAlignment Json?
+  requiredLevel    Int         @default(5)
+  status           AssetStatus @default(DRAFT)
+  validatedAt      DateTime?
+  validatedBy      String?
+  isPublished      Boolean     @default(false)
+  publishedAt      DateTime?
+  visibility       String      @default("private")
+  tags             Json?
+  thumbnailUrl     String?
+  detailUrl        String?
+  viewCount        Int         @default(0)
+  interestCount    Int         @default(0)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@index([organizationId, status])
+  @@index([isPublished, category])
+  @@map("hosmonic_assets")
+}
+
+// ═══════════════════════════════════════════════════════════
+// 8. DASHBOARD + AUDIT LOG
+// ═══════════════════════════════════════════════════════════
+
+model DashboardConfig {
+  id             String       @id @default(uuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  layout         Json
+  widgetConfigs  Json?
+  filters        Json?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([userId, organizationId])
+  @@map("dashboard_configs")
+}
+
+model AuditLog {
+  id             String        @id @default(uuid())
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  userId         String?
+  user           User?         @relation(fields: [userId], references: [id])
+  action         AuditAction
+  entityType     String
+  entityId       String?
+  details        Json?
+  ipAddress      String?
+  userAgent      String?
+  createdAt      DateTime      @default(now())
+
+  @@index([organizationId, createdAt])
+  @@index([userId, createdAt])
+  @@index([action])
+  @@map("audit_logs")
+}
