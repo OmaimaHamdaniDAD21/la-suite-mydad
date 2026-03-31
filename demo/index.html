@@ -783,7 +783,10 @@
   <div class="topbar">
     <div class="topbar-left">
       <button class="mobile-menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('mobile-open')">&#9776;</button>
-      <span class="breadcrumb"><strong>Cabinet Laurent &amp; Associes</strong></span>
+      <div id="mode-toggle" style="display:flex;background:#F5F5F5;border-radius:10px;padding:3px;gap:2px;">
+        <button onclick="switchMode('cabinet')" id="mode-cabinet" style="padding:5px 14px;border-radius:8px;border:none;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;background:var(--navy);color:#fff;transition:all 0.2s;">&#127970; Mon Cabinet</button>
+        <button onclick="switchMode('supervision')" id="mode-supervision" style="padding:5px 14px;border-radius:8px;border:none;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;background:transparent;color:var(--text-secondary);transition:all 0.2s;">&#128101; Supervision</button>
+      </div>
     </div>
     <div class="topbar-right">
       <div style="position:relative;">
@@ -912,14 +915,107 @@
     </div>
   </div>
 
+  <!-- SUPERVISION DASHBOARD -->
+  <div class="content page" id="page-supervision" style="display:none;">
+    <div style="margin-bottom:20px;">
+      <div style="font-size:26px;font-weight:800;letter-spacing:-0.8px;color:var(--text);">Supervision</div>
+      <div style="font-size:14px;color:var(--text-secondary);margin-top:4px;">Vue consolid&eacute;e de vos 12 clients</div>
+    </div>
+
+    <!-- Distribution HOSMONY -->
+    <div class="card" style="padding:18px;margin-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div style="font-size:14px;font-weight:700;">R&eacute;partition par niveau HOSMONY</div>
+        <div style="font-size:12px;color:var(--text-muted);">12 clients actifs</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <div style="flex:3;background:var(--hosmony-1);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">3</div><div style="font-size:11px;opacity:0.9;">Niveau 1</div></div>
+        <div style="flex:5;background:var(--hosmony-2);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">5</div><div style="font-size:11px;opacity:0.9;">Niveau 2</div></div>
+        <div style="flex:2;background:var(--hosmony-3);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">2</div><div style="font-size:11px;opacity:0.9;">Niveau 3</div></div>
+        <div style="flex:1;background:var(--hosmony-4);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">1</div><div style="font-size:11px;opacity:0.9;">Niveau 4</div></div>
+        <div style="flex:1;background:var(--hosmony-5);border-radius:8px;padding:10px 12px;color:#fff;"><div style="font-size:20px;font-weight:800;">1</div><div style="font-size:11px;opacity:0.9;">Niveau 5</div></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Opportunites detectees -->
+      <div class="card">
+        <div class="card-header"><div class="card-title" style="color:var(--navy);">&#128293; Opportunit&eacute;s d&eacute;tect&eacute;es</div><div class="card-badge">7 nouvelles</div></div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FAFAFA;border-radius:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">BM</div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Boulangerie Martin</div><div style="font-size:11px;color:var(--text-secondary);">CIR &mdash; Cr&eacute;dit Imp&ocirc;t Recherche &bull; <strong style="color:var(--green);">8 500 &euro;</strong></div></div>
+            <span class="pill green" style="font-size:11px;">Eligible</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FAFAFA;border-radius:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">GT</div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Garage Thibault</div><div style="font-size:11px;color:var(--text-secondary);">Aide transition &eacute;cologique &bull; <strong style="color:var(--green);">12 000 &euro;</strong></div></div>
+            <span class="pill green" style="font-size:11px;">Eligible</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FAFAFA;border-radius:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">FR</div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Fleuriste Rosalie</div><div style="font-size:11px;color:var(--text-secondary);">Norme hygi&egrave;ne 2026 &bull; <strong style="color:var(--red);">Ech&eacute;ance juillet</strong></div></div>
+            <span class="pill red" style="font-size:11px;">Urgent</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FAFAFA;border-radius:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">HB</div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Hotel Bellevue</div><div style="font-size:11px;color:var(--text-secondary);">Label Tourisme Durable &bull; <strong style="color:var(--navy);">Certification</strong></div></div>
+            <span class="pill blue" style="font-size:11px;">Nouveau</span>
+          </div>
+          <button class="btn sm" style="width:100%;justify-content:center;margin-top:4px;">Voir toutes les opportunit&eacute;s &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Actions urgentes -->
+      <div class="card">
+        <div class="card-header"><div class="card-title" style="color:var(--red);">&#9888;&#65039; Actions urgentes</div><div class="card-badge">5 actions</div></div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FEF2F2;border-radius:10px;border-left:3px solid var(--red);">
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Bilan annuel Boulangerie Martin</div><div style="font-size:11px;color:var(--text-secondary);">Ech&eacute;ance 15 avril &bull; <strong>J-15</strong></div></div>
+            <button class="btn sm primary">Traiter</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FFFBEB;border-radius:10px;border-left:3px solid var(--amber);">
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Audit RSE Garage Thibault</div><div style="font-size:11px;color:var(--text-secondary);">A planifier &bull; Niveau 2 requis</div></div>
+            <button class="btn sm">Planifier</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FFFBEB;border-radius:10px;border-left:3px solid var(--amber);">
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">3 d&eacute;clarations fiscales Q1</div><div style="font-size:11px;color:var(--text-secondary);">Avant le 15 avril &bull; Martin, Thibault, Rosalie</div></div>
+            <button class="btn sm primary">Traiter</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#FAFAFA;border-radius:10px;">
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;">Onboarding Cabinet Dupont</div><div style="font-size:11px;color:var(--text-secondary);">D&eacute;marrage parcours HOSMONY &bull; 5 avril</div></div>
+            <button class="btn sm">D&eacute;marrer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liste clients -->
+    <div class="card" style="margin-top:16px;">
+      <div class="card-header">
+        <div class="card-title">Clients</div>
+        <div style="display:flex;gap:6px;"><input type="text" placeholder="Filtrer..." style="padding:5px 10px;border:1px solid #EBEBEB;border-radius:8px;font-size:12px;font-family:inherit;outline:none;width:160px;"><button class="btn sm">Tous niveaux &#9662;</button></div>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <table class="data-table" style="width:100%;">
+          <thead><tr><th>Client</th><th>Niveau</th><th>Progression</th><th>Opportunit&eacute;s</th><th>Actions</th><th>Valeur</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">BM</div><strong>Boulangerie Martin</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:78%;"></div></div> 72%</td><td><strong style="color:var(--green);">3</strong></td><td>2</td><td style="color:var(--green);font-weight:700;">23.4K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">GT</div><strong>Garage Thibault</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:65%;"></div></div> 65%</td><td><strong style="color:var(--green);">2</strong></td><td>1</td><td style="color:var(--green);font-weight:700;">41.2K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">FR</div><strong>Fleuriste Rosalie</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:48%;background:var(--amber);"></div></div> 48%</td><td><strong style="color:var(--amber);">1</strong></td><td>3</td><td style="font-weight:700;">5.4K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">PR</div><strong>Pharmacie Rousseau</strong></div></td><td><span class="pill green">Niv. 1</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:100%;background:var(--green);"></div></div> 100%</td><td><strong>0</strong></td><td>0</td><td style="font-weight:700;">5.4K&euro;</td><td><button class="btn sm">Voir</button></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">HB</div><strong>Hotel Bellevue</strong></div></td><td><span class="pill blue">Niv. 2</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:55%;"></div></div> 55%</td><td><strong style="color:var(--green);">1</strong></td><td>1</td><td style="color:var(--green);font-weight:700;">18.7K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">VB</div><strong>Vignobles Beaumont</strong></div></td><td><span class="pill purple">Niv. 3</span></td><td><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:40%;background:var(--purple);"></div></div> 40%</td><td><strong>0</strong></td><td>2</td><td style="color:var(--green);font-weight:700;">67.3K&euro;</td><td><button class="btn sm primary">Superviser</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <!-- PARCOURS HOSMONY -->
   <div class="content page" id="page-hosmony">
-    <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">Mon parcours cabinet &bull; Suivi clients</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
+    <div class="page-header"><div><div class="page-title">Parcours HOSMONY</div><div class="page-subtitle">Niveau actuel : 2 &mdash; Dynamique &bull; Parcours du cabinet</div></div><div style="display:flex;gap:6px;"><button class="btn">Historique</button><button class="btn primary">Lancer le pre-audit</button></div></div>
 
-    <div class="tabs" style="margin-bottom:14px;">
-      <div class="tab active" onclick="document.getElementById('parcours-mon').style.display='block';document.getElementById('parcours-clients').style.display='none';this.classList.add('active');this.nextElementSibling.classList.remove('active');">Mon Parcours</div>
-      <div class="tab" onclick="document.getElementById('parcours-clients').style.display='block';document.getElementById('parcours-mon').style.display='none';this.classList.add('active');this.previousElementSibling.classList.remove('active');">Suivi Clients <strong>12</strong></div>
-    </div>
 
     <div id="parcours-mon">
     <div class="journey">
@@ -931,26 +1027,7 @@
     </div>
     </div><!-- end parcours-mon -->
 
-    <div id="parcours-clients" style="display:none;">
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-header"><div class="card-title">Clients Niveau 2 &mdash; Dynamique</div><div class="card-badge">5 clients</div></div>
-      <div class="card-body">
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">BM</div><div style="flex:1"><div class="step-title">Boulangerie Martin</div><div class="step-desc">7/9 etapes &bull; Score 72%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:78%;"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">GT</div><div style="flex:1"><div class="step-title">Garage Thibault</div><div class="step-desc">6/9 etapes &bull; Score 65%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:67%;"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">FR</div><div style="flex:1"><div class="step-title">Fleuriste Rosalie</div><div class="step-desc">4/9 etapes &bull; Score 48%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:44%;background:var(--amber);"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">RL</div><div style="flex:1"><div class="step-title">Restaurant Le Lys</div><div class="step-desc">3/9 etapes &bull; Score 35%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:33%;background:var(--amber);"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">HB</div><div style="flex:1"><div class="step-title">Hotel Bellevue</div><div class="step-desc">5/9 etapes &bull; Score 55%</div><div class="progress-track" style="width:120px;margin-top:4px;"><div class="progress-fill" style="width:55%;"></div></div></div><div><button class="btn sm primary">Superviser</button></div></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><div class="card-title">Clients Niveau 1 &mdash; Essentiel</div><div style="display:flex;align-items:center;gap:8px;"><span class="pill green">3 clients &#10003;</span></div></div>
-      <div class="card-body">
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">PR</div><div style="flex:1"><div class="step-title">Pharmacie Rousseau</div><div class="step-desc">6/6 etapes &bull; Pret pour Niveau 2</div></div><div><button class="btn sm primary">Superviser</button></div></div>
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">VB</div><div style="flex:1"><div class="step-title">Vignobles Beaumont</div><div class="step-desc">6/6 etapes &bull; Niveau 2 en attente</div></div><div><button class="btn sm">Voir</button></div></div>
-        <div class="step-item"><div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">CD</div><div style="flex:1"><div class="step-title">Cabinet Dupont</div><div class="step-desc">6/6 etapes &bull; Termine</div></div><div><button class="btn sm">Voir</button></div></div>
-      </div>
-    </div>
-    </div><!-- end parcours-clients -->
+    </div><!-- end parcours-mon -->
   </div>
 
   <!-- INDICATEURS -->
@@ -2204,6 +2281,46 @@
   spark('sp2', [9.2,9.8,10.1,10.5,10.8,11,11.2,11.1,11.5,11.8,12.1,12.4], '#2563EB');
   spark('sp3', [24,23.5,22.8,22.1,21.5,21,20.7,20.2,19.8,19.3,18.7,18.2], '#059669');
   spark('sp4', [6.5,6.6,6.7,6.8,6.9,6.9,7,7,7,7.1,7,7.1], '#D97706');
+  // ═══ MODE TOGGLE: Cabinet / Supervision ═══
+  function switchMode(mode) {
+    const cabinetBtn = document.getElementById('mode-cabinet');
+    const supervisionBtn = document.getElementById('mode-supervision');
+    const supervisionPage = document.getElementById('page-supervision');
+    const dashboardPage = document.getElementById('page-dashboard');
+
+    if (mode === 'supervision') {
+      // Activate supervision button
+      supervisionBtn.style.background = 'var(--navy)';
+      supervisionBtn.style.color = '#fff';
+      supervisionBtn.style.fontWeight = '600';
+      cabinetBtn.style.background = 'transparent';
+      cabinetBtn.style.color = 'var(--text-secondary)';
+      cabinetBtn.style.fontWeight = '500';
+      // Show supervision page, hide all others
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(p => p.style.display = '');
+      supervisionPage.style.display = 'block';
+      supervisionPage.classList.add('active');
+      // Deactivate sidebar items
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    } else {
+      // Activate cabinet button
+      cabinetBtn.style.background = 'var(--navy)';
+      cabinetBtn.style.color = '#fff';
+      cabinetBtn.style.fontWeight = '600';
+      supervisionBtn.style.background = 'transparent';
+      supervisionBtn.style.color = 'var(--text-secondary)';
+      supervisionBtn.style.fontWeight = '500';
+      // Show dashboard, hide supervision
+      supervisionPage.style.display = 'none';
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      dashboardPage.classList.add('active');
+      // Activate Accueil
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.querySelector('[data-page=dashboard]').classList.add('active');
+    }
+  }
+
   // Sidebar group toggle
   // Click group header = navigate to first sub-page + open submenu
   function toggleGroup(header) {
