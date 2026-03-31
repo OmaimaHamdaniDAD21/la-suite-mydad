@@ -26,6 +26,9 @@
     --red-bg: #FEF2F2;
     --purple: #7C3AED;
     --purple-bg: #F5F3FF;
+    --cyan: #00BBCC;
+    --cyan-bg: #ECFEFF;
+    --navy: #315299;
     --hosmony-1: #94A3B8;
     --hosmony-2: #3B82F6;
     --hosmony-3: #059669;
@@ -862,13 +865,24 @@
     </div>
   </div>
 
-  <!-- OPPORTUNITES -->
+  <!-- VEILLES IA -->
   <div class="content page" id="page-opportunities">
-    <div class="page-header"><div><div class="page-title">Veilles IA</div><div class="page-subtitle">Agents HOSMONY debloques par niveau</div></div></div>
 
-    <!-- Small agent selector tabs -->
-    <div style="display:flex;gap:6px;margin-bottom:18px;align-items:center;">
-      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--primary);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
+    <!-- Header with gradient banner using logo colors -->
+    <div style="background:linear-gradient(135deg, #315299 0%, #4f75ff 50%, #00BBCC 100%);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:18px;color:#fff;display:flex;align-items:center;gap:16px;">
+      <div>
+        <div style="font-size:20px;font-weight:800;letter-spacing:-0.3px;">Veilles IA</div>
+        <div style="font-size:12px;opacity:.8;margin-top:2px;">4 agents intelligents debloques par votre progression HOSMONY</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:6px;">
+        <button style="padding:7px 14px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:var(--radius-sm);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;backdrop-filter:blur(4px);">Exporter</button>
+        <button style="padding:7px 14px;background:#fff;color:var(--navy);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;">Actualiser la veille</button>
+      </div>
+    </div>
+
+    <!-- Agent selector — using cyan accent -->
+    <div style="display:flex;gap:6px;margin-bottom:16px;align-items:center;">
+      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--cyan);background:var(--cyan);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
         Reglementaire
       </div>
@@ -888,14 +902,9 @@
 
     <!-- AGENT REGLEMENTAIRE — Detail -->
     <div id="agent-reglem">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
-        <div><div style="font-size:15px;font-weight:700;">Veille reglementaire</div><div style="font-size:12px;color:var(--text-secondary);">RSE, ESG et obligations sectorielles pour votre entreprise</div></div>
-        <div style="margin-left:auto;display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Actualiser la veille</button></div>
-      </div>
-
-      <!-- Tabs -->
+      <!-- Tabs + filters -->
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
-        <span class="pill blue" style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--primary);color:#fff;">Reglementations &nbsp;<strong>19</strong></span>
+        <span style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--cyan);color:#fff;border-radius:4px;font-weight:600;">Reglementations &nbsp;<strong>19</strong></span>
         <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Calendrier &nbsp;<strong>3</strong></span>
         <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Evolutions sectorielles &nbsp;<strong>6</strong></span>
         <div style="flex:1;"></div>
@@ -1344,10 +1353,10 @@
     document.getElementById('agent-finance').style.display = id === 'finance' ? 'block' : 'none';
     document.querySelectorAll('.agent-tab:not(.disabled)').forEach(tab => {
       if (tab.dataset.agent === id) {
-        tab.style.background = 'var(--primary)';
+        tab.style.background = 'var(--cyan)';
         tab.style.color = '#fff';
         tab.style.fontWeight = '600';
-        tab.style.borderColor = 'var(--primary)';
+        tab.style.borderColor = 'var(--cyan)';
       } else {
         tab.style.background = 'var(--surface)';
         tab.style.color = 'var(--text)';
