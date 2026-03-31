@@ -563,8 +563,120 @@
 
   .empty-state { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; }
 
-  @media (max-width:1200px) { .grid-4,.kanban { grid-template-columns: repeat(2,1fr); } .grid-3 { grid-template-columns: repeat(2,1fr); } .chat-layout { grid-template-columns: 1fr; } }
-  @media (max-width:768px) { .sidebar { display: none; } .main { margin-left: 0; } .grid-4,.grid-3,.grid-2,.kanban { grid-template-columns: 1fr; } }
+  /* ═══ CELEBRATION ANIMATIONS ═══ */
+  @keyframes confetti {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+  }
+  @keyframes celebrate {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .celebrate { animation: celebrate 0.5s ease; }
+  .slide-up { animation: slideUp 0.3s ease forwards; }
+  .badge-achievement {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 99px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #fff; font-size: 10px; font-weight: 700;
+    box-shadow: 0 2px 8px rgba(255,165,0,0.3);
+  }
+
+  /* ═══ COLLAPSIBLE SIDEBAR ═══ */
+  .sidebar-group { margin-bottom: 2px; }
+  .sidebar-group-header {
+    display: flex; align-items: center; gap: 4px;
+    padding: 16px 14px 4px;
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--text-muted);
+    font-weight: 600; cursor: pointer; user-select: none;
+  }
+  .sidebar-group-header:hover { color: var(--text-secondary); }
+  .sidebar-group-header .chevron {
+    display: inline-block; font-size: 8px; transition: transform 0.2s;
+    margin-left: auto; width: 12px; text-align: center;
+  }
+  .sidebar-group.collapsed .chevron { transform: rotate(-90deg); }
+  .sidebar-group-items { overflow: hidden; transition: max-height 0.2s ease; }
+  .sidebar-group.collapsed .sidebar-group-items { max-height: 0 !important; overflow: hidden; }
+  .sidebar-group-items .nav-item { padding-left: 18px; }
+
+  .nav-item .fav-star {
+    margin-left: auto; font-size: 12px; opacity: 0; cursor: pointer;
+    transition: opacity 0.15s; color: var(--text-muted); flex-shrink: 0;
+  }
+  .nav-item:hover .fav-star { opacity: 0.5; }
+  .nav-item .fav-star:hover { opacity: 1; color: #F59E0B; }
+  .nav-item .fav-star.pinned { opacity: 1; color: #F59E0B; }
+
+  .nav-item.hosmony-accent:not(.active) {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-bg);
+    padding-left: 7px;
+  }
+
+  /* ═══ ONBOARDING ═══ */
+  .onboarding-progress-bar {
+    height: 4px; background: var(--border-light); border-radius: 99px;
+    overflow: hidden; margin: 10px 0;
+  }
+  .onboarding-progress-fill {
+    height: 100%; background: var(--accent); border-radius: 99px;
+    transition: width 0.3s ease;
+  }
+  .onboarding-step {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; border-radius: var(--radius-sm);
+    font-size: 12px;
+  }
+  .onboarding-step.done { color: var(--text-muted); }
+  .onboarding-step .step-icon { font-size: 14px; flex-shrink: 0; width: 20px; text-align: center; }
+
+  /* ═══ MINI WIDGETS ═══ */
+  .mini-widget {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px 14px;
+    box-shadow: var(--shadow); cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .mini-widget:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .mini-widget-title {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.3px; color: var(--text-muted); margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .mini-widget-value { font-size: 16px; font-weight: 800; margin-bottom: 2px; }
+  .mini-widget-detail { font-size: 11px; color: var(--text-secondary); }
+  .mini-widget-link { font-size: 10px; color: var(--primary); font-weight: 600; margin-top: 6px; display: block; }
+
+  /* ═══ MOBILE HAMBURGER ═══ */
+  .mobile-menu-btn { display: none; width: 32px; height: 32px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer; font-size: 16px; align-items: center; justify-content: center; }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width:1200px) {
+    .grid-4, .kanban { grid-template-columns: repeat(2,1fr); }
+    .grid-3 { grid-template-columns: repeat(2,1fr); }
+    .chat-layout { grid-template-columns: 1fr; }
+  }
+  @media (max-width:768px) {
+    .sidebar {
+      display: none;
+      position: fixed; left: 0; top: 0; z-index: 200;
+      width: 260px; height: 100vh;
+    }
+    .sidebar.mobile-open { display: flex; }
+    .main { margin-left: 0; }
+    .grid-4, .grid-3, .grid-2, .kanban { grid-template-columns: 1fr; }
+    .content { padding: 12px; }
+    .page-title { font-size: 16px; }
+    .topbar { padding: 0 12px; }
+    .page-header { flex-direction: column; gap: 8px; }
+    .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -574,32 +686,59 @@
     <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="8.13" y1="25" x2="40.81" y2="25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7cf5ff"/><stop offset="1" stop-color="#0cd"/></linearGradient></defs><path fill="#315299" d="M31.32,26.41c.32-3.28-2.5-5.43-4.46-6.04-1.38-.43-2.99-.65-4.61-.65-.91,0-1.82,0-2.74,0-.05,0-.1,0-.14.02-.04.01-.08.03-.11.05-.1.06-.17.16-.17.27v1.21s0,0-.02,0v.04s0,0,.02,0v8.09c0,.2-.15.38-.36.42-.75.15-1.48.28-2.19.4.31-.06.63-.12.95-.18.05,0,.09-.03.13-.06.08-.06.13-.17.13-.29v-9.43s0,0-.01,0v-.04s0,0,.01,0v-1.21c0-.14.12-.27.28-.32.04-.01.09-.02.14-.02l5.71-.53c2.73,0,8.8,3.52,7.44,8.27Z"/><path fill="#4f75ff" d="M8.51,33.14c.06.04.1.11.1.19,0,.09-.06.18-.13.21s-.15.04-.22.04c-1.19,0-2.39-.08-3.55-.45-.42-.14-.84-.32-1.21-.62-.6-.5-.97-1.3-.76-2.19.18-.76.64-1.39,1.1-1.91.82-.94,1.78-1.68,2.74-2.36l1.54-.98c.03.53.09,1.05.16,1.56l-1.53.98c-2,1.52-2.92,2.78-2.65,3.51.19.52.62.77,1.03.93.92.34,1.85.62,2.78.89.19.06.42.07.59.21Z"/><path fill="url(#g1)" d="M40.81,25c0,.31,0,.63-.03.94-.03.59-.1,1.17-.21,1.75,0,.04-.01.08-.02.12-.11.61-.26,1.2-.44,1.78-2.03,6.49-8.27,11.22-15.64,11.22-3.71,0-7.13-1.2-9.87-3.21-1.27-.93-2.39-2.04-3.33-3.28-.22-.29-.43-.58-.62-.89.35-.03.7-.07,1.05-.11.23-.03.46-.06.69-.09,1.24-.17,2.43-.35,3.61-.53.49-.07.99-.15,1.48-.23.09-.02.19-.03.29-.05,1.04-.17,2.07-.33,3.12-.51l.02,0c.57-.1,1.15-.19,1.74-.29.22-.04.62-.13,1.05-.23.43-.1.89-.21,1.23-.27l.23-.04.02,0c.55-.08,1.16-.14,1.65-.36l.09-.04c2.27-1.02,4.48-3.03,4.48-5.68,0-1.43-.61-2.75-1.64-3.81-1.47-1.51-3.78-2.5-6.37-2.5l-1.16-.13c-.15,0-.4-.07-.56-.07l-.47-.05-3.12.24s-.1,0-.13.02c-.16.05-.27.18-.27.32v1.21s0,0-.01,0v.04s0,0,.01,0v9.43c0,.12-.05.22-.12.29-.04.03-.08.05-.12.06-.91.19-1.8.36-2.66.51l-.06.01c-1.11.19-2.18.33-3.18.42-.46.04-.89.08-1.29.1-.24.01-.47.02-.69.03-.11,0-.21-.07-.25-.19-.35-.82-.62-1.68-.81-2.56-.04-.18-.08-.37-.11-.56-.06-.32-.11-.63-.14-.95,0-.06-.02-.13-.02-.19l-.02-.16c-.04-.33-.06-.67-.06-1.01h-.02V25h.01c0-.06,0-.11,0-.16.33-8.44,7.51-15.18,16.32-15.18,4.31,0,8.24,1.62,11.16,4.26.25.22.49.45.72.69l.31.32c.08.09,2.55,2.75,3.32,5.56.48,1.39.65,2.81.81,4.26.02.14.02.24.01.25,0,.15,0,.3,0,.45Z"/><path fill="#4f75ff" d="M47.3,22.18c-.19,1.53-1.92,3.16-5.17,4.84-.51.27-1.06.54-1.65.81l-.1.04-.1.04c-5.19,2.24-10.48,3.96-16.16,4.57-1.27.14-4.66.33-5.32.3-.36-.02-1.89.07-2.85-.1h.01c1.16-.16,6.95-.97,11.73-2.2l.78-.2.54-.14.46-.12.26-.07c4.43-1.21,8.01-2.55,10.65-3.82l.02-.01c.57-.28,1.1-.55,1.58-.81,1.3-.73,5.24-2.85,2.89-4.94-.98-.87-2.47-1.23-3.6-1.74-.13-.06-1.02-.35-.99-.56.11-.57,4.15.86,4.6,1.05.92.38,2.07.98,2.37,2.24.07.27.08.55.05.82Z"/><path fill="#4f75ff" d="M16.91,30.16l.32-11.51v-.25c2.33-.27,4.66-.28,6.97.08,3.79.51,7.5,2.89,7.17,7.2.25-3.18-2.15-5.52-5.08-6.37-2.81-.81-5.85-.74-8.73-.37l.24-.28.03,11.34-.92.16Z"/></svg>
     <div><h1>La Suite MyDAD</h1><span>Plateforme de performance</span></div>
   </div>
-  <div class="sidebar-section">Pilotage</div>
   <nav class="sidebar-nav">
-    <div class="nav-item active" data-page="dashboard"><div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div> Dashboard</div>
-    <div class="nav-item" data-page="hosmony"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div> Parcours</div>
-    <div class="nav-item" data-page="actions"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div> Plan d'Actions</div>
-    <div class="sidebar-section">Performance</div>
-    <div class="nav-item" data-page="strategy"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div> Strategie</div>
-    <div class="nav-item" data-page="indicateurs"><div class="icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div> Indicateurs</div>
-    <div class="nav-item" data-page="opportunities"><div class="icon"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div> Opportunites</div>
-    <div class="sidebar-section">Organisation & Formation</div>
-    <div class="nav-item" data-page="dynamics"><div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div> Organisation</div>
-    <div class="nav-item" data-page="competences"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div> Competences</div>
-    <div class="nav-item" data-page="formations"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div> Formations</div>
-    <div class="sidebar-section">IA & Outils</div>
-    <div class="nav-item" data-page="ai-studio"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1.27A7 7 0 015.27 19H4a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="1" fill="currentColor" stroke="none"/><path d="M9 17c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg></div> Studio IA</div>
-    <div class="nav-item" data-page="tools"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div> Outils MyDAD</div>
-    <div class="nav-item" data-page="connectors"><div class="icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div> Connecteurs API</div>
-    <div class="sidebar-section">Communication</div>
-    <div class="nav-item" data-page="chatbot"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div> Fil d'Actualite</div>
-    <div class="sidebar-section">Portefeuille</div>
-    <div class="nav-item" data-page="crm"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div> CRM</div>
-    <div class="nav-item" data-page="clients"><div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div> Mes Clients</div>
-    <div class="sidebar-section">Documentation</div>
-    <div class="nav-item" data-page="documents"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div> Documents & Audit</div>
-    <div class="sidebar-section">Parametres</div>
-    <div class="nav-item" data-page="settings"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1.08z"/></svg></div> Parametres</div>
+    <!-- PILOTAGE -->
+    <div class="sidebar-group" id="grp-pilotage">
+      <div class="sidebar-group-header" onclick="this.parentElement.classList.toggle('collapsed')">Pilotage <span class="chevron">&#9660;</span></div>
+      <div class="sidebar-group-items">
+        <div class="nav-item active" data-page="dashboard"><div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div> Dashboard <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item hosmony-accent" data-page="hosmony"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div> Parcours HOSMONY <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="actions"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div> Plan d'Actions <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+      </div>
+    </div>
+    <!-- PERFORMANCE -->
+    <div class="sidebar-group" id="grp-performance">
+      <div class="sidebar-group-header" onclick="this.parentElement.classList.toggle('collapsed')">Performance <span class="chevron">&#9660;</span></div>
+      <div class="sidebar-group-items">
+        <div class="nav-item" data-page="strategy"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div> Strategie <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="indicateurs"><div class="icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div> Indicateurs <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="opportunities"><div class="icon"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div> Opportunites <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+      </div>
+    </div>
+    <!-- ORGANISATION -->
+    <div class="sidebar-group" id="grp-organisation">
+      <div class="sidebar-group-header" onclick="this.parentElement.classList.toggle('collapsed')">Organisation <span class="chevron">&#9660;</span></div>
+      <div class="sidebar-group-items">
+        <div class="nav-item" data-page="dynamics"><div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div> Organisation <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="competences"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div> Competences <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="formations"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div> Formations <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="chatbot"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div> Fil d'Actualite <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+      </div>
+    </div>
+    <!-- OUTILS -->
+    <div class="sidebar-group" id="grp-outils">
+      <div class="sidebar-group-header" onclick="this.parentElement.classList.toggle('collapsed')">Outils <span class="chevron">&#9660;</span></div>
+      <div class="sidebar-group-items">
+        <div class="nav-item" data-page="ai-studio"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1.27A7 7 0 015.27 19H4a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="1" fill="currentColor" stroke="none"/><path d="M9 17c.85.63 1.885 1 3 1s2.15-.37 3-1"/></svg></div> Studio IA <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="tools"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div> Outils MyDAD <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="connectors"><div class="icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div> Connecteurs API <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+      </div>
+    </div>
+    <!-- BUSINESS -->
+    <div class="sidebar-group" id="grp-business">
+      <div class="sidebar-group-header" onclick="this.parentElement.classList.toggle('collapsed')">Business <span class="chevron">&#9660;</span></div>
+      <div class="sidebar-group-items">
+        <div class="nav-item" data-page="crm"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div> CRM <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+        <div class="nav-item" data-page="clients"><div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div> Mes Clients <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+      </div>
+    </div>
+    <!-- STANDALONE -->
+    <div style="padding: 2px 0;">
+      <div class="nav-item" data-page="documents"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div> Documents & Audit <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+    </div>
+    <div style="padding: 2px 0; margin-top: auto;">
+      <div class="nav-item" data-page="settings"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1.08z"/></svg></div> Parametres <span class="fav-star" onclick="event.stopPropagation();this.classList.toggle('pinned');this.textContent=this.classList.contains('pinned')?'\u2605':'\u2606'">&#9734;</span></div>
+    </div>
   </nav>
   <div class="sidebar-user">
     <div class="avatar">SL</div>
@@ -610,6 +749,7 @@
 <main class="main">
   <div class="topbar">
     <div class="topbar-left">
+      <button class="mobile-menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('mobile-open')">&#9776;</button>
       <span class="breadcrumb">Portefeuille &rsaquo; <strong>Boulangerie Martin</strong></span>
       <div class="client-selector">&#9662; Changer de client</div>
     </div>
@@ -631,12 +771,33 @@
 
   <!-- DASHBOARD -->
   <div class="content page active" id="page-dashboard">
-    <div class="page-header"><div><div class="page-title">Boulangerie Martin</div><div class="page-subtitle">Derniere mise a jour : 28 mars 2026 &bull; T1 2026</div></div><button class="btn sm ghost" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=settings]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-settings').classList.add('active');">Configurer</button></div>
+    <div class="page-header"><div><div class="page-title">Boulangerie Martin</div><div class="page-subtitle">Derniere mise a jour : 28 mars 2026 &bull; T1 2026</div></div><div style="display:flex;gap:6px;align-items:center;"><button class="btn sm" onclick="document.getElementById('onboarding-card').style.display=document.getElementById('onboarding-card').style.display==='none'?'block':'none';" style="display:inline-flex;align-items:center;gap:6px;">Guide de demarrage <span style="font-size:10px;color:var(--text-muted);background:var(--bg);padding:1px 6px;border-radius:99px;">3/8</span></button><button class="btn sm ghost" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=settings]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-settings').classList.add('active');">Configurer</button></div></div>
+
+    <!-- ONBOARDING WIZARD -->
+    <div class="card slide-up" id="onboarding-card" style="border-left:4px solid var(--accent);margin-bottom:16px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="font-size:15px;font-weight:700;flex:1;">Bienvenue sur MyDAD ! Completez votre configuration</div>
+        <span style="font-size:12px;color:var(--text-muted);">3/8</span>
+        <button class="btn sm ghost" onclick="document.getElementById('onboarding-card').style.display='none';">Masquer</button>
+      </div>
+      <div class="onboarding-progress-bar"><div class="onboarding-progress-fill" style="width:37.5%;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div class="onboarding-step done"><span class="step-icon">&#9989;</span><span style="flex:1;">Creer votre compte</span><span style="font-size:10px;color:var(--green);font-weight:600;">Complete</span></div>
+        <div class="onboarding-step done"><span class="step-icon">&#9989;</span><span style="flex:1;">Renseigner votre entreprise</span><span style="font-size:10px;color:var(--green);font-weight:600;">Complete</span></div>
+        <div class="onboarding-step done"><span class="step-icon">&#9989;</span><span style="flex:1;">Connecter Pennylane</span><span style="font-size:10px;color:var(--green);font-weight:600;">Complete</span></div>
+        <div class="onboarding-step"><span class="step-icon">&#11036;</span><span style="flex:1;">Configurer vos KPIs</span><button class="btn sm primary" style="padding:2px 8px;font-size:10px;">Configurer</button></div>
+        <div class="onboarding-step"><span class="step-icon">&#11036;</span><span style="flex:1;">Demarrer le parcours HOSMONY</span><button class="btn sm primary" style="padding:2px 8px;font-size:10px;">Commencer</button></div>
+        <div class="onboarding-step"><span class="step-icon">&#11036;</span><span style="flex:1;">Inviter vos collaborateurs</span><button class="btn sm primary" style="padding:2px 8px;font-size:10px;">Inviter</button></div>
+        <div class="onboarding-step"><span class="step-icon">&#11036;</span><span style="flex:1;">Creer votre premier agent IA</span><button class="btn sm primary" style="padding:2px 8px;font-size:10px;">Creer</button></div>
+        <div class="onboarding-step"><span class="step-icon">&#11036;</span><span style="flex:1;">Importer vos donnees</span><button class="btn sm primary" style="padding:2px 8px;font-size:10px;">Importer</button></div>
+      </div>
+    </div>
+
     <!-- HOSMONY level indicator — compact -->
     <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center;">
       <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--primary-bg);border:1px solid var(--primary);border-radius:var(--radius);flex:1;">
         <div style="width:32px;height:32px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;">2</div>
-        <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Niveau 2 &mdash; Dynamique</div><div style="font-size:11px;color:var(--text-secondary);">7/9 etapes &bull; Score 47/100</div></div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Niveau 2 &mdash; Dynamique</div><div style="font-size:11px;color:var(--text-secondary);">7/9 etapes &bull; Score 47/100 &bull; <a href="#" onclick="event.preventDefault();document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=hosmony]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-hosmony').classList.add('active');" style="color:var(--primary);text-decoration:none;font-weight:600;">Voir le parcours &rarr;</a></div></div>
         <div style="display:flex;gap:3px;">
           <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.4;">1</div>
           <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;">2</div>
@@ -647,13 +808,47 @@
       </div>
     </div>
     <div class="grid-4">
-      <div class="kpi-card" style="border-top-color:var(--accent);"><div class="kpi-badge up">+12%</div><div class="kpi-label">CA du jour</div><div class="kpi-value">2 340 &euro;</div><div class="kpi-detail">+12% vs hier</div><div class="kpi-sparkline" id="sp1"></div></div>
-      <div class="kpi-card" style="border-top-color:var(--green);"><div class="kpi-badge neutral">=</div><div class="kpi-label">Tresorerie</div><div class="kpi-value">34.2 K&euro;</div><div class="kpi-detail">Solde ce matin</div><div class="kpi-sparkline" id="sp2"></div></div>
-      <div class="kpi-card" style="border-top-color:var(--amber);"><div class="kpi-badge up">+6%</div><div class="kpi-label">Panier moyen</div><div class="kpi-value">8.70 &euro;</div><div class="kpi-detail">vs 8.20 &euro; moy. semaine</div><div class="kpi-sparkline" id="sp3"></div></div>
-      <div class="kpi-card" style="border-top-color:var(--purple);"><div class="kpi-badge up">+3</div><div class="kpi-label">Commandes</div><div class="kpi-value">42</div><div class="kpi-detail">dont 8 reservations</div><div class="kpi-sparkline" id="sp4"></div></div>
+      <div class="kpi-card slide-up" style="border-top-color:var(--accent);"><div class="kpi-badge up">+12%</div><div class="kpi-label">CA du jour</div><div class="kpi-value">2 340 &euro;</div><div class="kpi-detail">+12% vs hier</div><div class="kpi-sparkline" id="sp1"></div></div>
+      <div class="kpi-card slide-up" style="border-top-color:var(--green);animation-delay:0.05s;"><div class="kpi-badge neutral">=</div><div class="kpi-label">Tresorerie</div><div class="kpi-value">34.2 K&euro;</div><div class="kpi-detail">Solde ce matin</div><div class="kpi-sparkline" id="sp2"></div></div>
+      <div class="kpi-card slide-up" style="border-top-color:var(--amber);animation-delay:0.1s;"><div class="kpi-badge up">+6%</div><div class="kpi-label">Panier moyen</div><div class="kpi-value">8.70 &euro;</div><div class="kpi-detail">vs 8.20 &euro; moy. semaine</div><div class="kpi-sparkline" id="sp3"></div></div>
+      <div class="kpi-card slide-up" style="border-top-color:var(--purple);animation-delay:0.15s;"><div class="kpi-badge up">+3</div><div class="kpi-label">Commandes</div><div class="kpi-value">42</div><div class="kpi-detail">dont 8 reservations</div><div class="kpi-sparkline" id="sp4"></div></div>
     </div>
+
+    <!-- MINI WIDGETS COCKPIT -->
+    <div class="grid-4" style="margin-bottom:16px;">
+      <div class="mini-widget slide-up" style="border-left:3px solid var(--primary);" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=hosmony]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-hosmony').classList.add('active');">
+        <div class="mini-widget-title">Parcours HOSMONY</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:6px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;">2</div>
+          <div><div class="mini-widget-value" style="font-size:14px;">7/9 etapes</div></div>
+        </div>
+        <div class="progress-track" style="margin-top:6px;"><div class="progress-fill" style="width:78%;background:var(--primary);"></div></div>
+        <span class="mini-widget-link">Voir &rarr;</span>
+      </div>
+      <div class="mini-widget slide-up" style="border-left:3px solid var(--green);animation-delay:0.05s;" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=crm]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-crm').classList.add('active');">
+        <div class="mini-widget-title">CRM</div>
+        <div class="mini-widget-value" style="font-size:14px;">8 deals</div>
+        <div class="mini-widget-detail">47.5K&euro; pipeline</div>
+        <div class="mini-widget-detail">3 relances aujourd'hui</div>
+        <span class="mini-widget-link">Voir &rarr;</span>
+      </div>
+      <div class="mini-widget slide-up" style="border-left:3px solid var(--purple);animation-delay:0.1s;" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=ai-studio]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-ai-studio').classList.add('active');">
+        <div class="mini-widget-title">Studio IA</div>
+        <div class="mini-widget-value" style="font-size:14px;">6 agents</div>
+        <div class="mini-widget-detail">3 automatisations</div>
+        <div class="mini-widget-detail">Dernier run : 2h</div>
+        <span class="mini-widget-link">Voir &rarr;</span>
+      </div>
+      <div class="mini-widget slide-up" style="border-left:3px solid var(--amber);animation-delay:0.15s;" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=indicateurs]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-indicateurs').classList.add('active');">
+        <div class="mini-widget-title">Indicateurs</div>
+        <div class="mini-widget-value" style="font-size:14px;">32 indicateurs</div>
+        <div class="mini-widget-detail">22 conformes &bull; 3 alertes</div>
+        <span class="mini-widget-link">Voir &rarr;</span>
+      </div>
+    </div>
+
     <div class="grid-2">
-      <div class="card">
+      <div class="card slide-up">
         <div class="card-header"><div class="card-title">Plan d'Actions</div><div class="card-badge">5/12</div></div>
         <div class="card-body">
           <div class="action-item"><div class="action-dot" style="background:var(--primary);"></div><div style="flex:1"><div class="action-title">Bilan carbone Scope 1+2</div><div class="action-meta"><span class="tag" style="background:var(--red-bg);color:var(--red);">Haute</span> &bull; M. Martin &bull; 15 avr.</div></div></div>
@@ -662,7 +857,7 @@
           <div style="margin-top:8px;text-align:center;"><button class="btn sm" style="width:100%;justify-content:center;">Voir tout le plan d'actions &rarr;</button></div>
         </div>
       </div>
-      <div class="card">
+      <div class="card slide-up" style="animation-delay:0.1s;">
         <div class="card-header"><div class="card-title">Etapes HOSMONY &mdash; Niveau 2</div><div class="card-badge">7/9</div></div>
         <div class="card-body">
           <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Formation HOSMONY Niv.2</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
@@ -691,26 +886,26 @@
     <div class="card" style="margin-bottom:14px;">
       <div class="card-header"><div class="card-title">Etapes &mdash; Niveau 2 : Dynamique</div><div class="card-badge">7/9</div></div>
       <div class="card-body">
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Formation HOSMONY Niveau 2</div><div class="step-desc">Je construis ma strategie &mdash; 2 jours</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne : Gouvernance</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning niveau 2</div><div class="step-desc">Approfondissement et mise a jour reglementaire</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Diagnostic progression durabilite accompagne</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite niveau 2</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Formation HOSMONY Niveau 2</div><div class="step-desc">Je construis ma strategie &mdash; 2 jours</div></div><div class="step-status"><span class="badge-achievement celebrate">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne : Gouvernance</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning niveau 2</div><div class="step-desc">Approfondissement et mise a jour reglementaire</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Diagnostic progression durabilite accompagne</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite niveau 2</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
         <div class="step-item"><div class="step-num current">6</div><div style="flex:1"><div class="step-title">Definition des valeurs et raison d'etre</div><div class="step-desc">Definir les valeurs fondamentales de l'entreprise</div></div><div class="step-status"><button class="btn sm primary">Continuer</button></div></div>
         <div class="step-item"><div class="step-num locked">7</div><div style="flex:1"><div class="step-title">Ambitions DURABILITE (carte mentale)</div><div class="step-desc">Formaliser les ambitions via carte mentale</div></div><div class="step-status"><button class="btn sm" disabled>Verrouille</button></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning complementaire</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Bilan niveau 2</div></div><div class="step-status" style="color:var(--green);">Validee <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning complementaire</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
+        <div class="step-item slide-up"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Bilan niveau 2</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span> <button class="btn sm ghost">Voir</button></div></div>
       </div>
     </div>
     <div class="card">
       <div class="card-header"><div class="card-title">Etapes &mdash; Niveau 1 : Essentiel</div><div style="display:flex;align-items:center;gap:8px;"><span class="pill green">6/6 &#10003;</span><button class="btn sm ghost">Voir le rapport</button></div></div>
       <div class="card-body">
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Sensibilisation HOSMONY</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning initial durabilite</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Autodiagnostic progression durabilite</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
-        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Rapport de progression niveau 1</div></div><div class="step-status" style="color:var(--green);">Validee</div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Sensibilisation HOSMONY</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Consultation citoyenne</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">E-learning initial durabilite</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Autodiagnostic progression durabilite</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Analyse indicateur durabilite</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
+        <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Rapport de progression niveau 1</div></div><div class="step-status"><span class="badge-achievement">&#9733; Valide</span></div></div>
       </div>
     </div>
   </div>
@@ -1717,12 +1912,15 @@
 
 <script>
   document.querySelectorAll('.nav-item[data-page]').forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', (e) => {
+      if (e.target.classList.contains('fav-star')) return;
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       item.classList.add('active');
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const p = document.getElementById('page-' + item.dataset.page);
       if (p) p.classList.add('active');
+      // Close mobile sidebar
+      document.querySelector('.sidebar').classList.remove('mobile-open');
     });
   });
   document.addEventListener('click', (e) => {
