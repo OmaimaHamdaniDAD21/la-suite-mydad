@@ -804,7 +804,7 @@
     <!-- PILOTAGE -->
     <div class="nav-group">
       <div class="nav-group-header" onclick="toggleGroup(this)"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div> Pilotage <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg></div>
-      <div class="nav-group-items open">
+      <div class="nav-group-items">
         <div class="nav-item sub hosmony-accent" data-page="hosmony">Parcours HOSMONY</div>
         <div class="nav-item sub" data-page="actions">Plan d'Actions <span style="margin-left:auto;font-size:10px;font-weight:600;color:var(--text-muted);background:var(--bg);padding:1px 5px;border-radius:3px;">4</span></div>
       </div>
@@ -2183,24 +2183,29 @@
   spark('sp3', [24,23.5,22.8,22.1,21.5,21,20.7,20.2,19.8,19.3,18.7,18.2], '#059669');
   spark('sp4', [6.5,6.6,6.7,6.8,6.9,6.9,7,7,7,7.1,7,7.1], '#D97706');
   // Sidebar group toggle
+  // Click group header = navigate to first sub-page + open submenu
   function toggleGroup(header) {
     const items = header.nextElementSibling;
-    const isOpen = items.classList.contains('open');
+    const firstSub = items.querySelector('.nav-item.sub[data-page]');
     // Close all groups
     document.querySelectorAll('.nav-group-items').forEach(g => g.classList.remove('open'));
     document.querySelectorAll('.nav-group-header').forEach(h => h.classList.remove('expanded'));
-    // Open clicked if was closed
-    if (!isOpen) {
-      items.classList.add('open');
-      header.classList.add('expanded');
-    }
+    // Open this group
+    items.classList.add('open');
+    header.classList.add('expanded');
+    // Navigate to first sub-page
+    if (firstSub) firstSub.click();
   }
 
-  // Auto-expand group when sub-item is clicked
-  document.querySelectorAll('.nav-item.sub[data-page]').forEach(item => {
+  // When navigating, auto-expand the right group and collapse others
+  document.querySelectorAll('.nav-item[data-page]').forEach(item => {
     item.addEventListener('click', () => {
       const group = item.closest('.nav-group-items');
-      if (group && !group.classList.contains('open')) {
+      // Collapse all groups
+      document.querySelectorAll('.nav-group-items').forEach(g => g.classList.remove('open'));
+      document.querySelectorAll('.nav-group-header').forEach(h => h.classList.remove('expanded'));
+      // Open only the group of the clicked item
+      if (group) {
         group.classList.add('open');
         group.previousElementSibling.classList.add('expanded');
       }
