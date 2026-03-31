@@ -15,9 +15,11 @@
     --text: #1A1A2E;
     --text-secondary: #64748B;
     --text-muted: #94A3B8;
-    --primary: #00BBCC;
-    --primary-hover: #009DAA;
-    --primary-bg: #ECFEFF;
+    --primary: #315299;
+    --primary-hover: #273f7a;
+    --primary-bg: #EEF1F8;
+    --accent: #45E0EE;
+    --accent-bg: #EDFCFE;
     --green: #059669;
     --green-bg: #ECFDF5;
     --amber: #D97706;
@@ -26,11 +28,11 @@
     --red-bg: #FEF2F2;
     --purple: #7C3AED;
     --purple-bg: #F5F3FF;
-    --cyan: #00BBCC;
-    --cyan-bg: #ECFEFF;
+    --cyan: #45E0EE;
+    --cyan-bg: #EDFCFE;
     --navy: #315299;
     --hosmony-1: #94A3B8;
-    --hosmony-2: #00BBCC;
+    --hosmony-2: #315299;
     --hosmony-3: #059669;
     --hosmony-4: #D97706;
     --hosmony-5: #7C3AED;
@@ -101,7 +103,7 @@
   }
   .nav-item:hover { background: var(--bg); color: var(--text); }
   .nav-item.active {
-    background: var(--primary);
+    background: var(--navy);
     color: #fff;
     font-weight: 600;
   }
@@ -214,8 +216,8 @@
     line-height: 1.4;
   }
   .btn:hover { background: var(--bg); border-color: var(--text-muted); }
-  .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
-  .btn.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .btn.primary:hover { background: #273f7a; border-color: #273f7a; }
   .btn.sm { padding: 3px 8px; font-size: 11px; }
   .btn.ghost { border: none; color: var(--text-secondary); padding: 4px 8px; }
   .btn.ghost:hover { background: var(--bg); color: var(--text); }
@@ -255,15 +257,15 @@
 
   /* ═══ HOSMONY BANNER ═══ */
   .hosmony-banner {
-    background: linear-gradient(135deg, #EFF6FF 0%, #F0FDF4 100%);
-    border: 1px solid var(--primary);
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--accent-bg) 100%);
+    border: 1px solid var(--accent);
     border-radius: var(--radius);
     padding: 16px 18px;
     margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 14px;
-    box-shadow: 0 2px 12px rgba(59,130,246,0.08);
+    box-shadow: 0 2px 12px rgba(69,224,238,0.1);
   }
   .hosmony-level-badge {
     width: 40px; height: 40px;
@@ -304,7 +306,7 @@
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-  .kpi-card:nth-child(1) { border-top-color: var(--primary); }
+  .kpi-card:nth-child(1) { border-top-color: var(--accent); }
   .kpi-card:nth-child(2) { border-top-color: var(--green); }
   .kpi-card:nth-child(3) { border-top-color: var(--amber); }
   .kpi-card:nth-child(4) { border-top-color: var(--purple); }
@@ -368,7 +370,7 @@
   .pill.amber { background: var(--amber-bg); color: var(--amber); }
   .pill.red { background: var(--red-bg); color: var(--red); }
   .pill.gray { background: var(--bg); color: var(--text-muted); }
-  .pill.blue { background: var(--primary-bg); color: var(--primary); }
+  .pill.blue { background: var(--accent-bg); color: var(--navy); }
   .pill.purple { background: var(--purple-bg); color: var(--purple); }
 
   /* ═══ JOURNEY ═══ */
@@ -423,7 +425,7 @@
   .tool-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
   .tool-desc { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.4; }
   .tool-btn { width: 100%; padding: 6px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 11px; font-weight: 600; cursor: pointer; background: var(--surface); font-family: inherit; }
-  .tool-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .tool-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
   .tool-btn.locked { color: var(--text-muted); cursor: not-allowed; }
 
   .connector-card {
@@ -442,7 +444,7 @@
   .agent-list { display: flex; flex-direction: column; gap: 3px; }
   .agent-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; cursor: pointer; }
   .agent-card:hover { background: var(--bg); }
-  .agent-card.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .agent-card.selected { background: var(--navy); color: #fff; border-color: var(--navy); }
   .agent-card.selected .agent-desc { color: rgba(255,255,255,0.6); }
   .agent-name { font-size: 11px; font-weight: 600; }
   .agent-desc { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
@@ -477,7 +479,7 @@
 
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); text-align: center; transition: transform 0.15s; }
   .stat-card:hover { transform: translateY(-1px); }
-  .stat-card:nth-child(1) { border-left: 3px solid var(--primary); }
+  .stat-card:nth-child(1) { border-left: 3px solid var(--accent); }
   .stat-card:nth-child(2) { border-left: 3px solid var(--green); }
   .stat-card:nth-child(3) { border-left: 3px solid var(--amber); }
   .stat-card:nth-child(4) { border-left: 3px solid var(--purple); }
@@ -524,12 +526,12 @@
 
   .ai-btn {
     width: 100%; padding: 8px;
-    background: var(--primary); color: #fff;
+    background: var(--navy); color: #fff;
     border: none; border-radius: var(--radius-sm);
     font-size: 12px; font-weight: 600; cursor: pointer;
     margin-top: 8px; font-family: inherit;
   }
-  .ai-btn:hover { background: var(--primary-hover); }
+  .ai-btn:hover { background: #273f7a; }
   .ai-result {
     display: none; margin-top: 8px; padding: 10px;
     background: var(--bg);
@@ -872,7 +874,7 @@
 
     <!-- Agent selector — using cyan accent -->
     <div style="display:flex;gap:6px;margin-bottom:16px;align-items:center;">
-      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--cyan);background:var(--cyan);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
+      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
         Reglementaire
       </div>
@@ -894,7 +896,7 @@
     <div id="agent-reglem">
       <!-- Tabs + filters -->
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
-        <span style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--cyan);color:#fff;border-radius:4px;font-weight:600;">Reglementations &nbsp;<strong>19</strong></span>
+        <span style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--navy);color:#fff;border-radius:4px;font-weight:600;">Reglementations &nbsp;<strong>19</strong></span>
         <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Calendrier &nbsp;<strong>3</strong></span>
         <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Evolutions sectorielles &nbsp;<strong>6</strong></span>
         <div style="flex:1;"></div>
@@ -1331,9 +1333,9 @@
       p.style.borderColor = 'var(--border)';
       p.style.fontWeight = '500';
     });
-    el.style.background = 'var(--primary)';
+    el.style.background = 'var(--navy)';
     el.style.color = '#fff';
-    el.style.borderColor = 'var(--primary)';
+    el.style.borderColor = 'var(--navy)';
     el.style.fontWeight = '600';
   }
 
@@ -1343,10 +1345,10 @@
     document.getElementById('agent-finance').style.display = id === 'finance' ? 'block' : 'none';
     document.querySelectorAll('.agent-tab:not(.disabled)').forEach(tab => {
       if (tab.dataset.agent === id) {
-        tab.style.background = 'var(--cyan)';
+        tab.style.background = 'var(--navy)';
         tab.style.color = '#fff';
         tab.style.fontWeight = '600';
-        tab.style.borderColor = 'var(--cyan)';
+        tab.style.borderColor = 'var(--navy)';
       } else {
         tab.style.background = 'var(--surface)';
         tab.style.color = 'var(--text)';
