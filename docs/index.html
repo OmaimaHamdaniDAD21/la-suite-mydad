@@ -872,36 +872,43 @@
 
     <div class="page-header"><div><div class="page-title">Veilles IA</div><div class="page-subtitle">4 agents intelligents debloques par votre progression HOSMONY</div></div><div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">Actualiser la veille</button></div></div>
 
-    <!-- Agent selector — using cyan accent -->
-    <div style="display:flex;gap:6px;margin-bottom:16px;align-items:center;">
-      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-        Reglementaire
+    <!-- Agent selector as sidebar tabs on the left -->
+    <div style="display:flex;gap:14px;">
+      <div style="width:180px;flex-shrink:0;">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px;padding-left:2px;">Agents</div>
+        <div style="display:flex;flex-direction:column;gap:3px;">
+          <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--navy);color:#fff;cursor:pointer;font-size:12px;font-weight:600;border:none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Reglementaire
+          </div>
+          <div class="agent-tab" onclick="showAgent('finance')" data-agent="finance" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--surface);color:var(--text);cursor:pointer;font-size:12px;font-weight:500;border:1px solid var(--border);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            Financement
+          </div>
+          <div class="agent-tab disabled" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;border:1px solid var(--border-light);opacity:.45;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            Business <span style="font-size:9px;color:var(--text-muted);margin-left:auto;">Niv.3</span>
+          </div>
+          <div class="agent-tab disabled" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;border:1px solid var(--border-light);opacity:.45;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            Image <span style="font-size:9px;color:var(--text-muted);margin-left:auto;">Niv.4</span>
+          </div>
+        </div>
       </div>
-      <div class="agent-tab" onclick="showAgent('finance')" data-agent="finance" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:12px;font-weight:500;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        Financement
-      </div>
-      <div class="agent-tab disabled" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;opacity:.5;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-        Business <span class="pill gray" style="font-size:9px;padding:1px 5px;">Niv.3</span>
-      </div>
-      <div class="agent-tab disabled" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-muted);cursor:not-allowed;font-size:12px;font-weight:500;opacity:.5;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-        Image <span class="pill gray" style="font-size:9px;padding:1px 5px;">Niv.4</span>
-      </div>
-    </div>
+
+      <!-- Agent content area -->
+      <div style="flex:1;min-width:0;">
 
     <!-- AGENT REGLEMENTAIRE — Detail -->
     <div id="agent-reglem">
       <!-- Tabs + filters -->
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
         <span style="padding:6px 16px;font-size:12px;cursor:pointer;background:var(--navy);color:#fff;border-radius:4px;font-weight:600;">Reglementations &nbsp;<strong>19</strong></span>
         <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Calendrier &nbsp;<strong>3</strong></span>
-        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Evolutions sectorielles &nbsp;<strong>6</strong></span>
+        <span class="pill gray" style="padding:6px 16px;font-size:12px;cursor:pointer;">Evolutions &nbsp;<strong>6</strong></span>
         <div style="flex:1;"></div>
         <select style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;font-family:inherit;"><option>Tous les risques</option><option>Risque eleve</option><option>Risque moyen</option></select>
-        <input style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;width:180px;font-family:inherit;" placeholder="Rechercher...">
+        <input style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;width:160px;font-family:inherit;" placeholder="Rechercher...">
       </div>
 
       <!-- Reglementation cards -->
@@ -1047,6 +1054,9 @@
         <button class="btn sm">Voir le dossier</button>
       </div>
     </div>
+
+      </div><!-- end agent content area -->
+    </div><!-- end flex layout -->
   </div>
 
   <!-- STUDIO IA -->
@@ -1348,12 +1358,12 @@
         tab.style.background = 'var(--navy)';
         tab.style.color = '#fff';
         tab.style.fontWeight = '600';
-        tab.style.borderColor = 'var(--navy)';
+        tab.style.border = 'none';
       } else {
         tab.style.background = 'var(--surface)';
         tab.style.color = 'var(--text)';
         tab.style.fontWeight = '500';
-        tab.style.borderColor = 'var(--border)';
+        tab.style.border = '1px solid var(--border)';
       }
     });
   }
