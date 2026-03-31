@@ -31,8 +31,9 @@ import { dataPipelineRoutes } from "./modules/data-pipeline/data-pipeline.routes
 import { dashboardRoutes } from "./modules/dashboard/dashboard.routes";
 import { aiStudioRoutes } from "./modules/ai-studio/ai-studio.routes";
 
-// Route imports — Dynamics
+// Route imports — Dynamics & Integrations
 import { dynamicsRoutes } from "./modules/dynamics/dynamics.routes";
+import { integrationsRoutes } from "./modules/integrations/integrations.routes";
 
 export const app = express();
 
@@ -73,8 +74,9 @@ app.use("/api/data", dataPipelineRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/ai", aiStudioRoutes);
 
-// ═══ Dynamics ═══
+// ═══ Dynamics & Integrations ═══
 app.use("/api/dynamics", dynamicsRoutes);
+app.use("/api/integrations", integrationsRoutes);
 
 // Error handler (must be last)
 app.use(errorHandler);
