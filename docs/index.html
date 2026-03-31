@@ -484,6 +484,17 @@ a { text-decoration: none; color: inherit; }
   .search-bar { width: 180px; }
   .topbar-right .btn-ghost, .topbar-right .btn-primary { display: none; }
 }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .topbar { left: 0; }
+  .main { margin-left: 0; }
+  .kpi-grid, .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .kanban { flex-direction: column; }
+  .bar-chart { height: 120px; }
+  .topbar-center { display: none; }
+}
 </style>
 </head>
 <body>
