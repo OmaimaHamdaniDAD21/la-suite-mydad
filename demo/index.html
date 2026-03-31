@@ -594,9 +594,12 @@
     <div class="sidebar-section">Communication</div>
     <div class="nav-item" data-page="chatbot"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div> Fil d'Actualite</div>
     <div class="sidebar-section">Portefeuille</div>
+    <div class="nav-item" data-page="crm"><div class="icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div> CRM</div>
     <div class="nav-item" data-page="clients"><div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div> Mes Clients</div>
     <div class="sidebar-section">Documentation</div>
     <div class="nav-item" data-page="documents"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div> Documents & Audit</div>
+    <div class="sidebar-section">Parametres</div>
+    <div class="nav-item" data-page="settings"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1.08z"/></svg></div> Parametres</div>
   </nav>
   <div class="sidebar-user">
     <div class="avatar">SL</div>
@@ -628,7 +631,7 @@
 
   <!-- DASHBOARD -->
   <div class="content page active" id="page-dashboard">
-    <div class="page-header"><div><div class="page-title">Boulangerie Martin</div><div class="page-subtitle">Derniere mise a jour : 28 mars 2026 &bull; T1 2026</div></div></div>
+    <div class="page-header"><div><div class="page-title">Boulangerie Martin</div><div class="page-subtitle">Derniere mise a jour : 28 mars 2026 &bull; T1 2026</div></div><button class="btn sm ghost" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector('[data-page=settings]').classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-settings').classList.add('active');">Configurer</button></div>
     <!-- HOSMONY level indicator — compact -->
     <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center;">
       <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--primary-bg);border:1px solid var(--primary);border-radius:var(--radius);flex:1;">
@@ -644,10 +647,10 @@
       </div>
     </div>
     <div class="grid-4">
-      <div class="kpi-card"><div class="kpi-badge up">+8.2%</div><div class="kpi-label">Chiffre d'Affaires</div><div class="kpi-value">847 K&euro;</div><div class="kpi-detail">vs 783 K&euro; T1 2025</div><div class="kpi-sparkline" id="sp1"></div></div>
-      <div class="kpi-card"><div class="kpi-badge up">+1.3 pts</div><div class="kpi-label">Marge Nette</div><div class="kpi-value">12.4%</div><div class="kpi-detail">Objectif 15%</div><div class="kpi-sparkline" id="sp2"></div></div>
-      <div class="kpi-card"><div class="kpi-badge up">&minus;12%</div><div class="kpi-label">Empreinte Carbone</div><div class="kpi-value">18.2 <small style="font-size:13px;font-weight:400;">tCO2e</small></div><div class="kpi-detail">vs 20.7 en 2025</div><div class="kpi-sparkline" id="sp3"></div></div>
-      <div class="kpi-card"><div class="kpi-badge neutral">=</div><div class="kpi-label">Satisfaction Equipe</div><div class="kpi-value">7.1 <small style="font-size:13px;font-weight:400;">/ 10</small></div><div class="kpi-detail">Seuil Niv.3 : &ge; 7.5</div><div class="kpi-sparkline" id="sp4"></div></div>
+      <div class="kpi-card" style="border-top-color:var(--accent);"><div class="kpi-badge up">+12%</div><div class="kpi-label">CA du jour</div><div class="kpi-value">2 340 &euro;</div><div class="kpi-detail">+12% vs hier</div><div class="kpi-sparkline" id="sp1"></div></div>
+      <div class="kpi-card" style="border-top-color:var(--green);"><div class="kpi-badge neutral">=</div><div class="kpi-label">Tresorerie</div><div class="kpi-value">34.2 K&euro;</div><div class="kpi-detail">Solde ce matin</div><div class="kpi-sparkline" id="sp2"></div></div>
+      <div class="kpi-card" style="border-top-color:var(--amber);"><div class="kpi-badge up">+6%</div><div class="kpi-label">Panier moyen</div><div class="kpi-value">8.70 &euro;</div><div class="kpi-detail">vs 8.20 &euro; moy. semaine</div><div class="kpi-sparkline" id="sp3"></div></div>
+      <div class="kpi-card" style="border-top-color:var(--purple);"><div class="kpi-badge up">+3</div><div class="kpi-label">Commandes</div><div class="kpi-value">42</div><div class="kpi-detail">dont 8 reservations</div><div class="kpi-sparkline" id="sp4"></div></div>
     </div>
     <div class="grid-2">
       <div class="card">
@@ -712,19 +715,74 @@
     </div>
   </div>
 
-  <!-- INDICATEURS RSE -->
+  <!-- INDICATEURS -->
   <div class="content page" id="page-indicateurs">
-    <div class="page-header"><div><div class="page-title">Indicateurs RSE</div><div class="page-subtitle">Frequence : Semestrielle (Niveau 2)</div></div>
-    <div style="display:flex;gap:6px;"><button class="btn">Importer des donnees</button><button class="btn">Exporter</button><button class="btn primary">+ Ajouter un indicateur</button></div></div>
+    <div class="page-header"><div><div class="page-title">Indicateurs</div><div class="page-subtitle">Pilotage et suivi de tous vos indicateurs</div></div>
+    <div style="display:flex;gap:6px;"><button class="btn">Importer</button><button class="btn">Exporter</button><button class="btn primary">+ Creer un indicateur</button><button class="btn primary" style="background:var(--accent);border-color:var(--accent);color:var(--navy);">+ Creer un graphique</button></div></div>
+
+    <!-- Tabs: types d'indicateurs -->
+    <div class="tabs" style="margin-bottom:14px;">
+      <div class="tab active">Tous <strong>32</strong></div>
+      <div class="tab">Financier <strong>8</strong></div>
+      <div class="tab">RSE <strong>12</strong></div>
+      <div class="tab">Commercial <strong>6</strong></div>
+      <div class="tab">RH <strong>4</strong></div>
+      <div class="tab">Operations <strong>2</strong></div>
+      <div class="tab">Graphiques</div>
+    </div>
+
+    <!-- Graphiques rapides -->
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div class="card" style="padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;">Evolution CA mensuel</div>
+          <div style="display:flex;gap:4px;"><button class="btn sm ghost">6M</button><button class="btn sm" style="background:var(--navy);color:#fff;border-color:var(--navy);">12M</button><button class="btn sm ghost">3A</button></div>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:4px;height:100px;padding:0 4px;">
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:45%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:50%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:48%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:55%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:60%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:52%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:65%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:62%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.3;border-radius:3px 3px 0 0;height:70%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.4;border-radius:3px 3px 0 0;height:75%;"></div>
+          <div style="flex:1;background:var(--accent);opacity:.5;border-radius:3px 3px 0 0;height:82%;"></div>
+          <div style="flex:1;background:var(--navy);border-radius:3px 3px 0 0;height:90%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);margin-top:4px;padding:0 4px;"><span>Avr.</span><span>Mai</span><span>Juin</span><span>Jul.</span><span>Aout</span><span>Sep.</span><span>Oct.</span><span>Nov.</span><span>Dec.</span><span>Jan.</span><span>Fev.</span><span>Mars</span></div>
+      </div>
+      <div class="card" style="padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;">Repartition par categorie</div>
+          <button class="btn sm ghost">Configurer</button>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;height:100px;">
+          <!-- Simple donut chart representation -->
+          <div style="width:100px;height:100px;border-radius:50%;background:conic-gradient(var(--navy) 0% 25%, var(--green) 25% 47%, var(--amber) 47% 66%, var(--purple) 66% 78%, var(--accent) 78% 100%);position:relative;flex-shrink:0;">
+            <div style="position:absolute;inset:25px;background:var(--surface);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;">32</div>
+          </div>
+          <div style="font-size:11px;display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--navy);"></div> Financier <strong>8</strong></div>
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--green);"></div> Environnement <strong>7</strong></div>
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--amber);"></div> Social <strong>6</strong></div>
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--purple);"></div> Commercial <strong>4</strong></div>
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--accent);"></div> Autres <strong>7</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="import-bar">
       <span style="font-weight:600;">Filtrer :</span>
-      <select><option>Toutes categories</option><option>Environnement</option><option>Social</option><option>Societale</option><option>Ethique</option><option>Gouvernance</option></select>
+      <select><option>Toutes categories</option><option>Financier</option><option>Environnement</option><option>Social</option><option>Commercial</option><option>RH</option><option>Operations</option></select>
       <select><option>Tous statuts</option><option>Conforme</option><option>En progres</option><option>Non conforme</option></select>
-      <select><option>Toutes sources</option><option>Saisie manuelle</option><option>Pennylane</option><option>PayFit</option><option>Calcul auto</option></select>
+      <select><option>Toutes sources</option><option>Saisie manuelle</option><option>Pennylane</option><option>PayFit</option><option>Calcul auto</option><option>Caisse</option></select>
+      <select><option>Toutes frequences</option><option>Journalier</option><option>Hebdomadaire</option><option>Mensuel</option><option>Trimestriel</option></select>
       <div style="flex:1;"></div>
-      <span class="pill blue">Niv.2 Semestriel</span>
-      <span class="pill gray">Niv.3 Trim.</span>
-      <span class="pill gray">Niv.4 Mens.</span>
+      <input style="padding:4px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:11px;width:160px;font-family:inherit;" placeholder="Rechercher...">
     </div>
     <div class="grid-4">
       <div class="stat-card"><div class="stat-val">32</div><div class="stat-label">Indicateurs suivis</div></div>
@@ -1032,136 +1090,140 @@
 
   <!-- STUDIO IA -->
   <div class="content page" id="page-ai-studio">
-    <div class="page-header"><div><div class="page-title">Studio IA</div><div class="page-subtitle">6 assistants metier connectes a vos donnees</div></div><div style="display:flex;gap:6px;"><button class="btn">Configurer</button><button class="btn primary">+ Creer un agent</button></div></div>
+    <div class="page-header"><div><div class="page-title">Studio IA</div><div class="page-subtitle">Creez des agents et automatisations sur mesure</div></div><div style="display:flex;gap:6px;"><button class="btn primary">+ Creer un agent</button><button class="btn primary" style="background:var(--accent);border-color:var(--accent);color:var(--navy);">+ Automatisation</button></div></div>
 
-    <!-- Agent pills small + layout -->
-    <div style="display:flex;gap:6px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
-      <div class="ai-agent-pill active" onclick="selectAIAgent(this, 'commercial')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--text);background:var(--primary);color:#fff;cursor:pointer;font-size:11px;font-weight:600;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-        Commercial
+    <!-- Tabs -->
+    <div class="tabs" style="margin-bottom:18px;">
+      <div class="tab active">Mes Agents <strong>6</strong></div>
+      <div class="tab">Automatisations <strong>3</strong></div>
+      <div class="tab">Templates</div>
+      <div class="tab">Historique</div>
+    </div>
+
+    <!-- Agents grid -->
+    <div class="grid-3" style="margin-bottom:20px;">
+      <!-- Agent card 1 -->
+      <div class="card" style="padding:16px;border-top:3px solid var(--navy);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Commercial</div><div style="font-size:10px;color:var(--text-muted);">Portefeuille, scoring, recommandations</div></div>
+          <span class="pill green">Actif</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Analyse votre portefeuille clients, identifie les opportunites de croissance et genere des recommandations.</div>
+        <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
+          <span>47 executions</span><span>&bull;</span><span>Derniere : il y a 2h</span>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <button class="btn sm primary">Utiliser</button>
+          <button class="btn sm">Configurer</button>
+          <button class="btn sm ghost">Dupliquer</button>
+        </div>
       </div>
-      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'comptable')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        Comptable
+      <!-- Agent card 2 -->
+      <div class="card" style="padding:16px;border-top:3px solid var(--green);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Comptable</div><div style="font-size:10px;color:var(--text-muted);">Analyse financiere, ecritures</div></div>
+          <span class="pill green">Actif</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Analyse vos donnees comptables, detecte les anomalies et propose des optimisations fiscales.</div>
+        <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
+          <span>23 executions</span><span>&bull;</span><span>Derniere : hier</span>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <button class="btn sm primary">Utiliser</button>
+          <button class="btn sm">Configurer</button>
+        </div>
       </div>
-      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'marketing')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
-        Marketing
+      <!-- Agent card 3 -->
+      <div class="card" style="padding:16px;border-top:3px solid var(--purple);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--purple-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Marketing</div><div style="font-size:10px;color:var(--text-muted);">Strategie, contenu, positionnement</div></div>
+          <span class="pill green">Actif</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Genere du contenu, analyse votre positionnement et propose des strategies marketing adaptees.</div>
+        <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
+          <span>15 executions</span><span>&bull;</span><span>Derniere : 27 mars</span>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <button class="btn sm primary">Utiliser</button>
+          <button class="btn sm">Configurer</button>
+        </div>
       </div>
-      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'comm')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        Communication
+      <!-- Agent card 4 -->
+      <div class="card" style="padding:16px;border-top:3px solid var(--amber);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">SEO</div><div style="font-size:10px;color:var(--text-muted);">Referencement, audit web</div></div>
+          <span class="pill green">Actif</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Audite votre site, analyse les mots-cles et genere des recommandations SEO.</div>
+        <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
+          <span>8 executions</span><span>&bull;</span><span>Derniere : 25 mars</span>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <button class="btn sm primary">Utiliser</button>
+          <button class="btn sm">Configurer</button>
+        </div>
       </div>
-      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'seo')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        SEO
+      <!-- Agent card 5 -->
+      <div class="card" style="padding:16px;border-top:3px solid var(--accent);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">RH</div><div style="font-size:10px;color:var(--text-muted);">Recrutement, droit social</div></div>
+          <span class="pill amber">Brouillon</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Aide au recrutement, analyse des CV, veille droit social et obligations employeur.</div>
+        <div style="display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px;">
+          <span>0 executions</span><span>&bull;</span><span>Cree le 20 mars</span>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <button class="btn sm">Finaliser</button>
+          <button class="btn sm">Configurer</button>
+        </div>
       </div>
-      <div class="ai-agent-pill" onclick="selectAIAgent(this, 'rh')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:11px;font-weight:500;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        RH
+      <!-- Create new agent card -->
+      <div style="border:2px dashed var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;cursor:pointer;color:var(--text-muted);" onclick="">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <div style="font-size:12px;font-weight:600;">Creer un agent</div>
+        <div style="font-size:11px;margin-top:2px;">A partir de zero ou d'un template</div>
       </div>
     </div>
 
-    <!-- Main layout: history sidebar + chat -->
-    <div style="display:grid;grid-template-columns:200px 1fr;gap:12px;">
-      <!-- Chat history sidebar -->
-      <div class="card" style="padding:0;overflow:hidden;">
-        <div style="padding:10px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:11px;font-weight:700;">Historique</span>
-          <button class="btn sm" style="padding:2px 6px;font-size:10px;">+ Nouveau</button>
-        </div>
-        <div style="padding:4px;">
-          <div style="padding:8px 10px;border-radius:var(--radius-sm);background:var(--primary-bg);cursor:pointer;margin-bottom:2px;">
-            <div style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Potentiel croissance clients</div>
-            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">Aujourd'hui &bull; Commercial</div>
-          </div>
-          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
-            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Analyse marges T1 2026</div>
-            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">Hier &bull; Comptable</div>
-          </div>
-          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
-            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Strategie contenu LinkedIn</div>
-            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">27 mars &bull; Marketing</div>
-          </div>
-          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
-            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Audit SEO boulangerie</div>
-            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">25 mars &bull; SEO</div>
-          </div>
-          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:2px;">
-            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Obligations formation 2026</div>
-            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">22 mars &bull; RH</div>
-          </div>
-          <div style="padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;">
-            <div style="font-size:11px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Communique presse RSE</div>
-            <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">20 mars &bull; Communication</div>
-          </div>
-        </div>
-      </div>
+    <!-- Automatisations section -->
+    <div style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-size:14px;font-weight:700;">Automatisations</div>
+      <button class="btn sm primary" style="background:var(--accent);border-color:var(--accent);color:var(--navy);">+ Nouvelle automatisation</button>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <table class="data-table"><thead><tr><th>Nom</th><th>Declencheur</th><th>Action</th><th>Agent</th><th>Derniere exec.</th><th>Statut</th><th></th></tr></thead><tbody>
+        <tr><td><strong>Veille reglementaire hebdo</strong></td><td><span class="pill blue">Chaque lundi 8h</span></td><td>Scanner les nouvelles reglementations</td><td><span class="pill gray">Reglementaire</span></td><td>31 mars</td><td><span class="pill green">Actif</span></td><td><button class="btn sm">Modifier</button></td></tr>
+        <tr><td><strong>Alerte KPI sous seuil</strong></td><td><span class="pill amber">KPI &lt; objectif</span></td><td>Notifier + generer recommandation IA</td><td><span class="pill gray">Comptable</span></td><td>28 mars</td><td><span class="pill green">Actif</span></td><td><button class="btn sm">Modifier</button></td></tr>
+        <tr><td><strong>Rapport mensuel auto</strong></td><td><span class="pill blue">1er du mois</span></td><td>Generer rapport de performance PDF</td><td><span class="pill gray">Commercial</span></td><td>1 mars</td><td><span class="pill green">Actif</span></td><td><button class="btn sm">Modifier</button></td></tr>
+      </tbody></table>
+    </div>
 
-      <!-- Chat area -->
-      <div class="card" style="display:flex;flex-direction:column;min-height:440px;overflow:hidden;">
-        <!-- Chat header -->
-        <div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-          <div style="width:28px;height:28px;border-radius:7px;background:var(--text);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-          </div>
-          <div style="flex:1;"><div style="font-size:12px;font-weight:700;">Assistant Commercial</div></div>
-          <div style="display:flex;gap:5px;align-items:center;">
-            <span class="pill blue">12 clients</span>
-            <span class="pill green">T1 2026</span>
-            <span class="pill purple">Pennylane</span>
-            <button class="btn sm" style="margin-left:4px;">Contexte</button>
-          </div>
-        </div>
-
-        <!-- Messages — white background -->
-        <div style="flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;">
-          <div style="max-width:82%;padding:10px 14px;border-radius:var(--radius) var(--radius) var(--radius) 4px;font-size:12px;line-height:1.7;background:var(--bg);align-self:flex-start;">
-            <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px;">Assistant Commercial</div>
-            Bonjour Sophie ! Je suis pret a analyser votre portefeuille. Posez-moi une question sur vos clients, leur potentiel HOSMONY ou les opportunites de croissance.
-          </div>
-          <div style="max-width:75%;padding:10px 14px;border-radius:var(--radius) var(--radius) 4px var(--radius);font-size:12px;line-height:1.7;background:var(--primary);color:#fff;align-self:flex-end;">
-            Quels clients ont le plus fort potentiel de croissance HOSMONY ?
-          </div>
-          <div style="max-width:82%;padding:10px 14px;border-radius:var(--radius) var(--radius) var(--radius) 4px;font-size:12px;line-height:1.7;background:var(--bg);align-self:flex-start;">
-            <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px;">Assistant Commercial</div>
-            <strong>Top 3 potentiel de croissance :</strong>
-            <div style="margin:8px 0;padding:8px 10px;background:var(--surface);border-radius:var(--radius-sm);border-left:3px solid var(--primary);">
-              <div style="font-weight:600;">1. Cabinet Dupont</div>
-              <div style="font-size:11px;color:var(--text-secondary);">Niv.2 &rarr; Niv.3 d'ici 3 mois &bull; CA +12.4% &bull; <strong style="color:var(--green);">28K&euro;</strong> d'opportunites</div>
-            </div>
-            <div style="margin:8px 0;padding:8px 10px;background:var(--surface);border-radius:var(--radius-sm);border-left:3px solid var(--green);">
-              <div style="font-weight:600;">2. Vignobles Beaumont</div>
-              <div style="font-size:11px;color:var(--text-secondary);">Niv.3, score 62 &bull; 3 appels d'offres bio identifies</div>
-            </div>
-            <div style="margin:8px 0;padding:8px 10px;background:var(--surface);border-radius:var(--radius-sm);border-left:3px solid var(--primary);">
-              <div style="font-weight:600;">3. Boulangerie Martin</div>
-              <div style="font-size:11px;color:var(--text-secondary);">Niv.2 &rarr; Niv.3 realiste juin 2026</div>
-            </div>
-            <div style="margin-top:8px;padding:8px 10px;background:var(--red-bg);border-radius:var(--radius-sm);border-left:3px solid var(--red);">
-              <div style="font-weight:600;color:var(--red);">Alerte</div>
-              <div style="font-size:11px;color:var(--text-secondary);">Restaurant Le Lys (CA &minus;1.2%) &rarr; plan de redressement recommande</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Suggested prompts -->
-        <div style="padding:8px 16px;border-top:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap;">
-          <span style="font-size:10px;font-weight:600;color:var(--text-muted);padding:4px 0;">Suggestions :</span>
-          <button class="btn sm" style="border-radius:99px;font-size:11px;">Clients a risque</button>
-          <button class="btn sm" style="border-radius:99px;font-size:11px;">Opportunites ce trimestre</button>
-          <button class="btn sm" style="border-radius:99px;font-size:11px;">Comparer les marges</button>
-        </div>
-
-        <!-- Input -->
-        <div style="padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:8px;">
-          <input style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:12px;font-family:inherit;outline:none;" type="text" placeholder="Posez une question sur votre portefeuille...">
-          <button style="padding:8px 16px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
-            Envoyer
-          </button>
-        </div>
-      </div>
+    <!-- Templates gallery -->
+    <div style="margin-bottom:10px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-size:14px;font-weight:700;">Templates populaires</div>
+      <button class="btn sm">Voir tout</button>
+    </div>
+    <div class="grid-4">
+      <div class="card" style="padding:12px;cursor:pointer;"><div style="font-size:12px;font-weight:600;margin-bottom:3px;">Veille concurrentielle</div><div style="font-size:11px;color:var(--text-secondary);">Surveillez vos concurrents et recevez des alertes</div><div style="margin-top:6px;"><span class="pill blue">Marketing</span></div></div>
+      <div class="card" style="padding:12px;cursor:pointer;"><div style="font-size:12px;font-weight:600;margin-bottom:3px;">Redacteur blog RSE</div><div style="font-size:11px;color:var(--text-secondary);">Generez des articles de blog sur vos initiatives</div><div style="margin-top:6px;"><span class="pill green">Communication</span></div></div>
+      <div class="card" style="padding:12px;cursor:pointer;"><div style="font-size:12px;font-weight:600;margin-bottom:3px;">Analyse tresorerie</div><div style="font-size:11px;color:var(--text-secondary);">Previsions de tresorerie et alertes cash-flow</div><div style="margin-top:6px;"><span class="pill purple">Finance</span></div></div>
+      <div class="card" style="padding:12px;cursor:pointer;"><div style="font-size:12px;font-weight:600;margin-bottom:3px;">Scoring fournisseurs</div><div style="font-size:11px;color:var(--text-secondary);">Evaluez vos fournisseurs sur des criteres RSE</div><div style="margin-top:6px;"><span class="pill amber">Achats</span></div></div>
     </div>
   </div>
 
@@ -1495,6 +1557,159 @@
           <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="client-avatar" style="background:var(--hosmony-1);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;">RL</div><div><strong>Restaurant Le Lys</strong><div style="font-size:11px;color:var(--text-muted);">Restauration &bull; 12 emp.</div></div></div></td><td><div style="display:flex;align-items:center;gap:5px;"><div class="client-lv" style="background:var(--hosmony-1);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;">1</div><span style="font-size:11px;">22/100</span></div></td><td><strong>890K&euro;</strong><div style="font-size:11px;color:var(--red);">&minus;1.2%</div></td><td><strong>4.8%</strong></td><td><span style="font-size:11px;">1/6</span><div class="progress-track" style="width:60px;height:3px;margin-top:3px;"><div class="progress-fill" style="width:17%;background:var(--red);"></div></div></td><td><strong style="color:var(--green);">3.1K&euro;</strong></td><td><button class="btn sm primary">Dossier</button></td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- CRM -->
+  <div class="content page" id="page-crm">
+    <div class="page-header"><div><div class="page-title">CRM</div><div class="page-subtitle">Gestion de la relation client</div></div><div style="display:flex;gap:6px;"><button class="btn">Exporter</button><button class="btn primary">+ Nouveau contact</button></div></div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="stat-val">24</div><div class="stat-label">Contacts</div></div>
+      <div class="stat-card"><div class="stat-val">8</div><div class="stat-label">Deals en cours</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green);">47 500 &euro;</div><div class="stat-label">Pipeline</div></div>
+      <div class="stat-card"><div class="stat-val">32%</div><div class="stat-label">Taux de conversion</div></div>
+    </div>
+    <div class="kanban">
+      <div class="kanban-col"><div class="kanban-head">Prospect <span class="kanban-count">3</span></div><div class="kanban-body">
+        <div class="k-card"><div class="k-card-title">Restaurant Le Moderne</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">15 000 &euro;</span></div><div class="k-card-details"><div>Contact : <strong>J. Dubois</strong></div><div>3 mars</div></div></div>
+        <div class="k-card"><div class="k-card-title">Pharmacie Centrale</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">8 000 &euro;</span></div><div class="k-card-details"><div>Contact : <strong>P. Moreau</strong></div><div>15 mars</div></div></div>
+        <div class="k-card"><div class="k-card-title">Cabinet Leroy</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">22 000 &euro;</span></div><div class="k-card-details"><div>Contact : <strong>N. Leroy</strong></div><div>28 mars</div></div></div>
+      </div></div>
+      <div class="kanban-col"><div class="kanban-head">Qualifie <span class="kanban-count">2</span></div><div class="kanban-body">
+        <div class="k-card"><div class="k-card-title">Garage du Centre</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">18 000 &euro;</span></div><div class="k-card-details"><div>RDV planifie 5 avr.</div></div></div>
+        <div class="k-card"><div class="k-card-title">Fleuriste Rosalie</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">5 000 &euro;</span></div><div class="k-card-details"><div>Devis envoye</div></div></div>
+      </div></div>
+      <div class="kanban-col"><div class="kanban-head">Proposition <span class="kanban-count">2</span></div><div class="kanban-body">
+        <div class="k-card"><div class="k-card-title">Boucherie Dupont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">12 000 &euro;</span></div><div class="k-card-details"><div>En attente retour</div></div></div>
+        <div class="k-card"><div class="k-card-title">Hotel Bellevue</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--primary);">35 000 &euro;</span></div><div class="k-card-details"><div>Presentation 10 avr.</div></div></div>
+      </div></div>
+      <div class="kanban-col"><div class="kanban-head">Gagne <span class="kanban-count">4</span></div><div class="kanban-body">
+        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Boulangerie Martin</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">9 500 &euro;</span></div><div class="k-card-details"><div>Signe 15 fev.</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Vignobles Beaumont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">28 000 &euro;</span></div><div class="k-card-details"><div>Signe 1 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Garage Thibault</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">15 000 &euro;</span></div><div class="k-card-details"><div>Signe 12 mars</div></div></div>
+        <div class="k-card" style="border-left:3px solid var(--green);opacity:.6;"><div class="k-card-title">Cabinet Dupont</div><div class="k-card-meta"><span style="font-size:12px;font-weight:700;color:var(--green);">22 000 &euro;</span></div><div class="k-card-details"><div>Signe 25 mars</div></div></div>
+      </div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Activites recentes</div></div>
+      <table class="data-table"><thead><tr><th>Date</th><th>Type</th><th>Contact</th><th>Description</th></tr></thead><tbody>
+        <tr><td>31 mars</td><td><span class="pill blue">Appel</span></td><td><strong>J. Dubois</strong></td><td>Presentation de la suite MyDAD</td></tr>
+        <tr><td>30 mars</td><td><span class="pill green">Email</span></td><td><strong>P. Moreau</strong></td><td>Envoi documentation</td></tr>
+        <tr><td>28 mars</td><td><span class="pill purple">RDV</span></td><td><strong>N. Leroy</strong></td><td>Demo en ligne &mdash; 45min</td></tr>
+        <tr><td>25 mars</td><td><span class="pill green">Email</span></td><td><strong>Hotel Bellevue</strong></td><td>Proposition commerciale</td></tr>
+        <tr><td>22 mars</td><td><span class="pill blue">Appel</span></td><td><strong>Fleuriste Rosalie</strong></td><td>Suivi devis</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- PARAMETRES -->
+  <div class="content page" id="page-settings">
+    <div class="page-header"><div><div class="page-title">Parametres</div><div class="page-subtitle">Configuration de votre espace MyDAD</div></div></div>
+    <div class="tabs">
+      <div class="tab active">General</div>
+      <div class="tab">Membres & Acces</div>
+      <div class="tab">Dashboard & KPIs</div>
+      <div class="tab">Modules</div>
+      <div class="tab">Notifications</div>
+    </div>
+
+    <!-- General -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">General</h3>
+      <div class="card">
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Nom entreprise</div><div style="font-size:13px;font-weight:600;">Boulangerie Martin</div></div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Secteur</div><div style="font-size:13px;font-weight:500;">Artisanat alimentaire</div></div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">SIRET</div><div style="font-size:13px;font-weight:500;">123 456 789 00012</div></div>
+              <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;">Adresse</div><div style="font-size:13px;font-weight:500;">12 rue du Pain, 75011 Paris</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Logo</div>
+              <div style="width:80px;height:80px;background:var(--bg);border:2px dashed var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:10px;">Logo</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;"><button class="btn primary">Modifier</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Membres & Acces -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Membres & Acces</h3>
+      <div class="card" style="margin-bottom:10px;">
+        <table class="data-table"><thead><tr><th>Membre</th><th>Role</th><th>Modules</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
+          <tr><td><strong>Sophie Laurent</strong></td><td>Expert-Comptable</td><td>Tous</td><td><span class="pill green">Actif</span></td><td><button class="btn sm">Modifier</button></td></tr>
+          <tr><td><strong>Marc Martin</strong></td><td>Dirigeant</td><td>Dashboard, Parcours, Actions, Strategie</td><td><span class="pill green">Actif</span></td><td><button class="btn sm">Modifier</button></td></tr>
+          <tr><td><strong>Alice Morel</strong></td><td>Collaborateur</td><td>Dashboard, Actions, Equipe</td><td><span class="pill green">Actif</span></td><td><button class="btn sm">Modifier</button></td></tr>
+          <tr><td><span style="color:var(--text-secondary);">invite@client.fr</span></td><td>Collaborateur</td><td>&mdash;</td><td><span class="pill amber">Invite</span></td><td><button class="btn sm">Renvoyer</button></td></tr>
+        </tbody></table>
+      </div>
+      <div style="display:flex;gap:6px;"><button class="btn primary">+ Inviter un membre</button><button class="btn">Gerer les roles</button></div>
+    </div>
+
+    <!-- Dashboard & KPIs -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:4px;">KPIs affiches sur le dashboard</h3>
+      <p style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Cochez les KPIs a afficher. Glissez pour reordonner.</p>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="card-body" style="padding:0;">
+          <div style="padding:9px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><span style="font-size:14px;">&#9745;</span><strong style="flex:1;">Chiffre d'affaires du jour</strong><span style="color:var(--text-secondary);font-size:11px;">Frequence : Journalier</span><span style="color:var(--text-muted);font-size:11px;">Source : Pennylane</span></div>
+          <div style="padding:9px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><span style="font-size:14px;">&#9745;</span><strong style="flex:1;">Tresorerie disponible</strong><span style="color:var(--text-secondary);font-size:11px;">Frequence : Journalier</span><span style="color:var(--text-muted);font-size:11px;">Source : Banque DSP2</span></div>
+          <div style="padding:9px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><span style="font-size:14px;">&#9745;</span><strong style="flex:1;">Panier moyen</strong><span style="color:var(--text-secondary);font-size:11px;">Frequence : Journalier</span><span style="color:var(--text-muted);font-size:11px;">Source : Caisse</span></div>
+          <div style="padding:9px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><span style="font-size:14px;">&#9745;</span><strong style="flex:1;">Marge brute</strong><span style="color:var(--text-secondary);font-size:11px;">Frequence : Hebdomadaire</span><span style="color:var(--text-muted);font-size:11px;">Source : Pennylane</span></div>
+          <div style="padding:9px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-muted);"><span style="font-size:14px;">&#9744;</span><strong style="flex:1;">Empreinte carbone</strong><span style="font-size:11px;">Frequence : Mensuel</span><span style="font-size:11px;">Source : Calcul auto</span></div>
+          <div style="padding:9px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-muted);"><span style="font-size:14px;">&#9744;</span><strong style="flex:1;">Satisfaction equipe</strong><span style="font-size:11px;">Frequence : Trimestriel</span><span style="font-size:11px;">Source : Enquete</span></div>
+          <div style="padding:9px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-muted);"><span style="font-size:14px;">&#9744;</span><strong style="flex:1;">Heures formation</strong><span style="font-size:11px;">Frequence : Mensuel</span><span style="font-size:11px;">Source : PayFit</span></div>
+          <div style="padding:9px 14px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-muted);"><span style="font-size:14px;">&#9744;</span><strong style="flex:1;">NPS clients</strong><span style="font-size:11px;">Frequence : Trimestriel</span><span style="font-size:11px;">Source : Enquete</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:14px;"><button class="btn primary">Ajouter un KPI personnalise</button><button class="btn">Reinitialiser</button></div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Mise en page du dashboard</div></div>
+        <div class="card-body">
+          <div style="display:flex;gap:10px;">
+            <div style="flex:1;padding:14px;border:2px solid var(--navy);border-radius:var(--radius);text-align:center;cursor:pointer;background:var(--primary-bg);"><div style="font-size:12px;font-weight:600;color:var(--navy);">4 KPIs en ligne</div></div>
+            <div style="flex:1;padding:14px;border:1px solid var(--border);border-radius:var(--radius);text-align:center;cursor:pointer;"><div style="font-size:12px;font-weight:500;color:var(--text-secondary);">3 KPIs + graphique</div></div>
+            <div style="flex:1;padding:14px;border:1px solid var(--border);border-radius:var(--radius);text-align:center;cursor:pointer;"><div style="font-size:12px;font-weight:500;color:var(--text-secondary);">2 KPIs + tableau</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modules -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Modules</h3>
+      <div class="grid-3">
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Dashboard</div><div style="font-size:10px;color:var(--text-muted);">Module principal</div></div><span class="pill green">Core</span></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Parcours HOSMONY</div><div style="font-size:10px;color:var(--text-muted);">Parcours de progression</div></div><span class="pill green">Core</span></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Plan d'Actions</div><div style="font-size:10px;color:var(--text-muted);">Gestion des actions</div></div><span class="pill green">Core</span></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Strategie</div><div style="font-size:10px;color:var(--text-muted);">Vision et objectifs</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Indicateurs RSE</div><div style="font-size:10px;color:var(--text-muted);">Suivi extra-financier</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Opportunites</div><div style="font-size:10px;color:var(--text-muted);">Veille et financements</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Studio IA</div><div style="font-size:10px;color:var(--text-muted);">Assistants metier IA</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Competences</div><div style="font-size:10px;color:var(--text-muted);">Cartographie des competences</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--border);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:var(--shadow);"></div></div></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">CRM</div><div style="font-size:10px;color:var(--text-muted);">Relation client</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--border);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:var(--shadow);"></div></div></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Fil d'Actualite</div><div style="font-size:10px;color:var(--text-muted);">Communication interne</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--border);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:var(--shadow);"></div></div></div></div>
+        <div class="card"><div class="card-body" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Marketplace</div><div style="font-size:10px;color:var(--text-muted);">Solutions partenaires</div></div><div style="width:34px;height:18px;border-radius:9px;background:var(--border);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:var(--shadow);"></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:10px;">Notifications</h3>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="card-body" style="padding:0;">
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><strong style="flex:1;">Alertes KPI</strong><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div><span style="font-size:11px;color:var(--text-secondary);min-width:100px;">Email + In-app</span></div>
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><strong style="flex:1;">Echeances reglementaires</strong><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div><span style="font-size:11px;color:var(--text-secondary);min-width:100px;">Email + In-app</span></div>
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><strong style="flex:1;">Nouvelles opportunites</strong><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div><span style="font-size:11px;color:var(--text-secondary);min-width:100px;">In-app</span></div>
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12px;"><strong style="flex:1;">Actions en retard</strong><div style="width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;box-shadow:var(--shadow);"></div></div><span style="font-size:11px;color:var(--text-secondary);min-width:100px;">Email</span></div>
+          <div style="padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:12px;"><strong style="flex:1;color:var(--text-muted);">Rapports hebdomadaires</strong><div style="width:34px;height:18px;border-radius:9px;background:var(--border);position:relative;cursor:pointer;"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:var(--shadow);"></div></div><span style="font-size:11px;color:var(--text-muted);min-width:100px;">&mdash;</span></div>
+        </div>
+      </div>
+      <button class="btn primary">Sauvegarder les preferences</button>
     </div>
   </div>
 
