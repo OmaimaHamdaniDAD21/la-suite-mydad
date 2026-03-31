@@ -12,12 +12,12 @@
     --surface-hover: #FAFBFC;
     --border: #E5E7EB;
     --border-light: #F0F1F3;
-    --text: #1E3A5F;
+    --text: #1A1A2E;
     --text-secondary: #64748B;
     --text-muted: #94A3B8;
-    --primary: #3B82F6;
-    --primary-hover: #2563EB;
-    --primary-bg: #EFF6FF;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --primary-bg: #EEF2FF;
     --green: #059669;
     --green-bg: #ECFDF5;
     --amber: #D97706;
@@ -98,7 +98,7 @@
   }
   .nav-item:hover { background: var(--bg); color: var(--text); }
   .nav-item.active {
-    background: var(--text);
+    background: var(--primary);
     color: #fff;
     font-weight: 600;
   }
@@ -115,7 +115,7 @@
   }
   .avatar {
     width: 30px; height: 30px;
-    background: var(--text);
+    background: var(--primary);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
@@ -211,8 +211,8 @@
     line-height: 1.4;
   }
   .btn:hover { background: var(--bg); border-color: var(--text-muted); }
-  .btn.primary { background: linear-gradient(135deg, var(--text) 0%, #2563EB 100%); color: #fff; border-color: var(--text); }
-  .btn.primary:hover { background: linear-gradient(135deg, #0f2847 0%, #1d4ed8 100%); }
+  .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
   .btn.sm { padding: 3px 8px; font-size: 11px; }
   .btn.ghost { border: none; color: var(--text-secondary); padding: 4px 8px; }
   .btn.ghost:hover { background: var(--bg); color: var(--text); }
@@ -420,7 +420,7 @@
   .tool-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
   .tool-desc { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.4; }
   .tool-btn { width: 100%; padding: 6px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 11px; font-weight: 600; cursor: pointer; background: var(--surface); font-family: inherit; }
-  .tool-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+  .tool-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   .tool-btn.locked { color: var(--text-muted); cursor: not-allowed; }
 
   .connector-card {
@@ -439,7 +439,7 @@
   .agent-list { display: flex; flex-direction: column; gap: 3px; }
   .agent-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; cursor: pointer; }
   .agent-card:hover { background: var(--bg); }
-  .agent-card.selected { background: var(--text); color: #fff; border-color: var(--text); }
+  .agent-card.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
   .agent-card.selected .agent-desc { color: rgba(255,255,255,0.6); }
   .agent-name { font-size: 11px; font-weight: 600; }
   .agent-desc { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
@@ -448,12 +448,12 @@
   .chat-context { padding: 6px 14px; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 10px; display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
   .chat-msgs { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
   .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: var(--radius); font-size: 12px; line-height: 1.6; }
-  .chat-msg.user { background: var(--text); color: #fff; align-self: flex-end; }
+  .chat-msg.user { background: var(--primary); color: #fff; align-self: flex-end; }
   .chat-msg.bot { background: var(--bg); align-self: flex-start; border: 1px solid var(--border); }
   .chat-input-bar { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; gap: 6px; }
   .chat-input { flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 12px; font-family: inherit; outline: none; }
   .chat-input:focus { border-color: var(--text); }
-  .chat-send { padding: 7px 14px; background: var(--text); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .chat-send { padding: 7px 14px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
 
   /* ═══ CLIENTS ═══ */
   .client-card {
@@ -521,12 +521,12 @@
 
   .ai-btn {
     width: 100%; padding: 8px;
-    background: var(--text); color: #fff;
+    background: var(--primary); color: #fff;
     border: none; border-radius: var(--radius-sm);
     font-size: 12px; font-weight: 600; cursor: pointer;
     margin-top: 8px; font-family: inherit;
   }
-  .ai-btn:hover { background: #000; }
+  .ai-btn:hover { background: var(--primary-hover); }
   .ai-result {
     display: none; margin-top: 8px; padding: 10px;
     background: var(--bg);
@@ -621,19 +621,17 @@
   <!-- DASHBOARD -->
   <div class="content page active" id="page-dashboard">
     <div class="page-header"><div><div class="page-title">Boulangerie Martin</div><div class="page-subtitle">Derniere mise a jour : 28 mars 2026 &bull; T1 2026</div></div></div>
-    <div class="hosmony-banner">
-      <div class="hosmony-level-badge" style="background:var(--hosmony-2);">2</div>
-      <div class="hosmony-info"><h3>Niveau 2 &mdash; Dynamique</h3><p>Strategie formalisee, suivi semestriel, premiers financements</p></div>
-      <div class="hosmony-progress">
-        <div class="hosmony-score">47 <small>/ 100</small></div>
-        <div class="progress-label">Progression vers Niveau 3</div>
-        <div class="progress-track"><div class="progress-fill" style="width:47%;background:var(--primary);"></div></div>
-        <div class="levels-mini">
-          <div class="level-dot done" style="background:var(--hosmony-1);">1</div>
-          <div class="level-dot active" style="background:var(--hosmony-2);">2</div>
-          <div class="level-dot" style="background:var(--hosmony-3);">3</div>
-          <div class="level-dot" style="background:var(--hosmony-4);">4</div>
-          <div class="level-dot" style="background:var(--hosmony-5);">5</div>
+    <!-- HOSMONY level indicator — compact -->
+    <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center;">
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--primary-bg);border:1px solid var(--primary);border-radius:var(--radius);flex:1;">
+        <div style="width:32px;height:32px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;">2</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Niveau 2 &mdash; Dynamique</div><div style="font-size:11px;color:var(--text-secondary);">7/9 etapes &bull; Score 47/100</div></div>
+        <div style="display:flex;gap:3px;">
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.4;">1</div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;">2</div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-3);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.15;">3</div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.15;">4</div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--hosmony-5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;opacity:.15;">5</div>
         </div>
       </div>
     </div>
@@ -870,7 +868,7 @@
 
     <!-- Small agent selector tabs -->
     <div style="display:flex;gap:6px;margin-bottom:18px;align-items:center;">
-      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--text);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
+      <div class="agent-tab active" onclick="showAgent('reglem')" data-agent="reglem" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--primary);color:#fff;cursor:pointer;font-size:12px;font-weight:600;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
         Reglementaire
       </div>
@@ -1056,7 +1054,7 @@
 
     <!-- Agent pills small + layout -->
     <div style="display:flex;gap:6px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
-      <div class="ai-agent-pill active" onclick="selectAIAgent(this, 'commercial')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--text);background:var(--text);color:#fff;cursor:pointer;font-size:11px;font-weight:600;">
+      <div class="ai-agent-pill active" onclick="selectAIAgent(this, 'commercial')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--text);background:var(--primary);color:#fff;cursor:pointer;font-size:11px;font-weight:600;">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
         Commercial
       </div>
@@ -1140,7 +1138,7 @@
             <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px;">Assistant Commercial</div>
             Bonjour Sophie ! Je suis pret a analyser votre portefeuille. Posez-moi une question sur vos clients, leur potentiel HOSMONY ou les opportunites de croissance.
           </div>
-          <div style="max-width:75%;padding:10px 14px;border-radius:var(--radius) var(--radius) 4px var(--radius);font-size:12px;line-height:1.7;background:var(--text);color:#fff;align-self:flex-end;">
+          <div style="max-width:75%;padding:10px 14px;border-radius:var(--radius) var(--radius) 4px var(--radius);font-size:12px;line-height:1.7;background:var(--primary);color:#fff;align-self:flex-end;">
             Quels clients ont le plus fort potentiel de croissance HOSMONY ?
           </div>
           <div style="max-width:82%;padding:10px 14px;border-radius:var(--radius) var(--radius) var(--radius) 4px;font-size:12px;line-height:1.7;background:var(--bg);align-self:flex-start;">
@@ -1176,7 +1174,7 @@
         <!-- Input -->
         <div style="padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:8px;">
           <input style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:12px;font-family:inherit;outline:none;" type="text" placeholder="Posez une question sur votre portefeuille...">
-          <button style="padding:8px 16px;background:var(--text);color:#fff;border:none;border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;">
+          <button style="padding:8px 16px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
             Envoyer
           </button>
@@ -1233,8 +1231,8 @@
         <div class="step-item"><div class="step-num done">&#10003;</div><div style="flex:1"><div class="step-title">Cadre reglementaire RSE</div><div class="step-desc">4H</div></div><span class="pill green">Termine</span></div>
       </div></div>
       <div class="card"><div class="card-header"><div class="card-title">Sessions HOSMONY</div><button class="btn sm">Planifier</button></div><div class="card-body">
-        <div class="step-item"><div style="background:var(--text);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">30<br>mars</div><div style="flex:1"><div class="step-title">Economie circulaire</div><div class="step-desc">Visio 14h00</div></div><button class="btn sm">Rejoindre</button></div>
-        <div class="step-item"><div style="background:var(--text);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">30<br>mars</div><div style="flex:1"><div class="step-title">Bien-etre au travail</div><div class="step-desc">Visio 16h00</div></div><button class="btn sm">Rejoindre</button></div>
+        <div class="step-item"><div style="background:var(--primary);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">30<br>mars</div><div style="flex:1"><div class="step-title">Economie circulaire</div><div class="step-desc">Visio 14h00</div></div><button class="btn sm">Rejoindre</button></div>
+        <div class="step-item"><div style="background:var(--primary);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">30<br>mars</div><div style="flex:1"><div class="step-title">Bien-etre au travail</div><div class="step-desc">Visio 16h00</div></div><button class="btn sm">Rejoindre</button></div>
         <div class="step-item"><div style="background:var(--text-secondary);color:#fff;padding:3px 5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center;line-height:1.2;flex-shrink:0;">15<br>avr.</div><div style="flex:1"><div class="step-title">Biodiversite et ecosystemes</div><div class="step-desc">Visio 10h00</div></div><button class="btn sm">S'inscrire</button></div>
       </div></div>
     </div>
@@ -1334,9 +1332,9 @@
       p.style.borderColor = 'var(--border)';
       p.style.fontWeight = '500';
     });
-    el.style.background = 'var(--text)';
+    el.style.background = 'var(--primary)';
     el.style.color = '#fff';
-    el.style.borderColor = 'var(--text)';
+    el.style.borderColor = 'var(--primary)';
     el.style.fontWeight = '600';
   }
 
@@ -1346,10 +1344,10 @@
     document.getElementById('agent-finance').style.display = id === 'finance' ? 'block' : 'none';
     document.querySelectorAll('.agent-tab:not(.disabled)').forEach(tab => {
       if (tab.dataset.agent === id) {
-        tab.style.background = 'var(--text)';
+        tab.style.background = 'var(--primary)';
         tab.style.color = '#fff';
         tab.style.fontWeight = '600';
-        tab.style.borderColor = 'var(--text)';
+        tab.style.borderColor = 'var(--primary)';
       } else {
         tab.style.background = 'var(--surface)';
         tab.style.color = 'var(--text)';
