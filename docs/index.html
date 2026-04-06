@@ -536,13 +536,13 @@ a { text-decoration: none; color: inherit; }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
       <div class="nav-group-items">
-        <div class="nav-item" data-page="indicateurs" data-mode="cabinet">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Indicateurs
-        </div>
         <div class="nav-item" data-page="strategy" data-mode="cabinet">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
           Strategie
+        </div>
+        <div class="nav-item" data-page="indicateurs" data-mode="cabinet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Indicateurs
         </div>
         <div class="nav-item" data-page="opportunities" data-mode="cabinet">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -871,26 +871,15 @@ a { text-decoration: none; color: inherit; }
   <!-- ARBRE HOSMONY -->
   <div class="card mb-20" style="padding:24px;display:flex;align-items:center;gap:32px;">
     <div style="flex-shrink:0;">
-      <img src="arbre-hosmony.png" alt="Arbre HOSMONY - 5 niveaux" style="width:300px;height:auto;">
+      <img src="arbre-hosmony.png" alt="Arbre HOSMONY - 5 niveaux" style="width:420px;height:auto;">
     </div>
     <div style="flex:1;">
       <div style="font-size:18px;font-weight:800;margin-bottom:4px;color:var(--text);">Votre position</div>
       <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Niveau 2 — Dynamique</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:14px;height:14px;border-radius:4px;background:#9B2C2C;"></div>
-          <span style="font-size:13px;font-weight:600;width:110px;">Essentiel</span>
-          <span style="font-size:12px;color:var(--green);font-weight:700;">&#10003; Complete</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:14px;height:14px;border-radius:4px;background:#E07032;"></div>
-          <span style="font-size:13px;font-weight:700;width:110px;">Dynamique</span>
-          <span style="font-size:12px;color:var(--amber);font-weight:600;width:70px;">7/9 etapes</span>
-          <div class="progress-bar" style="flex:1;max-width:140px;"><div class="progress-fill" style="width:78%;background:#E07032;"></div></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:14px;height:14px;border-radius:4px;background:#E8B500;"></div>
-          <span style="font-size:13px;font-weight:600;width:110px;color:var(--text-muted);">Performance</span>
+          <div style="width:14px;height:14px;border-radius:4px;background:#1A3A6C;"></div>
+          <span style="font-size:13px;font-weight:600;width:110px;color:var(--text-muted);">Etoile</span>
           <span style="font-size:12px;color:var(--text-muted);">Verrouille</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
@@ -899,9 +888,20 @@ a { text-decoration: none; color: inherit; }
           <span style="font-size:12px;color:var(--text-muted);">Verrouille</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:14px;height:14px;border-radius:4px;background:#1A3A6C;"></div>
-          <span style="font-size:13px;font-weight:600;width:110px;color:var(--text-muted);">Etoile</span>
+          <div style="width:14px;height:14px;border-radius:4px;background:#E8B500;"></div>
+          <span style="font-size:13px;font-weight:600;width:110px;color:var(--text-muted);">Performance</span>
           <span style="font-size:12px;color:var(--text-muted);">Verrouille</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:14px;height:14px;border-radius:4px;background:#E07032;"></div>
+          <span style="font-size:13px;font-weight:700;width:110px;">Dynamique</span>
+          <span style="font-size:12px;color:var(--amber);font-weight:600;width:70px;">7/9 etapes</span>
+          <div class="progress-bar" style="flex:1;max-width:140px;"><div class="progress-fill" style="width:78%;background:#E07032;"></div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:14px;height:14px;border-radius:4px;background:#9B2C2C;"></div>
+          <span style="font-size:13px;font-weight:600;width:110px;">Essentiel</span>
+          <span style="font-size:12px;color:var(--green);font-weight:700;">&#10003; Complete</span>
         </div>
       </div>
       <button class="btn-primary" style="margin-top:16px;">Continuer l'etape en cours</button>
@@ -1027,7 +1027,7 @@ a { text-decoration: none; color: inherit; }
 
   <!-- Paquerette HOSMONY -->
   <div class="card mb-20" style="padding:20px;display:flex;align-items:center;gap:24px;background:linear-gradient(135deg,#F8FAFC,#EDF0F7);">
-    <img src="paquerette.png" alt="Paquerette HOSMONY" style="width:80px;height:80px;object-fit:contain;border-radius:50%;">
+    <img src="paquerette.png" alt="Paquerette HOSMONY" style="width:140px;height:140px;object-fit:contain;border-radius:50%;">
     <div style="flex:1;">
       <div style="font-size:15px;font-weight:700;">Score global de performance</div>
       <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Synthese de vos 24 indicateurs — chaque petale represente une dimension</div>
