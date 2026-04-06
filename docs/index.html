@@ -1129,76 +1129,95 @@ a { text-decoration: none; color: inherit; }
 
 <!-- ==================== PAGE: OPPORTUNITES ==================== -->
 <section class="page" id="page-opportunities">
-  <div class="page-title">Opportunites</div>
-  <div class="page-subtitle">Veille reglementaire et opportunites detectees par les agents IA</div>
-
-  <div class="flex items-center gap-8 mb-12">
-    <select class="select-styled">
-      <option>Tous les agents</option>
-      <option>Agent Reglementaire (Niv.1)</option>
-      <option>Agent Financement (Niv.2)</option>
-      <option>Agent Business (Niv.3)</option>
-      <option>Agent Image de marque (Niv.4)</option>
-    </select>
-    <button class="btn-primary">Lancer une analyse</button>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <div>
+      <div class="page-title">Opportunites</div>
+      <div class="page-subtitle">Veille et opportunites detectees par les agents HOSMONY</div>
+    </div>
+    <button class="btn-primary" onclick="alert('Analyse lancee pour tous les agents')">Lancer une analyse globale</button>
   </div>
 
-  <div style="display:flex;gap:10px;margin-bottom:16px;">
-    <div style="flex:1;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);border-left:3px solid var(--green);cursor:pointer;background:var(--surface);">
-      <div style="font-size:12px;font-weight:700;">Reglementaire</div>
-      <div style="font-size:11px;color:var(--text-muted);">Niveau 1 &bull; 19 suivies</div>
-    </div>
-    <div style="flex:1;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);border-left:3px solid var(--primary);cursor:pointer;background:var(--surface);">
-      <div style="font-size:12px;font-weight:700;">Financement</div>
-      <div style="font-size:11px;color:var(--text-muted);">Niveau 2 &bull; 6 detectes</div>
-    </div>
-    <div style="flex:1;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);border-left:3px solid var(--amber);cursor:pointer;opacity:0.5;background:var(--surface);">
-      <div style="font-size:12px;font-weight:700;">Business</div>
-      <div style="font-size:11px;color:var(--text-muted);">Niveau 3 &bull; Verrouille</div>
-    </div>
-    <div style="flex:1;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);border-left:3px solid var(--purple);cursor:pointer;opacity:0.5;background:var(--surface);">
-      <div style="font-size:12px;font-weight:700;">Image de marque</div>
-      <div style="font-size:11px;color:var(--text-muted);">Niveau 4 &bull; Verrouille</div>
-    </div>
+  <!-- 4 AGENT TABS -->
+  <div class="tabs" id="oppoTabs">
+    <button class="tab-btn active" onclick="switchOppoTab(this,'reglem')">Reglementaire <span style="font-size:10px;opacity:.6;">Niv.1</span></button>
+    <button class="tab-btn" onclick="switchOppoTab(this,'finance')">Financement <span style="font-size:10px;opacity:.6;">Niv.2</span></button>
+    <button class="tab-btn" onclick="switchOppoTab(this,'business')" style="opacity:0.4;" title="Debloquez le Niveau 3">Business <span style="font-size:10px;opacity:.6;">Niv.3</span></button>
+    <button class="tab-btn" onclick="switchOppoTab(this,'marque')" style="opacity:0.4;" title="Debloquez le Niveau 4">Image de marque <span style="font-size:10px;opacity:.6;">Niv.4</span></button>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-item"><div><div class="stat-val">19</div><div class="stat-label">Opportunites suivies</div></div></div>
-    <div class="stat-item"><div><div class="stat-val" style="color:var(--green)">0</div><div class="stat-label">Alertes critiques</div></div></div>
-    <div class="stat-item"><div><div class="stat-val" style="color:var(--amber)">3</div><div class="stat-label">Echeances proches</div></div></div>
-    <div class="stat-item"><div><div class="stat-val" style="color:var(--primary)">23,4K&euro;</div><div class="stat-label">Valeur estimee</div></div></div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">Reglementation a fort impact</div>
+  <!-- TAB: REGLEMENTAIRE -->
+  <div class="oppo-tab-content active" id="oppo-reglem">
+    <div class="stats-row">
+      <div class="stat-item"><div><div class="stat-val">19</div><div class="stat-label">Reglementations suivies</div></div></div>
+      <div class="stat-item"><div><div class="stat-val" style="color:var(--green)">0</div><div class="stat-label">Alertes critiques</div></div></div>
+      <div class="stat-item"><div><div class="stat-val" style="color:var(--amber)">3</div><div class="stat-label">Echeances 30 jours</div></div></div>
+      <div class="stat-item"><div><div class="stat-val">12</div><div class="stat-label">Clients concernes</div></div></div>
+    </div>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-title">Reglementations a fort impact</div>
       <div class="reg-card">
         <div class="reg-card-header"><span class="reg-card-title">CSRD -- Directive durabilite</span><span class="pill pill-red">Risque eleve</span></div>
-        <div class="reg-card-desc">Applicable aux PME de plus de 250 salaries des 2026. 4 de vos clients sont concernes. Actions requises avant le 1er juillet.</div>
+        <div class="reg-card-desc">Applicable aux PME de plus de 250 salaries des 2026. 4 de vos clients sont concernes.</div>
+        <div style="margin-top:6px;display:flex;gap:6px;"><span class="pill pill-gray">Durand SA</span><span class="pill pill-gray">Moreau & Fils</span><span class="pill pill-gray">Girard Immo</span><span class="pill pill-gray">Rousseau BTP</span></div>
       </div>
       <div class="reg-card">
         <div class="reg-card-header"><span class="reg-card-title">Facturation electronique obligatoire</span><span class="pill pill-amber">Risque moyen</span></div>
-        <div class="reg-card-desc">Obligation d'emission pour toutes les entreprises a partir de septembre 2026. Migration technique a planifier.</div>
+        <div class="reg-card-desc">Obligation d'emission pour toutes les entreprises a partir de septembre 2026.</div>
+        <div style="margin-top:6px;display:flex;gap:6px;"><span class="pill pill-gray">Tous les clients</span></div>
       </div>
       <div class="reg-card">
         <div class="reg-card-header"><span class="reg-card-title">Reforme retraites 2026</span><span class="pill pill-blue">Information</span></div>
-        <div class="reg-card-desc">Impact sur les cotisations sociales de vos clients employeurs. Mise a jour des parametres de paie requise.</div>
+        <div class="reg-card-desc">Impact sur les cotisations sociales. Mise a jour des parametres de paie requise.</div>
+        <div style="margin-top:6px;display:flex;gap:6px;"><span class="pill pill-gray">8 clients employeurs</span></div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-title">Financements detectes</div>
+  </div>
+
+  <!-- TAB: FINANCEMENT -->
+  <div class="oppo-tab-content" id="oppo-finance" style="display:none;">
+    <div class="stats-row">
+      <div class="stat-item"><div><div class="stat-val">6</div><div class="stat-label">Financements detectes</div></div></div>
+      <div class="stat-item"><div><div class="stat-val" style="color:var(--green)">24,6K&euro;</div><div class="stat-label">Valeur totale estimee</div></div></div>
+      <div class="stat-item"><div><div class="stat-val" style="color:var(--amber)">2</div><div class="stat-label">Dossiers urgents</div></div></div>
+      <div class="stat-item"><div><div class="stat-val">4</div><div class="stat-label">Clients eligibles</div></div></div>
+    </div>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-title">Financements et aides detectes</div>
       <div class="reg-card">
-        <div class="reg-card-header"><span class="reg-card-title">Credit Impot Recherche</span><span class="pill pill-green">12 500 &euro;</span></div>
-        <div class="reg-card-desc">Durand SA eligible au CIR pour ses activites R&D. Dossier a constituer avant juin 2026.</div>
+        <div class="reg-card-header"><span class="reg-card-title">Credit Impot Recherche (CIR)</span><span class="pill pill-green">12 500 &euro;</span></div>
+        <div class="reg-card-desc">Durand SA eligible pour ses activites R&D. Dossier a constituer avant juin 2026.</div>
+        <div style="margin-top:6px;display:flex;gap:6px;align-items:center;"><span class="pill pill-gray">Durand SA</span><button class="btn-ghost" style="font-size:11px;">Creer la mission</button></div>
       </div>
       <div class="reg-card">
-        <div class="reg-card-header"><span class="reg-card-title">Subvention BPI Transition</span><span class="pill pill-green">8 200 &euro;</span></div>
-        <div class="reg-card-desc">Moreau & Fils eligible a l'aide transition ecologique. Appel a projet ouvert jusqu'au 30 juin.</div>
+        <div class="reg-card-header"><span class="reg-card-title">Subvention BPI Transition ecologique</span><span class="pill pill-green">8 200 &euro;</span></div>
+        <div class="reg-card-desc">Moreau & Fils eligible. Appel a projet ouvert jusqu'au 30 juin.</div>
+        <div style="margin-top:6px;display:flex;gap:6px;align-items:center;"><span class="pill pill-gray">Moreau & Fils</span><button class="btn-ghost" style="font-size:11px;">Creer la mission</button></div>
       </div>
       <div class="reg-card">
         <div class="reg-card-header"><span class="reg-card-title">Aide embauche apprentis</span><span class="pill pill-green">3 900 &euro;</span></div>
-        <div class="reg-card-desc">Petit & Co peut beneficier de l'aide pour 3 contrats d'apprentissage prevus en septembre.</div>
+        <div class="reg-card-desc">Petit & Co peut beneficier de l'aide pour 3 contrats d'apprentissage.</div>
+        <div style="margin-top:6px;display:flex;gap:6px;align-items:center;"><span class="pill pill-gray">Petit & Co</span><button class="btn-ghost" style="font-size:11px;">Creer la mission</button></div>
       </div>
+    </div>
+  </div>
+
+  <!-- TAB: BUSINESS (locked) -->
+  <div class="oppo-tab-content" id="oppo-business" style="display:none;">
+    <div class="card" style="text-align:center;padding:40px 20px;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" style="margin:0 auto 12px;display:block;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      <div class="fw-700" style="margin-bottom:4px;">Agent Business — Niveau 3 requis</div>
+      <div class="text-sm text-muted" style="margin-bottom:12px;">Detecte des opportunites de croissance, nouveaux marches et partenariats pour vos clients. Completez le Niveau 2 pour debloquer cet agent.</div>
+      <div style="display:flex;justify-content:center;gap:4px;"><span class="pill pill-amber">3/9 etapes restantes</span></div>
+    </div>
+  </div>
+
+  <!-- TAB: IMAGE DE MARQUE (locked) -->
+  <div class="oppo-tab-content" id="oppo-marque" style="display:none;">
+    <div class="card" style="text-align:center;padding:40px 20px;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" style="margin:0 auto 12px;display:block;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      <div class="fw-700" style="margin-bottom:4px;">Agent Image de marque — Niveau 4 requis</div>
+      <div class="text-sm text-muted" style="margin-bottom:12px;">Labels, certifications, communication RSE et positionnement de marque pour vos clients. Completez le Niveau 3 pour debloquer cet agent.</div>
+      <div style="display:flex;justify-content:center;gap:4px;"><span class="pill pill-purple">Niveau 4 — Excellence</span></div>
     </div>
   </div>
 </section>
@@ -1908,6 +1927,14 @@ function switchIndicateurTab(btn, cat) {
   btn.closest('.tabs').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
+function switchOppoTab(btn, tab) {
+  btn.closest('.tabs').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.oppo-tab-content').forEach(c => { c.style.display = 'none'; c.classList.remove('active'); });
+  const target = document.getElementById('oppo-' + tab);
+  if (target) { target.style.display = 'block'; target.classList.add('active'); }
+}
+
 function switchDynTab(btn, tab) {
   btn.closest('.tabs').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
